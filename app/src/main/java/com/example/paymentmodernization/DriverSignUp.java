@@ -59,8 +59,8 @@ public class DriverSignUp extends AppCompatActivity {
               .baseUrl("https://payment-modernization.herokuapp.com/")
               .addConverterFactory(ScalarsConverterFactory.create())
               .build();
-      PaymentModernizationApi paymentModernizationApi =
-          retrofit.create(PaymentModernizationApi.class);
+      PaymentModernizationAPI paymentModernizationApi =
+          retrofit.create(PaymentModernizationAPI.class);
 
       final Call<String> call =
           paymentModernizationApi.insertNewUser(username, password, fullName, "DELIVERY_PERSON");

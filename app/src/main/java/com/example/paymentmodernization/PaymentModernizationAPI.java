@@ -8,7 +8,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 
-public interface PaymentModernizationApi {
+public interface PaymentModernizationAPI {
 
   @GET("login")
   Call<LoginAuthorization> getLoginAuthorization(

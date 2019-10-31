@@ -21,8 +21,8 @@ public class LoginProcess {
               .baseUrl("https://payment-modernization.herokuapp.com/")
               .addConverterFactory(GsonConverterFactory.create())
               .build();
-      PaymentModernizationApi paymentModernizationApi =
-          retrofit.create(PaymentModernizationApi.class);
+      PaymentModernizationAPI paymentModernizationApi =
+          retrofit.create(PaymentModernizationAPI.class);
 
       final Call<LoginAuthorization> call =
           paymentModernizationApi.getLoginAuthorization(authorizationString);
