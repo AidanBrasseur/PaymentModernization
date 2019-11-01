@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="LoginActivity">
+    tools:context=".Login.LoginActivity">
 
     <EditText
         android:id="@+id/password"
@@ -95,8 +95,9 @@
 
     <ProgressBar
         android:id="@+id/loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_marginStart="32dp"
         android:layout_marginTop="64dp"
@@ -114,7 +115,7 @@
         android:layout_width="133dp"
         android:layout_height="133dp"
         android:layout_marginTop="44dp"
-        android:src="@drawable/scotiabank_logo"
+        android:src="@drawable/payment_app_logov2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

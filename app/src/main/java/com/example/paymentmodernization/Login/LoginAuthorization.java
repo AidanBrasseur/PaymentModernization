@@ -1,4 +1,4 @@
-package com.example.paymentmodernization;
+package com.example.paymentmodernization.Login;
 
 public class LoginAuthorization {
 

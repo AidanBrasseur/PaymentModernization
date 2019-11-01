@@ -1,17 +1,39 @@
-package com.example.paymentmodernization;
+package com.example.paymentmodernization.Login;
 
+import android.text.TextUtils;
 import android.util.Base64;
+
+import com.example.paymentmodernization.PaymentModernizationAPI;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/** Class that handles authentication w/ login credentials and retrieves user information. */
-public class LoginProcess {
+public class LoginInteractor {
 
-  public void login(final String username, String password) {
+  interface OnLoginFinishedListener {
+    void onUsernameError(String message);
 
+    void onPasswordError(String message);
+
+    void onSuccess();
+
+    void onFail();
+  }
+
+  public void login(
+      final String username, final String password, final OnLoginFinishedListener listener) {
+
+    if (TextUtils.isEmpty(username)) {
+      listener.onUsernameError("Cannot have empty username");
+      return;
+    }
+    if (TextUtils.isEmpty(password)) {
+      listener.onPasswordError("Cannot have empty password");
+      return;
+    }
     try {
       String authorizationString =
           Base64.encodeToString((username + ":" + password).getBytes(), Base64.NO_WRAP);
@@ -37,20 +59,19 @@ public class LoginProcess {
                 System.out.println(response.code());
               } else {
                 LoginAuthorization loginAuthorization = response.body();
+                if (loginAuthorization.getIsValid().equals("true")) {
+                  listener.onSuccess();
+                } else {
+                  listener.onFail();
+                }
               }
             }
 
             @Override
-            public void onFailure(Call<LoginAuthorization> call, Throwable t) {
-              System.out.println("OnFailure" + t.getMessage());
-            }
+            public void onFailure(Call<LoginAuthorization> call, Throwable t) {}
           });
     } catch (Exception e) {
       e.printStackTrace();
     }
-  }
-
-  public void logout() {
-    // TODO: revoke authentication
   }
 }
