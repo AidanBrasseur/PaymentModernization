@@ -1,15 +1,15 @@
 package com.example.paymentmodernization.SignUp;
 
 public interface SignUpView {
-    void showProgress();
+  void showProgress();
 
-    void hideProgress();
+  void hideProgress();
 
-    void setUsernameError(String message);
+  void setUsernameError(String message);
 
-    void setPasswordError(String message);
+  void setPasswordError(String message);
 
-    void switchToLogin();
+  void switchToLogin();
 
-    void sendInvalidSignUpMessage();
+  void sendInvalidSignUpMessage();
 }
