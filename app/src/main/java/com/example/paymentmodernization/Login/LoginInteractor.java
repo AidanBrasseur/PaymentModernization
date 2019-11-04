@@ -11,18 +11,17 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/** LoginInteractor communicates with server to perform login functionalities. */
 public class LoginInteractor {
 
-  interface OnLoginFinishedListener {
-    void onUsernameError(String message);
-
-    void onPasswordError(String message);
-
-    void onSuccess();
-
-    void onFail();
-  }
-
+  /**
+   * Determine whether the login credentials username and password are valid, calling the
+   * corresponding method in listener.
+   *
+   * @param username the username input
+   * @param password the password input
+   * @param listener an OnLoginFinishedListener to signal validation of login information
+   */
   public void login(
       final String username, final String password, final OnLoginFinishedListener listener) {
 
@@ -56,7 +55,6 @@ public class LoginInteractor {
             public void onResponse(
                 Call<LoginAuthorization> call, Response<LoginAuthorization> response) {
               if (!response.isSuccessful()) {
-                System.out.println(response.code());
               } else {
                 LoginAuthorization loginAuthorization = response.body();
                 if (loginAuthorization.getIsValid().equals("true")) {
@@ -68,10 +66,23 @@ public class LoginInteractor {
             }
 
             @Override
-            public void onFailure(Call<LoginAuthorization> call, Throwable t) {}
+            public void onFailure(Call<LoginAuthorization> call, Throwable t) {
+              // TODO: Handle failure of http get
+            }
           });
     } catch (Exception e) {
       e.printStackTrace();
     }
+  }
+
+  /** OnLoginFinishedListener is an interface outlines methods for use during login. */
+  interface OnLoginFinishedListener {
+    void onUsernameError(String message);
+
+    void onPasswordError(String message);
+
+    void onSuccess();
+
+    void onFail();
   }
 }

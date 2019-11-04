@@ -1,8 +1,6 @@
 package com.example.paymentmodernization.SignUp;
 
-import android.content.Intent;
 import android.text.TextUtils;
-import android.widget.Toast;
 
 import com.example.paymentmodernization.PaymentModernizationAPI;
 
@@ -12,18 +10,18 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
+/** SignUpInteractor communicates with server to perform sign-up functionalities. */
 public class SignUpInteractor {
 
-  interface OnSignUpFinishedListener {
-    void onUsernameError(String message);
-
-    void onPasswordError(String message);
-
-    void onSuccess();
-
-    void onFail();
-  }
-
+  /**
+   * Signs up a new user with given username, password, and fullName, calling the corresponding
+   * method in listener.
+   *
+   * @param username the username input
+   * @param password the password input
+   * @param fullName the full name of the new user
+   * @param listener an OnSignUpFinishedListener to signal sucess or failure during sign-up
+   */
   public void signUpUser(
       String username, String password, String fullName, final OnSignUpFinishedListener listener) {
     if (TextUtils.isEmpty(username)) {
@@ -64,10 +62,22 @@ public class SignUpInteractor {
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {}
+            public void onFailure(Call<String> call, Throwable t) {
+              // TODO: Handle failure of sign-up
+            }
           });
     } catch (Exception e) {
       e.printStackTrace();
     }
+  }
+  /** OnSignUpFinishedListener is an interface outlines methods for use during sign-up. */
+  interface OnSignUpFinishedListener {
+    void onUsernameError(String message);
+
+    void onPasswordError(String message);
+
+    void onSuccess();
+
+    void onFail();
   }
 }

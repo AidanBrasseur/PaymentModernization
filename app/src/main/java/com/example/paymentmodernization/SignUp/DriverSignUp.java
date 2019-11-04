@@ -1,7 +1,5 @@
 package com.example.paymentmodernization.SignUp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,9 +8,12 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.paymentmodernization.Login.LoginActivity;
 import com.example.paymentmodernization.R;
 
+/** Activity to display driver sign-up page. Implements SignUpView. */
 public class DriverSignUp extends AppCompatActivity implements SignUpView {
 
   private EditText fullNameText;
@@ -46,40 +47,49 @@ public class DriverSignUp extends AppCompatActivity implements SignUpView {
     presenter.onDestroy();
     super.onDestroy();
   }
-
+  /** Signs up new user with username, password, and fullName fields text */
   void signUpUser() {
     presenter.signUpUser(
         usernameText.getText().toString(),
         passwordText.getText().toString(),
         fullNameText.getText().toString());
   }
-
+  /** Shows current loading progress */
   @Override
   public void showProgress() {
     progressBar.setVisibility(View.VISIBLE);
   }
-
+  /** Hides current loading progress */
   @Override
   public void hideProgress() {
     progressBar.setVisibility(View.GONE);
   }
-
+  /**
+   * Sets error message given an error with the username
+   *
+   * @param message the message for the error
+   */
   @Override
   public void setUsernameError(String message) {
     usernameText.setError(message);
   }
-
+  /**
+   * Sets error message given an error with the password
+   *
+   * @param message the message for the error
+   */
   @Override
   public void setPasswordError(String message) {
     passwordText.setError(message);
   }
 
+  /** switches current screen to the login screen */
   @Override
   public void switchToLogin() {
     Intent intent = new Intent(DriverSignUp.this, LoginActivity.class);
     startActivity(intent);
   }
-
+  /** sends message to user indicating that their sign-up attempt was invalid */
   @Override
   public void sendInvalidSignUpMessage() {
     usernameText.setText("");
