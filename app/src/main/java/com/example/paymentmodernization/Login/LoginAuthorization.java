@@ -6,6 +6,16 @@ public class LoginAuthorization {
   private String isValid;
   /** The authentication token of the corresponding user */
   private String authToken;
+  /** The type of the user */
+  private String userType;
+
+  public String getUserType() {
+    return userType;
+  }
+
+  public void setUserType(String userType) {
+    this.userType = userType;
+  }
 
   public String getIsValid() {
     return isValid;

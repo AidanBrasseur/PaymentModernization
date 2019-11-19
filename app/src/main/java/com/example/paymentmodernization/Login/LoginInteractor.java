@@ -58,7 +58,8 @@ public class LoginInteractor {
               } else {
                 LoginAuthorization loginAuthorization = response.body();
                 if (loginAuthorization.getIsValid().equals("true")) {
-                  listener.onSuccess(loginAuthorization.getAuthToken());
+                  listener.onSuccess(
+                      loginAuthorization.getAuthToken(), loginAuthorization.getUserType());
                 } else {
                   listener.onFail();
                 }
@@ -81,7 +82,7 @@ public class LoginInteractor {
 
     void onPasswordError(String message);
 
-    void onSuccess(String authToken);
+    void onSuccess(String authToken, String userType);
 
     void onFail();
   }
