@@ -13,6 +13,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".SignUp.DriverSignUp"></activity>
         <activity android:name=".SignUp.SignUpChoiceActivity" />
+        <activity android:name=".SignUp.CompanySignUp"></activity>
         <activity
             android:name=".HomePage"
             android:label="@string/title_activity_home_page"

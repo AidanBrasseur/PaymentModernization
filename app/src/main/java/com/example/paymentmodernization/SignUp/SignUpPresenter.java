@@ -21,6 +21,45 @@ public class SignUpPresenter implements SignUpInteractor.OnSignUpFinishedListene
     this.signUpView = signUpView;
     this.signUpInteractor = signUpInteractor;
   }
+//TODO: Documentation. Probably going to move all this to new classes honestly
+  /**
+   * Signs up new user with given username, password and fullName
+   *
+   * @param username the username input
+   * @param password the password input
+   * @param fullName the full name of the new user
+   */
+  public void signUpUser(
+      String username,
+      String password,
+      String fullName,
+      String userType,
+      String accountNum,
+      String cardNum,
+      String bank,
+      String streetAddress,
+      String city,
+      String region,
+      String country,
+      String postalCode) {
+    if (signUpView != null) {
+      signUpView.showProgress();
+    }
+    signUpInteractor.signUpUser(
+        username,
+        password,
+        fullName,
+        userType,
+        accountNum,
+        cardNum,
+        bank,
+        streetAddress,
+        city,
+        region,
+        country,
+        postalCode,
+        this);
+  }
 
   /**
    * Signs up new user with given username, password and fullName

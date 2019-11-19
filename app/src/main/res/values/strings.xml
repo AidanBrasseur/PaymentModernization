@@ -20,4 +20,11 @@
     <string name="business_select">Business</string>
     <string name="create_account">Choose your account type</string>
     <string name="full_name_prompt">Full Name</string>
+    <string-array name="banks_array">
+        <item>SCOTIABANK</item>
+        <item>CIBC</item>
+        <item>BMO</item>
+        <item>TD</item>
+        <item>RBC</item>
+    </string-array>
 </resources>

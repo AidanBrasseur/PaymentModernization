@@ -59,8 +59,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
   /** switches current screen to the homescreen */
   @Override
-  public void switchToHomeScreen() {
+  public void switchToHomeScreen(String authToken) {
     Intent intent = new Intent(LoginActivity.this, HomePage.class);
+    intent.putExtra("authToken", authToken);
     startActivity(intent);
   }
   /** switches current screen to the sign-up choice screen */

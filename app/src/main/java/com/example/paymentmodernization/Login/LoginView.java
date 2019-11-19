@@ -4,7 +4,7 @@ package com.example.paymentmodernization.Login;
 public interface LoginView {
 
   /** switches current screen to the homescreen */
-  void switchToHomeScreen();
+  void switchToHomeScreen(String authToken);
   /** switches current screen to the sign-up choice page */
   void switchToSignUpScreen();
   /** Shows current loading progress */

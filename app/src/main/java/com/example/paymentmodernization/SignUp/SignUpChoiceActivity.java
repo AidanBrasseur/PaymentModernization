@@ -12,17 +12,39 @@ import com.example.paymentmodernization.R;
 public class SignUpChoiceActivity extends AppCompatActivity {
 
   private Button driverButton;
+  private Button supplierButton;
+  private Button smallBusinessButton;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_signup_choice);
     driverButton = findViewById(R.id.driverButton);
+    supplierButton = findViewById(R.id.supplier);
+    smallBusinessButton = findViewById(R.id.businessOwner);
     driverButton.setOnClickListener(
         new View.OnClickListener() {
           @Override
           public void onClick(View view) {
             Intent intent = new Intent(SignUpChoiceActivity.this, DriverSignUp.class);
+            startActivity(intent);
+          }
+        });
+    supplierButton.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+            Intent intent = new Intent(SignUpChoiceActivity.this, CompanySignUp.class);
+            intent.putExtra("type", "DELIVERY_PERSON");
+            startActivity(intent);
+          }
+        });
+    smallBusinessButton.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+            Intent intent = new Intent(SignUpChoiceActivity.this, CompanySignUp.class);
+            intent.putExtra("type", "SMALL_BUSINESS");
             startActivity(intent);
           }
         });
