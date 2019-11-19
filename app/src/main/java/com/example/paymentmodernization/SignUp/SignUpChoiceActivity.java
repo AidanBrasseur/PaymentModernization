@@ -35,7 +35,7 @@ public class SignUpChoiceActivity extends AppCompatActivity {
           @Override
           public void onClick(View view) {
             Intent intent = new Intent(SignUpChoiceActivity.this, CompanySignUp.class);
-            intent.putExtra("type", "DELIVERY_PERSON");
+            intent.putExtra("type", "SUPPLIER");
             startActivity(intent);
           }
         });
