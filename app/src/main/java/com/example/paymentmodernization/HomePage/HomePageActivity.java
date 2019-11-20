@@ -1,5 +1,6 @@
 package com.example.paymentmodernization.HomePage;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 
@@ -7,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 import com.example.paymentmodernization.R;
 import com.example.paymentmodernization.ui.main.SectionsPagerAdapter;
@@ -27,7 +30,7 @@ public class HomePageActivity extends AppCompatActivity implements  HomePageView
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_home_page);
-    SectionsPagerAdapter sectionsPagerAdapter =
+    /*SectionsPagerAdapter sectionsPagerAdapter =
         new SectionsPagerAdapter(this, getSupportFragmentManager());
     ViewPager viewPager = findViewById(R.id.view_pager);
     viewPager.setAdapter(sectionsPagerAdapter);
@@ -43,7 +46,7 @@ public class HomePageActivity extends AppCompatActivity implements  HomePageView
                 .setAction("Action", null)
                 .show();
           }
-        });
+        });*/
       /**
        * getting invoices
        */
@@ -58,6 +61,10 @@ public class HomePageActivity extends AppCompatActivity implements  HomePageView
 
   }
 
+    /**
+     * tell presenter to get invoices
+     * @param authToken
+     */
   public void displayInvoices(String authToken){
 
       invoicesPresenter.invoices(authToken);
@@ -65,7 +72,36 @@ public class HomePageActivity extends AppCompatActivity implements  HomePageView
   }
 
   @Override
-    public void showInvoices(ArrayList<LinkedTreeMap>invoices ){
+    public void addInvoicesToTable(ArrayList<LinkedTreeMap>invoices ){
+      //adding table header
+      TableRow tr_head = new TableRow(this);
+      tr_head.setId((10));
+      tr_head.setBackgroundColor(Color.GRAY);
+      tr_head.setLayoutParams(new TableRow.LayoutParams(
+              TableRow.LayoutParams.FILL_PARENT,
+              TableRow.LayoutParams.WRAP_CONTENT));
+
+      TextView label_supplier = new TextView(this);
+      label_supplier.setId((20));
+      label_supplier.setText("supplier");
+      label_supplier.setTextColor(Color.WHITE);
+      label_supplier.setPadding(5, 5, 5, 5);
+      tr_head.addView(label_supplier);
+
+      TextView label_business = new TextView(this);
+      label_business.setId((20));
+      label_business.setText("Bussiness");
+      label_business.setTextColor(Color.WHITE);
+      label_business.setPadding(5, 5, 5, 5);
+      tr_head.addView(label_business);
+
+      invoicesTable.addView(tr_head, new TableLayout.LayoutParams(
+              TableLayout.LayoutParams.FILL_PARENT,
+              TableLayout.LayoutParams.WRAP_CONTENT
+      ));
+
+
+
 
 
   }

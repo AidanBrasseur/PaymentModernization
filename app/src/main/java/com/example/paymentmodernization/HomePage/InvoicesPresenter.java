@@ -31,6 +31,6 @@ public class InvoicesPresenter implements InvoicesInteractor.OnInvoicesFinishedL
     @Override
     public void onSuccess(ArrayList<LinkedTreeMap> invoices) {
     // TODO impliment this method call some method on homepageview
-        homePageView.showInvoices(invoices);
+        homePageView.addInvoicesToTable(invoices);
     }
 }
