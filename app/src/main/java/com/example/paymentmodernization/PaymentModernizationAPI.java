@@ -1,6 +1,7 @@
 package com.example.paymentmodernization;
 
 import com.example.paymentmodernization.Login.LoginAuthorization;
+import com.example.paymentmodernization.HomePage.Invoices;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -16,6 +17,10 @@ public interface PaymentModernizationAPI {
   Call<LoginAuthorization> getLoginAuthorization(
       @Header("Authorization") String authorizationString);
 
+  /** Gets invoices of the user */
+  @GET("invoices")
+  Call<Invoices> getInvoices(@Header("Authorization") String authorizationString);
+
   /**
    * Signs up a new user with given username, password, name and type
    *
@@ -27,10 +32,10 @@ public interface PaymentModernizationAPI {
   @FormUrlEncoded
   @POST("signup-user")
   Call<String> insertNewUser(
-          @Field("username") String username,
-          @Field("password") String password,
-          @Field("name") String name,
-          @Field("type") String type);
+      @Field("username") String username,
+      @Field("password") String password,
+      @Field("name") String name,
+      @Field("type") String type);
 
   /**
    * Signs up a new company with given username, password, name, type, bank information, and address
@@ -47,21 +52,20 @@ public interface PaymentModernizationAPI {
    * @param region the region the company is located
    * @param country the country the company is located
    * @param postalCode the postal code of the company
-   *
    */
   @FormUrlEncoded
   @POST("signup-company")
   Call<String> insertNewCompany(
-          @Field("username") String username,
-          @Field("password") String password,
-          @Field("name") String name,
-          @Field("type") String type,
-          @Field("accountNum") String accountNum,
-          @Field("cardNum") String cardNum,
-          @Field("bank") String bank,
-          @Field("streetAddress") String streetAddress,
-          @Field("city") String city,
-          @Field("region") String region,
-          @Field("country") String country,
-          @Field("postalCode") String postalCode);
+      @Field("username") String username,
+      @Field("password") String password,
+      @Field("name") String name,
+      @Field("type") String type,
+      @Field("accountNum") String accountNum,
+      @Field("cardNum") String cardNum,
+      @Field("bank") String bank,
+      @Field("streetAddress") String streetAddress,
+      @Field("city") String city,
+      @Field("region") String region,
+      @Field("country") String country,
+      @Field("postalCode") String postalCode);
 }
