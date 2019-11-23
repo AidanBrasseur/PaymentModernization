@@ -51,7 +51,7 @@ public class InvoicesInteractor {
 
             @Override
             public void onFailure(Call<Invoices> call, Throwable t) {
-              // TODO: Handle failure of http get
+              // TODO: Handle failure of http get.
               System.out.println(t.toString() + "**FAILURE FUNCTION*******");
             }
           });

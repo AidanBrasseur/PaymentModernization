@@ -73,7 +73,7 @@ public class HomePageActivity extends AppCompatActivity implements  HomePageView
 
   @Override
     public void addInvoicesToTable(ArrayList<LinkedTreeMap>invoices ){
-      //adding table header
+    // adding table header
       TableRow tr_head = new TableRow(this);
       tr_head.setId((10));
       tr_head.setBackgroundColor(Color.GRAY);

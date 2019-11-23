@@ -23,14 +23,14 @@ public class InvoicesPresenter implements InvoicesInteractor.OnInvoicesFinishedL
     }
 
     public void invoices(String authToken){
-        System.out.println("*****************************");
         invoicesInteractor.invoiceDisplay(authToken, this);
     }
 
-    /** Handles the successful validation of login information */
+    /** Handles the successful retreival of invoice information */
     @Override
     public void onSuccess(ArrayList<LinkedTreeMap> invoices) {
     // TODO impliment this method call some method on homepageview
         homePageView.addInvoicesToTable(invoices);
+        System.out.println(invoices.toString());
     }
 }
