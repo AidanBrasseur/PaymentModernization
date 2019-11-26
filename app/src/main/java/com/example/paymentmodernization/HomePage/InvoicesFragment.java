@@ -28,6 +28,11 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
   private RecyclerView recyclerView;
   private RecyclerView.Adapter recycleAdapter;
   private RecyclerView.LayoutManager recycleManager;
+  private String completedStatus;
+
+  public InvoicesFragment(String completedStatus){
+    this.completedStatus = completedStatus;
+  }
 
   @Override
   public View onCreateView(
@@ -83,19 +88,27 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
     ArrayList<InvoiceCard> invoiceCards = new ArrayList<>();
     for (Invoice invoice : invoices) {
       String heading = invoice.getSupplier() + " to " + invoice.getBusiness();
+      String status = invoice.getStatus();
       String delivery;
       if (invoice.getDueDate() == null) {
         delivery = "Delivery Date TBD";
       } else {
         delivery = "Delivery Date: " + invoice.getDueDate();
       }
-      invoiceCards.add(new InvoiceCard(heading, delivery));
+      if (this.completedStatus.equals("COMPLETE") && invoice.getStatus().equals("COMPLETE")){
+        invoiceCards.add(new InvoiceCard(heading, delivery, status));
+      }
+      else if (!this.completedStatus.equals("COMPLETE")) {
+        if (!(invoice.getStatus().equals("COMPLETE"))){
+          invoiceCards.add(new InvoiceCard(heading, delivery, status));
+        }
+      }
+
     }
 
     recycleAdapter = new InvoicesAdapter(invoiceCards);
     recyclerView.setLayoutManager(recycleManager);
     recyclerView.setAdapter(recycleAdapter);
 
-    System.out.println("************Call addinvoices table *******");
   }
 }

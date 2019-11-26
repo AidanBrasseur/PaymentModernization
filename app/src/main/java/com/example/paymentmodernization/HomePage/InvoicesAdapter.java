@@ -34,6 +34,7 @@ public class InvoicesAdapter extends RecyclerView.Adapter<InvoicesAdapter.Invoic
 
     holder.supplierToCompany.setText(currentCard.getSupplierToCompany());
     holder.delivery.setText(currentCard.getDelivery());
+    holder.status.setText(currentCard.getStatus());
   }
 
   @Override
@@ -44,11 +45,13 @@ public class InvoicesAdapter extends RecyclerView.Adapter<InvoicesAdapter.Invoic
   public static class InvoicesViewHolder extends RecyclerView.ViewHolder {
     public TextView supplierToCompany;
     public TextView delivery;
+    public  TextView status;
 
     public InvoicesViewHolder(View itemView) {
       super(itemView);
       supplierToCompany = itemView.findViewById(R.id.supplierToCompany);
       delivery = itemView.findViewById(R.id.delivery);
+      status = itemView.findViewById(R.id.status);
     }
   }
 }

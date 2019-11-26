@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.paymentmodernization.HomePage.InvoicesFragment;
+import com.example.paymentmodernization.Login.LoginActivity;
 import com.example.paymentmodernization.R;
 import com.example.paymentmodernization.ui.SectionsPagerAdapter;
 import com.example.paymentmodernization.ui.slideshow.SlideshowFragment;
@@ -40,8 +41,8 @@ public class HomeFragment extends Fragment {
     //            });
     SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
     // Temporary until invoice tabs go in
-    sectionsPagerAdapter.addFragment(new InvoicesFragment(), "Invoices");
-    sectionsPagerAdapter.addFragment(new SlideshowFragment(), "Completed Invoices");
+    sectionsPagerAdapter.addFragment(new InvoicesFragment("NOT_COMPLETE"), "Invoices");
+    sectionsPagerAdapter.addFragment(new InvoicesFragment("COMPLETE"), "Completed Invoices");
     ViewPager viewPager = root.findViewById(R.id.view_pager);
     viewPager.setAdapter(sectionsPagerAdapter);
     TabLayout tabs = root.findViewById(R.id.tabs);
