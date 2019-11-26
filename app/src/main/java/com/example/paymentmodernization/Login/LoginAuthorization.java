@@ -6,6 +6,9 @@ public class LoginAuthorization {
   private String isValid;
   /** The authentication token of the corresponding user */
   private String authToken;
+
+  /** The full name of the user */
+  private String fullName;
   /** The type of the user */
   private String userType;
 
@@ -31,5 +34,13 @@ public class LoginAuthorization {
 
   public void setAuthToken(String authToken) {
     this.authToken = authToken;
+  }
+
+  public String getFullName() {
+    return fullName;
+  }
+
+  public void setFullName(String fullName) {
+    this.fullName = fullName;
   }
 }
