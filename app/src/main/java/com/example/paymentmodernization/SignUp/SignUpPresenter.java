@@ -21,7 +21,7 @@ public class SignUpPresenter implements SignUpInteractor.OnSignUpFinishedListene
     this.signUpView = signUpView;
     this.signUpInteractor = signUpInteractor;
   }
-//TODO: Documentation. Probably going to move all this to new classes honestly
+  // TODO: Documentation. Probably going to move all this to new classes honestly
   /**
    * Signs up new user with given username, password and fullName
    *

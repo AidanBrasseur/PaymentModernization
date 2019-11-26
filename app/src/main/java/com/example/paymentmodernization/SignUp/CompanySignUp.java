@@ -44,7 +44,7 @@ public class CompanySignUp extends AppCompatActivity implements SignUpView {
     passwordText = findViewById(R.id.password);
     accountNum = findViewById(R.id.accountNum);
     cardNum = findViewById(R.id.cardNum);
-    bankChoice = (Spinner) findViewById(R.id.bankChoice);
+    bankChoice = findViewById(R.id.bankChoice);
     ArrayAdapter<CharSequence> adapter =
         ArrayAdapter.createFromResource(
             this, R.array.banks_array, android.R.layout.simple_spinner_item);

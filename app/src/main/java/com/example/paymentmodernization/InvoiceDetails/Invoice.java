@@ -1,6 +1,3 @@
 package com.example.paymentmodernization.InvoiceDetails;
 
-public class Invoice {
-
-
-}
+public class Invoice {}

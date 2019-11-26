@@ -11,9 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SignUp.DriverSignUp"></activity>
+        <activity
+            android:name=".NavDrawer"
+            android:label="@string/title_activity_nav_drawer"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".SignUp.DriverSignUp" />
         <activity android:name=".SignUp.SignUpChoiceActivity" />
-        <activity android:name=".SignUp.CompanySignUp"></activity>
+        <activity android:name=".SignUp.CompanySignUp" />
         <activity
             android:name=".HomePage"
             android:label="@string/title_activity_home_page"

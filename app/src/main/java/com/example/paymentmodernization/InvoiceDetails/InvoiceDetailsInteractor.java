@@ -1,4 +1,3 @@
 package com.example.paymentmodernization.InvoiceDetails;
 
-public class InvoiceDetailsInteractor {
-}
+public class InvoiceDetailsInteractor {}
