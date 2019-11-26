@@ -28,9 +28,9 @@ public class InvoicesPresenter implements InvoicesInteractor.OnInvoicesFinishedL
 
     /** Handles the successful retreival of invoice information */
     @Override
-    public void onSuccess(ArrayList<LinkedTreeMap> invoices) {
+    public void onSuccess(ArrayList<Invoice> invoices) {
     // TODO impliment this method call some method on homepageview
-        homePageView.addInvoicesToTable(invoices);
+        homePageView.addInvoiceCards(invoices);
         System.out.println(invoices.toString());
     }
 }

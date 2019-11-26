@@ -6,5 +6,5 @@ import java.util.ArrayList;
 
 public interface HomePageView {
 
-     void addInvoicesToTable(ArrayList<LinkedTreeMap> invoices);
+     void addInvoiceCards(ArrayList<Invoice> invoices);
 }

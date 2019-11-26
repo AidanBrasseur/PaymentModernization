@@ -12,13 +12,13 @@ public class Invoices {
 
 
     /** The invoices for this user */
-    private ArrayList<LinkedTreeMap> invoices;
+    private ArrayList<Invoice> invoices;
 
     /**
      * get the invoices
      * @return invoices
      */
-    public ArrayList<LinkedTreeMap> getInvoices() {
+    public ArrayList<Invoice> getInvoices() {
         return invoices;
     }
 
@@ -26,7 +26,7 @@ public class Invoices {
      * set invoices
      * @param invoices
      */
-    public void setInvoices(ArrayList<LinkedTreeMap> invoices) {
+    public void setInvoices(ArrayList<Invoice> invoices) {
         this.invoices = invoices;
     }
 

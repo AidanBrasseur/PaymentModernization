@@ -65,7 +65,7 @@ public class InvoicesInteractor {
     /** OnInvoicesFinishedListener is an interface outlines methods for use during homePage loads. */
     interface OnInvoicesFinishedListener {
 
-        void onSuccess(ArrayList<LinkedTreeMap> invoices);
+        void onSuccess(ArrayList<Invoice> invoices);
     }
 
 }

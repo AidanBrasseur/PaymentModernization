@@ -1,12 +1,20 @@
 package com.example.paymentmodernization.HomePage;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
+import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -20,11 +28,16 @@ import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.ArrayList;
 
-public class HomePageActivity extends AppCompatActivity implements  HomePageView{
+public class HomePageActivity extends AppCompatActivity implements HomePageView {
 
-    private String authToken;
-    private InvoicesPresenter invoicesPresenter;
-    private TableLayout invoicesTable;
+  private String authToken;
+  private InvoicesPresenter invoicesPresenter;
+  private TableLayout invoicesTable;
+  private ConstraintLayout layout;
+  private Context context;
+  private RecyclerView recyclerView;
+  private RecyclerView.Adapter recycleAdapter;
+  private RecyclerView.LayoutManager recycleManager;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -47,64 +60,53 @@ public class HomePageActivity extends AppCompatActivity implements  HomePageView
                 .show();
           }
         });*/
-      /**
-       * getting invoices
-       */
+    /** getting invoices */
     invoicesPresenter = new InvoicesPresenter(this, new InvoicesInteractor());
     Intent intent = getIntent();
 
     this.authToken = intent.getStringExtra("authToken");
+    context = getApplicationContext();
+
+    //this.invoicesTable = findViewById(R.id.invoices);
+    layout = findViewById(R.id.coordinatorLayout);
     displayInvoices(this.authToken);
-
-
-    this.invoicesTable = findViewById(R.id.invoices);
-
+    recyclerView = findViewById(R.id.recyclerView);
+    recycleManager = new LinearLayoutManager(this);
+//    LinearLayoutManager manager = new LinearLayoutManager(this);
+//    manager.setOrientation(LinearLayoutManager.VERTICAL);
+//    recyclerView.setLayoutManager(manager);
   }
 
-    /**
-     * tell presenter to get invoices
-     * @param authToken
-     */
-  public void displayInvoices(String authToken){
+  /**
+   * tell presenter to get invoices
+   *
+   * @param authToken
+   */
+  public void displayInvoices(String authToken) {
 
-      invoicesPresenter.invoices(authToken);
-
+    invoicesPresenter.invoices(authToken);
   }
 
   @Override
-    public void addInvoicesToTable(ArrayList<LinkedTreeMap>invoices ){
-    // adding table header
-      TableRow tr_head = new TableRow(this);
-      tr_head.setId((10));
-      tr_head.setBackgroundColor(Color.GRAY);
-      tr_head.setLayoutParams(new TableRow.LayoutParams(
-              TableRow.LayoutParams.FILL_PARENT,
-              TableRow.LayoutParams.WRAP_CONTENT));
+  public void addInvoiceCards(ArrayList<Invoice> invoices) {
+    ArrayList<InvoiceCard> invoiceCards = new ArrayList<>();
+    for (Invoice invoice: invoices){
+      String heading = invoice.getSupplier() + " to " + invoice.getBusiness();
+      String delivery;
+      if (invoice.getDueDate() == null) {
+        delivery = "Delivery Date TBD";
+      }
+      else {delivery = "Delivery Date: " + invoice.getDueDate();}
+      invoiceCards.add(new InvoiceCard(heading, delivery));
+    }
 
-      TextView label_supplier = new TextView(this);
-      label_supplier.setId((20));
-      label_supplier.setText("supplier");
-      label_supplier.setTextColor(Color.WHITE);
-      label_supplier.setPadding(5, 5, 5, 5);
-      tr_head.addView(label_supplier);
-
-      TextView label_business = new TextView(this);
-      label_business.setId((20));
-      label_business.setText("Bussiness");
-      label_business.setTextColor(Color.WHITE);
-      label_business.setPadding(5, 5, 5, 5);
-      tr_head.addView(label_business);
-
-      invoicesTable.addView(tr_head, new TableLayout.LayoutParams(
-              TableLayout.LayoutParams.FILL_PARENT,
-              TableLayout.LayoutParams.WRAP_CONTENT
-      ));
+    recycleAdapter = new InvoicesAdapter(invoiceCards);
+    recyclerView.setLayoutManager(recycleManager);
+    recyclerView.setAdapter(recycleAdapter);
 
 
 
 
-
+    System.out.println("************Call addinvoices table *******");
   }
-
-
 }

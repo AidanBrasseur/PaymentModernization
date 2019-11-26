@@ -15,7 +15,7 @@
         <activity android:name=".SignUp.SignUpChoiceActivity" />
         <activity android:name=".SignUp.CompanySignUp"></activity>
         <activity
-            android:name=".HomePage"
+            android:name=".HomePage.HomePageActivity"
             android:label="@string/title_activity_home_page"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
