@@ -10,9 +10,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.paymentmodernization.HomePage.InvoicesFragment;
 import com.example.paymentmodernization.R;
 import com.example.paymentmodernization.ui.SectionsPagerAdapter;
-import com.example.paymentmodernization.ui.share.ShareFragment;
 import com.example.paymentmodernization.ui.slideshow.SlideshowFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -40,7 +40,7 @@ public class HomeFragment extends Fragment {
     //            });
     SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
     // Temporary until invoice tabs go in
-    sectionsPagerAdapter.addFragment(new ShareFragment(), "Invoices");
+    sectionsPagerAdapter.addFragment(new InvoicesFragment(), "Invoices");
     sectionsPagerAdapter.addFragment(new SlideshowFragment(), "Completed Invoices");
     ViewPager viewPager = root.findViewById(R.id.view_pager);
     viewPager.setAdapter(sectionsPagerAdapter);

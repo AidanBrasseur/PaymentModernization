@@ -14,42 +14,41 @@ import java.util.ArrayList;
 
 public class InvoicesAdapter extends RecyclerView.Adapter<InvoicesAdapter.InvoicesViewHolder> {
 
-    private ArrayList<InvoiceCard> invoiceCards;
+  private ArrayList<InvoiceCard> invoiceCards;
 
-    public static class InvoicesViewHolder extends RecyclerView.ViewHolder{
-        public TextView supplierToCompany;
-        public TextView delivery;
+  public InvoicesAdapter(ArrayList<InvoiceCard> invoiceCards) {
+    this.invoiceCards = invoiceCards;
+  }
 
-        public InvoicesViewHolder(View itemView){
-            super(itemView);
-            supplierToCompany = itemView.findViewById(R.id.supplierToCompany);
-            delivery = itemView.findViewById(R.id.delivery);
-        }
+  @NonNull
+  @Override
+  public InvoicesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.invoice_card, parent, false);
+    InvoicesViewHolder ivh = new InvoicesViewHolder(v);
+    return ivh;
+  }
+
+  @Override
+  public void onBindViewHolder(@NonNull InvoicesViewHolder holder, int position) {
+    InvoiceCard currentCard = invoiceCards.get(position);
+
+    holder.supplierToCompany.setText(currentCard.getSupplierToCompany());
+    holder.delivery.setText(currentCard.getDelivery());
+  }
+
+  @Override
+  public int getItemCount() {
+    return invoiceCards.size();
+  }
+
+  public static class InvoicesViewHolder extends RecyclerView.ViewHolder {
+    public TextView supplierToCompany;
+    public TextView delivery;
+
+    public InvoicesViewHolder(View itemView) {
+      super(itemView);
+      supplierToCompany = itemView.findViewById(R.id.supplierToCompany);
+      delivery = itemView.findViewById(R.id.delivery);
     }
-
-    public InvoicesAdapter(ArrayList<InvoiceCard> invoiceCards){
-        this.invoiceCards = invoiceCards;
-    }
-
-    @NonNull
-    @Override
-    public InvoicesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.invoice_card, parent, false);
-        InvoicesViewHolder ivh = new InvoicesViewHolder(v);
-        return ivh;
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull InvoicesViewHolder holder, int position) {
-        InvoiceCard currentCard = invoiceCards.get(position);
-
-        holder.supplierToCompany.setText(currentCard.getSupplierToCompany());
-        holder.delivery.setText(currentCard.getDelivery());
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return invoiceCards.size();
-    }
+  }
 }
