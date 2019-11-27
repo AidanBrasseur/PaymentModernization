@@ -56,6 +56,7 @@ public class LoginInteractor {
               if (!response.isSuccessful()) {
               } else {
                 UserInformation userInformation = response.body();
+                userInformation.setUsername(username);
                 if (userInformation.getIsValid().equals("true")) {
                   listener.onSuccess(userInformation);
                 } else {
