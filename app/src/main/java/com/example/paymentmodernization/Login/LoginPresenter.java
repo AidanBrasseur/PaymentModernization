@@ -67,9 +67,9 @@ public class LoginPresenter implements LoginInteractor.OnLoginFinishedListener {
 
   /** Handles the successful validation of login information */
   @Override
-  public void onSuccess(String authToken, String userType, String fullName) {
+  public void onSuccess(UserInformation userInformation) {
     if (loginView != null) {
-      loginView.switchToHomeScreen(authToken, userType, fullName);
+      loginView.switchToHomeScreen(userInformation);
     }
   }
 

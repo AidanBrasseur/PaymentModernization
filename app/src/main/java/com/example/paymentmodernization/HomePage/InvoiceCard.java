@@ -19,6 +19,7 @@ public class InvoiceCard {
     return supplierToCompany;
   }
 
-  public String getStatus() { return status;}
-
+  public String getStatus() {
+    return status;
+  }
 }

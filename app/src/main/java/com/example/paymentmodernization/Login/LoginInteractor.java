@@ -45,23 +45,19 @@ public class LoginInteractor {
       PaymentModernizationAPI paymentModernizationApi =
           retrofit.create(PaymentModernizationAPI.class);
 
-      final Call<LoginAuthorization> call =
+      final Call<UserInformation> call =
           paymentModernizationApi.getLoginAuthorization(authorizationString);
 
       call.enqueue(
-          new Callback<LoginAuthorization>() {
+          new Callback<UserInformation>() {
 
             @Override
-            public void onResponse(
-                Call<LoginAuthorization> call, Response<LoginAuthorization> response) {
+            public void onResponse(Call<UserInformation> call, Response<UserInformation> response) {
               if (!response.isSuccessful()) {
               } else {
-                LoginAuthorization loginAuthorization = response.body();
-                if (loginAuthorization.getIsValid().equals("true")) {
-                  listener.onSuccess(
-                      loginAuthorization.getAuthToken(),
-                      loginAuthorization.getUserType(),
-                      loginAuthorization.getFullName());
+                UserInformation userInformation = response.body();
+                if (userInformation.getIsValid().equals("true")) {
+                  listener.onSuccess(userInformation);
                 } else {
                   listener.onFail();
                 }
@@ -69,7 +65,7 @@ public class LoginInteractor {
             }
 
             @Override
-            public void onFailure(Call<LoginAuthorization> call, Throwable t) {
+            public void onFailure(Call<UserInformation> call, Throwable t) {
               // TODO: Handle failure of http get
             }
           });
@@ -84,7 +80,7 @@ public class LoginInteractor {
 
     void onPasswordError(String message);
 
-    void onSuccess(String authToken, String userType, String fullName);
+    void onSuccess(UserInformation userInformation);
 
     void onFail();
   }

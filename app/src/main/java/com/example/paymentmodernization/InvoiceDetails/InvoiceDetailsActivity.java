@@ -1,8 +1,6 @@
 package com.example.paymentmodernization.InvoiceDetails;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -21,8 +19,7 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_invoice_details);
-    this.invoice = (Invoice)getIntent().getSerializableExtra("invoice");
+    this.invoice = (Invoice) getIntent().getSerializableExtra("invoice");
     this.tmpText = findViewById(R.id.tmp);
-
   }
 }

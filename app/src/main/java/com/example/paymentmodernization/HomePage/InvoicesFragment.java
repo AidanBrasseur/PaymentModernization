@@ -9,14 +9,13 @@ import android.view.ViewGroup;
 import android.widget.TableLayout;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.paymentmodernization.InvoiceDetails.InvoiceDetailsActivity;
-import com.example.paymentmodernization.Login.LoginActivity;
+import com.example.paymentmodernization.Login.UserInformation;
 import com.example.paymentmodernization.R;
 
 import java.util.ArrayList;
@@ -33,18 +32,15 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
   private RecyclerView.LayoutManager recycleManager;
   private String completedStatus;
   private InvoicesFragmentListener fragmentListener;
+  private UserInformation userInformation;
 
-
-  public interface InvoicesFragmentListener{
-      void onInputInvoicesSent(Invoice invoice);
-  };
-
-  public InvoicesFragment(String completedStatus){
+    public InvoicesFragment(String completedStatus) {
     this.completedStatus = completedStatus;
   }
 
   @Override
-  public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+  public View onCreateView(
+      @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
     View root = inflater.inflate(R.layout.fragment_invoices, container, false);
     /*SectionsPagerAdapter sectionsPagerAdapter =
@@ -67,8 +63,8 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
     /** getting invoices */
     invoicesPresenter = new InvoicesPresenter(this, new InvoicesInteractor());
     Intent intent = getActivity().getIntent();
-
-    this.authToken = intent.getStringExtra("authToken");
+    userInformation = intent.getParcelableExtra("userInformation");
+    this.authToken = userInformation.getAuthToken();
     context = getActivity().getApplicationContext();
 
     // this.invoicesTable = findViewById(R.id.invoices);
@@ -105,17 +101,15 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
       } else {
         delivery = "Delivery Date: " + invoice.getDueDate();
       }
-      if (this.completedStatus.equals("COMPLETE") && invoice.getStatus().equals("COMPLETE")){
+      if (this.completedStatus.equals("COMPLETE") && invoice.getStatus().equals("COMPLETE")) {
         invoiceCards.add(new InvoiceCard(heading, delivery, status));
         keptinvoice.add(invoice);
-      }
-      else if (!this.completedStatus.equals("COMPLETE")) {
-        if (!(invoice.getStatus().equals("COMPLETE"))){
+      } else if (!this.completedStatus.equals("COMPLETE")) {
+        if (!(invoice.getStatus().equals("COMPLETE"))) {
           invoiceCards.add(new InvoiceCard(heading, delivery, status));
           keptinvoice.add(invoice);
         }
       }
-
     }
 
     recycleAdapter = new InvoicesAdapter(invoiceCards);
@@ -138,19 +132,24 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
         });
   }
 
-//    @Override
-//    public void onAttach(@NonNull Context context) {
-//        super.onAttach(context);
-//        if (context instanceof InvoicesFragmentListener){
-//            fragmentListener = (InvoicesFragmentListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString() + "must impliment InvoicesFragmentListener");
-//        }
-//    }
-//
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        fragmentListener = null;
-//    }
+public interface InvoicesFragmentListener {
+    void onInputInvoicesSent(Invoice invoice);
+  }
+
+  //    @Override
+  //    public void onAttach(@NonNull Context context) {
+  //        super.onAttach(context);
+  //        if (context instanceof InvoicesFragmentListener){
+  //            fragmentListener = (InvoicesFragmentListener) context;
+  //        } else {
+  //            throw new RuntimeException(context.toString() + "must impliment
+  // InvoicesFragmentListener");
+  //        }
+  //    }
+  //
+  //    @Override
+  //    public void onDetach() {
+  //        super.onDetach();
+  //        fragmentListener = null;
+  //    }
 }

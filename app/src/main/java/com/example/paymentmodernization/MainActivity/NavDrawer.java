@@ -1,4 +1,4 @@
-package com.example.paymentmodernization;
+package com.example.paymentmodernization.MainActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,8 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.paymentmodernization.Login.UserInformation;
+import com.example.paymentmodernization.R;
 import com.google.android.material.navigation.NavigationView;
 
 public class NavDrawer extends AppCompatActivity {
@@ -30,14 +32,15 @@ public class NavDrawer extends AppCompatActivity {
     Toolbar toolbar = findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
     Intent intent = getIntent();
+    UserInformation userInformation = intent.getParcelableExtra("userInformation");
     DrawerLayout drawer = findViewById(R.id.drawer_layout);
     NavigationView navigationView = findViewById(R.id.nav_view);
     View header = navigationView.getHeaderView(0);
     fullName = header.findViewById(R.id.fullNameText);
-    fullName.setText(intent.getStringExtra("fullName"));
+    fullName.setText(userInformation.getFullName());
 
     username = header.findViewById(R.id.usernameText);
-    username.setText(intent.getStringExtra("username"));
+    username.setText(userInformation.getUsername());
 
     // Passing each menu ID as a set of Ids because each
     // menu should be considered as top level destinations.
