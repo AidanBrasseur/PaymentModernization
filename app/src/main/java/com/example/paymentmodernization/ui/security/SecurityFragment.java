@@ -1,4 +1,4 @@
-package com.example.paymentmodernization.ui.tools;
+package com.example.paymentmodernization.ui.security;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,16 +14,16 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.paymentmodernization.R;
 
-public class ToolsFragment extends Fragment {
+public class SecurityFragment extends Fragment {
 
-  private ToolsViewModel toolsViewModel;
+  private SecurityViewModel securityViewModel;
 
   public View onCreateView(
       @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    toolsViewModel = ViewModelProviders.of(this).get(ToolsViewModel.class);
-    View root = inflater.inflate(R.layout.fragment_tools, container, false);
-    final TextView textView = root.findViewById(R.id.text_tools);
-    toolsViewModel
+    securityViewModel = ViewModelProviders.of(this).get(SecurityViewModel.class);
+    View root = inflater.inflate(R.layout.fragment_security, container, false);
+    final TextView textView = root.findViewById(R.id.text_security);
+    securityViewModel
         .getText()
         .observe(
             this,
