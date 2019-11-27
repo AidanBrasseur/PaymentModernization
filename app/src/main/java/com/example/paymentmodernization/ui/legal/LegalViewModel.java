@@ -1,16 +1,16 @@
-package com.example.paymentmodernization.ui.slideshow;
+package com.example.paymentmodernization.ui.legal;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class SlideshowViewModel extends ViewModel {
+public class LegalViewModel extends ViewModel {
 
   private MutableLiveData<String> mText;
 
-  public SlideshowViewModel() {
+  public LegalViewModel() {
     mText = new MutableLiveData<>();
-    mText.setValue("This is slideshow fragment");
+    mText.setValue("This is a legal fragment");
   }
 
   public LiveData<String> getText() {
