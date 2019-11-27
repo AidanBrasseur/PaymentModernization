@@ -15,6 +15,15 @@ import java.util.ArrayList;
 public class InvoicesAdapter extends RecyclerView.Adapter<InvoicesAdapter.InvoicesViewHolder> {
 
   private ArrayList<InvoiceCard> invoiceCards;
+  private onItemClickListener mListener;
+
+  public interface onItemClickListener {
+      void onItemClick(int position);
+  }
+
+  public void setOnItemClickListener(onItemClickListener listener){
+      mListener = listener;
+  }
 
   public InvoicesAdapter(ArrayList<InvoiceCard> invoiceCards) {
     this.invoiceCards = invoiceCards;
@@ -24,7 +33,7 @@ public class InvoicesAdapter extends RecyclerView.Adapter<InvoicesAdapter.Invoic
   @Override
   public InvoicesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.invoice_card, parent, false);
-    InvoicesViewHolder ivh = new InvoicesViewHolder(v);
+    InvoicesViewHolder ivh = new InvoicesViewHolder(v, mListener);
     return ivh;
   }
 
@@ -47,11 +56,22 @@ public class InvoicesAdapter extends RecyclerView.Adapter<InvoicesAdapter.Invoic
     public TextView delivery;
     public  TextView status;
 
-    public InvoicesViewHolder(View itemView) {
+    public InvoicesViewHolder(View itemView, final onItemClickListener listener) {
       super(itemView);
       supplierToCompany = itemView.findViewById(R.id.supplierToCompany);
       delivery = itemView.findViewById(R.id.delivery);
       status = itemView.findViewById(R.id.status);
+      itemView.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+              if (listener != null) {
+                  int position = getAdapterPosition();
+                  if (position != RecyclerView.NO_POSITION){
+                      listener.onItemClick(position);
+                  }
+              }
+          }
+      });
     }
   }
 }

@@ -1,8 +1,9 @@
 package com.example.paymentmodernization.HomePage;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Invoice {
+public class Invoice implements Serializable {
   private String business;
   private String supplier;
   private String dueDate;

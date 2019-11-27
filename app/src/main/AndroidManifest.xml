@@ -18,6 +18,7 @@
         <activity android:name=".SignUp.DriverSignUp" />
         <activity android:name=".SignUp.SignUpChoiceActivity" />
         <activity android:name=".SignUp.CompanySignUp" />
+        <activity android:name=".InvoiceDetails.InvoiceDetailsActivity" />
         <activity
             android:name=".HomePage.InvoicesFragment"
             android:label="@string/title_activity_home_page"

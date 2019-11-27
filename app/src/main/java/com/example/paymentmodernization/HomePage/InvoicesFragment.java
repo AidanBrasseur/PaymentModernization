@@ -9,11 +9,14 @@ import android.view.ViewGroup;
 import android.widget.TableLayout;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.paymentmodernization.InvoiceDetails.InvoiceDetailsActivity;
+import com.example.paymentmodernization.Login.LoginActivity;
 import com.example.paymentmodernization.R;
 
 import java.util.ArrayList;
@@ -26,17 +29,23 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
   private ConstraintLayout layout;
   private Context context;
   private RecyclerView recyclerView;
-  private RecyclerView.Adapter recycleAdapter;
+  private InvoicesAdapter recycleAdapter;
   private RecyclerView.LayoutManager recycleManager;
   private String completedStatus;
+  private InvoicesFragmentListener fragmentListener;
+
+
+  public interface InvoicesFragmentListener{
+      void onInputInvoicesSent(Invoice invoice);
+  };
 
   public InvoicesFragment(String completedStatus){
     this.completedStatus = completedStatus;
   }
 
   @Override
-  public View onCreateView(
-      @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+  public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
     View root = inflater.inflate(R.layout.fragment_invoices, container, false);
     /*SectionsPagerAdapter sectionsPagerAdapter =
         new SectionsPagerAdapter(this, getSupportFragmentManager());
@@ -84,8 +93,9 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
   }
 
   @Override
-  public void addInvoiceCards(ArrayList<Invoice> invoices) {
+  public void addInvoiceCards(final ArrayList<Invoice> invoices) {
     ArrayList<InvoiceCard> invoiceCards = new ArrayList<>();
+    final ArrayList<Invoice> keptinvoice = new ArrayList<>();
     for (Invoice invoice : invoices) {
       String heading = invoice.getSupplier() + " to " + invoice.getBusiness();
       String status = invoice.getStatus();
@@ -97,10 +107,12 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
       }
       if (this.completedStatus.equals("COMPLETE") && invoice.getStatus().equals("COMPLETE")){
         invoiceCards.add(new InvoiceCard(heading, delivery, status));
+        keptinvoice.add(invoice);
       }
       else if (!this.completedStatus.equals("COMPLETE")) {
         if (!(invoice.getStatus().equals("COMPLETE"))){
           invoiceCards.add(new InvoiceCard(heading, delivery, status));
+          keptinvoice.add(invoice);
         }
       }
 
@@ -110,5 +122,35 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
     recyclerView.setLayoutManager(recycleManager);
     recyclerView.setAdapter(recycleAdapter);
 
+    recycleAdapter.setOnItemClickListener(
+        new InvoicesAdapter.onItemClickListener() {
+          @Override
+          public void onItemClick(int position) {
+            Invoice clickedInvoice = keptinvoice.get(position);
+            System.out.println(getActivity());
+            Intent intent = new Intent(getActivity(), InvoiceDetailsActivity.class);
+            intent.putExtra("invoice", clickedInvoice);
+            getActivity().startActivity(intent);
+
+            // fragmentListener.onInputInvoicesSent(clickedInvoice);
+
+          }
+        });
   }
+
+//    @Override
+//    public void onAttach(@NonNull Context context) {
+//        super.onAttach(context);
+//        if (context instanceof InvoicesFragmentListener){
+//            fragmentListener = (InvoicesFragmentListener) context;
+//        } else {
+//            throw new RuntimeException(context.toString() + "must impliment InvoicesFragmentListener");
+//        }
+//    }
+//
+//    @Override
+//    public void onDetach() {
+//        super.onDetach();
+//        fragmentListener = null;
+//    }
 }
