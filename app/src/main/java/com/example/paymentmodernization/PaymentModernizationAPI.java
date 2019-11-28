@@ -10,7 +10,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 /** An interface dictating the get and post methods corresponding to API calls */
 public interface PaymentModernizationAPI {
@@ -39,17 +38,13 @@ public interface PaymentModernizationAPI {
       @Field("name") String name,
       @Field("type") String type);
 
-  /**
-   * updates status for particular invoice
-   */
-
+  /** updates status for particular invoice */
   @FormUrlEncoded
   @POST("invoices/update-status/{invoiceId}")
   Call<String> updateStatus(
-          @Path("invoiceId") String invoiceId,
-          @Header("Authorization") String authToken,
-          @Field("newStatus") String newStatus
-  );
+      @Path("invoiceId") String invoiceId,
+      @Header("Authorization") String authToken,
+      @Field("newStatus") String newStatus);
 
   /**
    * Signs up a new company with given username, password, name, type, bank information, and address

@@ -1,5 +1,6 @@
 package com.example.paymentmodernization.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,23 +12,28 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.paymentmodernization.HomePage.InvoicesFragment;
-import com.example.paymentmodernization.Login.LoginActivity;
+import com.example.paymentmodernization.Login.UserInformation;
 import com.example.paymentmodernization.R;
 import com.example.paymentmodernization.ui.SectionsPagerAdapter;
-//import com.example.paymentmodernization.ui.slideshow.SlideshowFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
+
+// import com.example.paymentmodernization.ui.slideshow.SlideshowFragment;
 
 public class HomeFragment extends Fragment {
 
   private HomeViewModel homeViewModel;
   private FloatingActionButton fab;
+  private UserInformation userInformation;
 
   public View onCreateView(
       @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
     View root = inflater.inflate(R.layout.fragment_home, container, false);
+    Intent intent = getActivity().getIntent();
+    userInformation = intent.getParcelableExtra("userInformation");
+    String userType = userInformation.getUserType();
     //    final TextView textView = root.findViewById(R.id.text_home);
     //    homeViewModel
     //        .getText()
@@ -48,6 +54,9 @@ public class HomeFragment extends Fragment {
     TabLayout tabs = root.findViewById(R.id.tabs);
     tabs.setupWithViewPager(viewPager);
     FloatingActionButton fab = root.findViewById(R.id.fab);
+    if (!userType.equals("SUPPLIER")) {
+      fab.hide();
+    }
     fab.setOnClickListener(
         new View.OnClickListener() {
           @Override
