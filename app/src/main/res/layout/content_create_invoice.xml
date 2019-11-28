@@ -27,12 +27,13 @@
 
         <EditText
             android:id="@+id/estimatedDate"
+            android:focusable="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints="Estimated Delivery Date"
             android:ems="10"
             android:hint="Estimated Delivery Date"
-            android:inputType="textPersonName"
+            android:inputType="none"
             android:paddingTop="15dp"/>
 
         <EditText

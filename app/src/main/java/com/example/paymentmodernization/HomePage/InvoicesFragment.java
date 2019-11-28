@@ -72,10 +72,11 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
 
     // this.invoicesTable = findViewById(R.id.invoices);
     layout = root.findViewById(R.id.coordinatorLayout);
-    displayInvoices(this.authToken);
+    // displayInvoices(this.authToken);
     recyclerView = root.findViewById(R.id.recyclerView);
     recycleManager = new LinearLayoutManager(context);
     swipeRefreshLayout = root.findViewById(R.id.swipeRefresh);
+    swipeRefreshLayout.setRefreshing(false);
     swipeRefreshLayout.setOnRefreshListener(
         new SwipeRefreshLayout.OnRefreshListener() {
           @Override
@@ -123,7 +124,7 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
         }
       }
     }
-
+    recycleManager = new LinearLayoutManager(context);
     recycleAdapter = new InvoicesAdapter(invoiceCards);
     recyclerView.setLayoutManager(recycleManager);
     recyclerView.setAdapter(recycleAdapter);

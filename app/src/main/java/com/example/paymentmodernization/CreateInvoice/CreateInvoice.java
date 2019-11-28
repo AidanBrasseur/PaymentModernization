@@ -1,10 +1,15 @@
 package com.example.paymentmodernization.CreateInvoice;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,13 +18,14 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.paymentmodernization.Login.UserInformation;
 import com.example.paymentmodernization.MainActivity.NavDrawer;
 import com.example.paymentmodernization.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class CreateInvoice extends AppCompatActivity implements CreateInvoiceView {
   private EditText businessText;
@@ -28,10 +34,11 @@ public class CreateInvoice extends AppCompatActivity implements CreateInvoiceVie
   private EditText orderDesc;
   private EditText orderQt;
   private EditText price;
-  private FloatingActionButton fab;
+  private Button submitButton;
   private ProgressBar progressBar;
   private UserInformation userInformation;
   private CreateInvoicePresenter createInvoicePresenter;
+  private Calendar myCalendar;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -45,14 +52,59 @@ public class CreateInvoice extends AppCompatActivity implements CreateInvoiceVie
     businessText = findViewById(R.id.businessRecipient);
     deliveryPersonText = findViewById(R.id.deliveryPerson);
     dueDateText = findViewById(R.id.estimatedDate);
-    dueDateText.setText("2019-11-17 18:45:00");
     orderDesc = findViewById(R.id.orderDesc);
     orderQt = findViewById(R.id.orderQt);
     price = findViewById(R.id.orderPrice);
     progressBar = findViewById(R.id.progress);
     createInvoicePresenter = new CreateInvoicePresenter(this, new CreateInvoiceInteractor());
-    fab = findViewById(R.id.fab);
-    fab.setOnClickListener(
+    submitButton = findViewById(R.id.submit);
+
+    myCalendar = Calendar.getInstance();
+
+    final TimePickerDialog.OnTimeSetListener time =
+        new TimePickerDialog.OnTimeSetListener() {
+          @Override
+          public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            myCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            myCalendar.set(Calendar.MINUTE, minute);
+            updateLabel();
+          }
+        };
+
+    final DatePickerDialog.OnDateSetListener date =
+        new DatePickerDialog.OnDateSetListener() {
+
+          @Override
+          public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            // TODO Auto-generated method stub
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, monthOfYear);
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            new TimePickerDialog(
+                    CreateInvoice.this,
+                    time,
+                    myCalendar.get(Calendar.HOUR_OF_DAY),
+                    myCalendar.get(Calendar.MINUTE),
+                    false)
+                .show();
+          }
+        };
+
+    dueDateText.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            // TODO Auto-generated method stub
+            new DatePickerDialog(
+                    CreateInvoice.this,
+                    date,
+                    myCalendar.get(Calendar.YEAR),
+                    myCalendar.get(Calendar.MONTH),
+                    myCalendar.get(Calendar.DAY_OF_MONTH))
+                .show();
+          }
+        });
+    submitButton.setOnClickListener(
         new View.OnClickListener() {
           @Override
           public void onClick(View view) {
@@ -77,6 +129,12 @@ public class CreateInvoice extends AppCompatActivity implements CreateInvoiceVie
             }
           }
         });
+  }
+
+  private void updateLabel() {
+    String myFormat = "yyyy-MM-dd HH:mm:ss";
+    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.CANADA);
+    dueDateText.setText(sdf.format(myCalendar.getTime()));
   }
 
   @Override
@@ -119,8 +177,9 @@ public class CreateInvoice extends AppCompatActivity implements CreateInvoiceVie
 
   void createInvoice(
       String authToken, String business, String deliveryPerson, String dueDate, String items) {
-    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    String date = formatter.format(new Date());
+    String myFormat = "yyyy-MM-dd HH:mm:ss";
+    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.CANADA);
+    String date = sdf.format(new Date());
     createInvoicePresenter.createInvoice(authToken, business, deliveryPerson, date, dueDate, items);
   }
 }

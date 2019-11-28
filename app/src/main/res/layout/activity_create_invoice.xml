@@ -41,27 +41,19 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="274dp"
         android:layout_height="236dp"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:layout_gravity="center"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_height="wrap_content"
-        android:src="@android:color/transparent"
-        android:layout_margin="@dimen/fab_margin"
-        app:layout_anchorGravity="bottom|end"
-        />
-
-    <TextView
+    <Button
+        android:id="@+id/submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:elevation="6dp"
+        android:background="@drawable/rounded_button"
         android:text="Submit"
-        android:textColor="#fff"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_anchor="@id/fab"
-        app:layout_anchorGravity="center" />
+        android:textColor="@android:color/background_light"
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_gravity="end|bottom"
+        app:layout_anchorGravity="bottom|end"/>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
