@@ -9,14 +9,12 @@ import android.view.ViewGroup;
 import android.widget.TableLayout;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.paymentmodernization.InvoiceDetails.InvoiceDetailsActivity;
-import com.example.paymentmodernization.Login.LoginActivity;
 import com.example.paymentmodernization.Login.UserInformation;
 import com.example.paymentmodernization.R;
 
@@ -35,15 +33,13 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
   private String completedStatus;
   private UserInformation userInformation;
 
-
-
-
-  public InvoicesFragment(String completedStatus){
+  public InvoicesFragment(String completedStatus) {
     this.completedStatus = completedStatus;
   }
 
   @Override
-  public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+  public View onCreateView(
+      @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
     View root = inflater.inflate(R.layout.fragment_invoices, container, false);
     /*SectionsPagerAdapter sectionsPagerAdapter =
@@ -104,17 +100,15 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
       } else {
         delivery = "Delivery Date: " + invoice.getDueDate();
       }
-      if (this.completedStatus.equals("COMPLETE") && invoice.getStatus().equals("COMPLETE")){
+      if (this.completedStatus.equals("COMPLETE") && invoice.getStatus().equals("COMPLETE")) {
         invoiceCards.add(new InvoiceCard(heading, delivery, status));
         keptinvoice.add(invoice);
-      }
-      else if (!this.completedStatus.equals("COMPLETE")) {
-        if (!(invoice.getStatus().equals("COMPLETE"))){
+      } else if (!this.completedStatus.equals("COMPLETE")) {
+        if (!(invoice.getStatus().equals("COMPLETE"))) {
           invoiceCards.add(new InvoiceCard(heading, delivery, status));
           keptinvoice.add(invoice);
         }
       }
-
     }
 
     recycleAdapter = new InvoicesAdapter(invoiceCards);
@@ -132,9 +126,7 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
             intent.putExtra("authToken", authToken);
             intent.putExtra("userType", userInformation.getUserType());
             getActivity().startActivity(intent);
-
           }
         });
   }
-
 }

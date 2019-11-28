@@ -1,9 +1,21 @@
 package com.example.paymentmodernization.HomePage;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
-public class Invoice implements Serializable {
+public class Invoice implements Parcelable {
+  public static final Parcelable.Creator<Invoice> CREATOR =
+      new Parcelable.Creator<Invoice>() {
+        public Invoice createFromParcel(Parcel parcel) {
+          return new Invoice(parcel);
+        }
+
+        public Invoice[] newArray(int size) {
+          return new Invoice[size];
+        }
+      };
   private String business;
   private String supplier;
   private String dueDate;
@@ -13,6 +25,18 @@ public class Invoice implements Serializable {
   private String paymentDate;
   private ArrayList<InvoiceItem> items;
   private String status;
+
+  private Invoice(Parcel parcel) {
+    business = parcel.readString();
+    supplier = parcel.readString();
+    dueDate = parcel.readString();
+    invoiceId = parcel.readString();
+    invoiceDate = parcel.readString();
+    deliveryDate = parcel.readString();
+    paymentDate = parcel.readString();
+    items = parcel.readArrayList(InvoiceItem.class.getClassLoader());
+    status = parcel.readString();
+  }
 
   public String getBusiness() {
     return business;
@@ -84,5 +108,23 @@ public class Invoice implements Serializable {
 
   public void setStatus(String status) {
     this.status = status;
+  }
+
+  @Override
+  public int describeContents() {
+    return 0;
+  }
+
+  @Override
+  public void writeToParcel(Parcel parcel, int i) {
+    parcel.writeString(business);
+    parcel.writeString(supplier);
+    parcel.writeString(dueDate);
+    parcel.writeString(invoiceId);
+    parcel.writeString(invoiceDate);
+    parcel.writeString(deliveryDate);
+    parcel.writeString(paymentDate);
+    parcel.writeList(items);
+    parcel.writeString(status);
   }
 }

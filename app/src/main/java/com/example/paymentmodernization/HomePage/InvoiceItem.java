@@ -1,10 +1,29 @@
 package com.example.paymentmodernization.HomePage;
 
-public class InvoiceItem {
+import android.os.Parcel;
+import android.os.Parcelable;
 
+public class InvoiceItem implements Parcelable {
+
+  public static final Parcelable.Creator<InvoiceItem> CREATOR =
+      new Parcelable.Creator<InvoiceItem>() {
+        public InvoiceItem createFromParcel(Parcel parcel) {
+          return new InvoiceItem(parcel);
+        }
+
+        public InvoiceItem[] newArray(int size) {
+          return new InvoiceItem[size];
+        }
+      };
   private String quantity;
   private String price;
   private String description;
+
+  private InvoiceItem(Parcel parcel) {
+    quantity = parcel.readString();
+    price = parcel.readString();
+    description = parcel.readString();
+  }
 
   public String getQuantity() {
     return quantity;
@@ -28,5 +47,17 @@ public class InvoiceItem {
 
   public void setDescription(String description) {
     this.description = description;
+  }
+
+  @Override
+  public int describeContents() {
+    return 0;
+  }
+
+  @Override
+  public void writeToParcel(Parcel parcel, int i) {
+    parcel.writeString(quantity);
+    parcel.writeString(price);
+    parcel.writeString(description);
   }
 }
