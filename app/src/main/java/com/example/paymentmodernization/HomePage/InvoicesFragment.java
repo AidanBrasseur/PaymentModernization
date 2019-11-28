@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.paymentmodernization.InvoiceDetails.InvoiceDetailsActivity;
 import com.example.paymentmodernization.Login.LoginActivity;
+import com.example.paymentmodernization.Login.UserInformation;
 import com.example.paymentmodernization.R;
 
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
   private InvoicesAdapter recycleAdapter;
   private RecyclerView.LayoutManager recycleManager;
   private String completedStatus;
+  private UserInformation userInformation;
 
 
 
@@ -64,8 +66,8 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
     /** getting invoices */
     invoicesPresenter = new InvoicesPresenter(this, new InvoicesInteractor());
     Intent intent = getActivity().getIntent();
-
-    this.authToken = intent.getStringExtra("authToken");
+    this.userInformation = intent.getParcelableExtra("userInformation");
+    this.authToken = userInformation.getAuthToken();
     context = getActivity().getApplicationContext();
 
     // this.invoicesTable = findViewById(R.id.invoices);
@@ -128,7 +130,7 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
             Intent intent = new Intent(getActivity(), InvoiceDetailsActivity.class);
             intent.putExtra("invoice", clickedInvoice);
             intent.putExtra("authToken", authToken);
-            intent.putExtra("userType", getActivity().getIntent().getStringExtra("userType"));
+            intent.putExtra("userType", userInformation.getUserType());
             getActivity().startActivity(intent);
 
           }

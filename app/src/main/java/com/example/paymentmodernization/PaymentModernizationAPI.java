@@ -1,7 +1,7 @@
 package com.example.paymentmodernization;
 
 import com.example.paymentmodernization.HomePage.Invoices;
-import com.example.paymentmodernization.Login.LoginAuthorization;
+import com.example.paymentmodernization.Login.UserInformation;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -17,8 +17,7 @@ public interface PaymentModernizationAPI {
 
   /** Gets information about the validity of the login credentials */
   @GET("login")
-  Call<LoginAuthorization> getLoginAuthorization(
-      @Header("Authorization") String authorizationString);
+  Call<UserInformation> getLoginAuthorization(@Header("Authorization") String authorizationString);
 
   /** Gets invoices of the user */
   @GET("invoices")

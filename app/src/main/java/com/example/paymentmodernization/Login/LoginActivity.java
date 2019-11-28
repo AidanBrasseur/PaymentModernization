@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.paymentmodernization.NavDrawer;
+import com.example.paymentmodernization.MainActivity.NavDrawer;
 import com.example.paymentmodernization.R;
 import com.example.paymentmodernization.SignUp.SignUpChoiceActivity;
 
@@ -59,12 +59,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
   /** switches current screen to the homescreen */
   @Override
-  public void switchToHomeScreen(String authToken, String userType, String fullName) {
+  public void switchToHomeScreen(UserInformation userInformation) {
     Intent intent = new Intent(LoginActivity.this, NavDrawer.class);
-    intent.putExtra("authToken", authToken);
-    intent.putExtra("userType", userType);
-    intent.putExtra("username", usernameField.getText().toString());
-    intent.putExtra("fullName", fullName);
+    intent.putExtra("userInformation", userInformation);
     startActivity(intent);
   }
   /** switches current screen to the sign-up choice screen */

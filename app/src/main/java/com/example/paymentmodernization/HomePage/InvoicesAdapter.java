@@ -17,16 +17,12 @@ public class InvoicesAdapter extends RecyclerView.Adapter<InvoicesAdapter.Invoic
   private ArrayList<InvoiceCard> invoiceCards;
   private onItemClickListener mListener;
 
-  public interface onItemClickListener {
-      void onItemClick(int position);
-  }
-
-  public void setOnItemClickListener(onItemClickListener listener){
-      mListener = listener;
-  }
-
   public InvoicesAdapter(ArrayList<InvoiceCard> invoiceCards) {
     this.invoiceCards = invoiceCards;
+  }
+
+  public void setOnItemClickListener(onItemClickListener listener) {
+    mListener = listener;
   }
 
   @NonNull
@@ -51,27 +47,32 @@ public class InvoicesAdapter extends RecyclerView.Adapter<InvoicesAdapter.Invoic
     return invoiceCards.size();
   }
 
+  public interface onItemClickListener {
+    void onItemClick(int position);
+  }
+
   public static class InvoicesViewHolder extends RecyclerView.ViewHolder {
     public TextView supplierToCompany;
     public TextView delivery;
-    public  TextView status;
+    public TextView status;
 
     public InvoicesViewHolder(View itemView, final onItemClickListener listener) {
       super(itemView);
       supplierToCompany = itemView.findViewById(R.id.supplierToCompany);
       delivery = itemView.findViewById(R.id.delivery);
       status = itemView.findViewById(R.id.status);
-      itemView.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
+      itemView.setOnClickListener(
+          new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
               if (listener != null) {
-                  int position = getAdapterPosition();
-                  if (position != RecyclerView.NO_POSITION){
-                      listener.onItemClick(position);
-                  }
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                  listener.onItemClick(position);
+                }
               }
-          }
-      });
+            }
+          });
     }
   }
 }
