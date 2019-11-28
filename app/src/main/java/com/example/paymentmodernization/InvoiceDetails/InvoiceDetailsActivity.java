@@ -54,7 +54,7 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
     invoiceId.setText(invoice.getInvoiceId());
     this.invoiceDate = findViewById(R.id.invoiceDate);
     invoiceDate.setText(invoice.getInvoiceDate());
-    this.deliveryDate = findViewById(R.id.delivery);
+    this.deliveryDate = findViewById(R.id.deliveryDate);
     deliveryDate.setText(invoice.getDeliveryDate());
     this.paymentDate = findViewById(R.id.paymentDate);
     paymentDate.setText(invoice.getPaymentDate());
