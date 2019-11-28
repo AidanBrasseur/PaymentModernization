@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".CreateInvoice.CreateInvoice"
+    tools:showIn="@layout/activity_create_invoice">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="15dp">
+
+        <EditText
+            android:id="@+id/businessRecipient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="Business"
+            android:ems="10"
+            android:hint="Business"
+            android:inputType="textPersonName"
+            android:paddingTop="15dp"/>
+
+        <EditText
+            android:id="@+id/estimatedDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="Estimated Delivery Date"
+            android:ems="10"
+            android:hint="Estimated Delivery Date"
+            android:inputType="textPersonName"
+            android:paddingTop="15dp"/>
+
+        <EditText
+            android:id="@+id/deliveryPerson"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="Delivery Person"
+            android:ems="10"
+            android:hint="Delivery Person"
+            android:inputType="textPersonName"
+            android:paddingTop="15dp"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingTop="15dp">
+
+            <EditText
+                android:id="@+id/orderDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:autofillHints="Item Description"
+                android:ems="10"
+                android:hint="Item Description"
+                android:inputType="textPersonName"
+                android:paddingTop="15dp"/>
+
+            <EditText
+                android:id="@+id/orderQt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:autofillHints="Item Quantity"
+                android:ems="10"
+                android:hint="Item Quantity"
+                android:inputType="textPersonName"
+                android:paddingTop="15dp"/>
+
+            <EditText
+                android:id="@+id/orderPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:autofillHints="Item Price"
+                android:ems="10"
+                android:hint="Item Price"
+                android:inputType="textPersonName"
+                android:paddingTop="15dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
