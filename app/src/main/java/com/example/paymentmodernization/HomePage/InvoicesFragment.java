@@ -32,12 +32,9 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
   private InvoicesAdapter recycleAdapter;
   private RecyclerView.LayoutManager recycleManager;
   private String completedStatus;
-  private InvoicesFragmentListener fragmentListener;
 
 
-  public interface InvoicesFragmentListener{
-      void onInputInvoicesSent(Invoice invoice);
-  };
+
 
   public InvoicesFragment(String completedStatus){
     this.completedStatus = completedStatus;
@@ -130,27 +127,12 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
             System.out.println(getActivity());
             Intent intent = new Intent(getActivity(), InvoiceDetailsActivity.class);
             intent.putExtra("invoice", clickedInvoice);
+            intent.putExtra("authToken", authToken);
+            intent.putExtra("userType", getActivity().getIntent().getStringExtra("userType"));
             getActivity().startActivity(intent);
-
-            // fragmentListener.onInputInvoicesSent(clickedInvoice);
 
           }
         });
   }
 
-//    @Override
-//    public void onAttach(@NonNull Context context) {
-//        super.onAttach(context);
-//        if (context instanceof InvoicesFragmentListener){
-//            fragmentListener = (InvoicesFragmentListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString() + "must impliment InvoicesFragmentListener");
-//        }
-//    }
-//
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        fragmentListener = null;
-//    }
 }

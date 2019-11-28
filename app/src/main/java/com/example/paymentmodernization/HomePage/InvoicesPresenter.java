@@ -25,4 +25,6 @@ public class InvoicesPresenter implements InvoicesInteractor.OnInvoicesFinishedL
     invoicesView.addInvoiceCards(invoices);
     System.out.println(invoices.toString());
   }
+
+
 }

@@ -1,3 +1,7 @@
 package com.example.paymentmodernization.InvoiceDetails;
 
-public interface InvoiceDetailsView {}
+public interface InvoiceDetailsView {
+
+
+    void statusUpdatedSuccess(String newStatus);
+}

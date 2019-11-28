@@ -14,7 +14,7 @@ import com.example.paymentmodernization.HomePage.InvoicesFragment;
 import com.example.paymentmodernization.Login.LoginActivity;
 import com.example.paymentmodernization.R;
 import com.example.paymentmodernization.ui.SectionsPagerAdapter;
-import com.example.paymentmodernization.ui.slideshow.SlideshowFragment;
+//import com.example.paymentmodernization.ui.slideshow.SlideshowFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
