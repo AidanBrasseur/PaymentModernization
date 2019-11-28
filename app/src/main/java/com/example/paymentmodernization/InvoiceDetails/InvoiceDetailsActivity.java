@@ -89,4 +89,10 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
       button.setEnabled(false);
     }
   }
+
+  @Override
+  public void onBackPressed()
+  {
+    finish();
+  }
 }
