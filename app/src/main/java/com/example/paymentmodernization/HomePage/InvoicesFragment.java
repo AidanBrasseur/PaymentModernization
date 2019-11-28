@@ -3,6 +3,7 @@ package com.example.paymentmodernization.HomePage;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.paymentmodernization.InvoiceDetails.InvoiceDetailsActivity;
 import com.example.paymentmodernization.Login.UserInformation;
@@ -32,6 +34,7 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
   private RecyclerView.LayoutManager recycleManager;
   private String completedStatus;
   private UserInformation userInformation;
+  private SwipeRefreshLayout swipeRefreshLayout;
 
   public InvoicesFragment(String completedStatus) {
     this.completedStatus = completedStatus;
@@ -39,7 +42,7 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
 
   @Override
   public View onCreateView(
-      @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+          @NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
 
     View root = inflater.inflate(R.layout.fragment_invoices, container, false);
     /*SectionsPagerAdapter sectionsPagerAdapter =
@@ -71,6 +74,14 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
     displayInvoices(this.authToken);
     recyclerView = root.findViewById(R.id.recyclerView);
     recycleManager = new LinearLayoutManager(context);
+    swipeRefreshLayout = root.findViewById(R.id.swipeRefresh);
+    swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+            displayInvoices(authToken);
+        }
+    });
+
     //    LinearLayoutManager manager = new LinearLayoutManager(this);
     //    manager.setOrientation(LinearLayoutManager.VERTICAL);
     //    recyclerView.setLayoutManager(manager);
@@ -114,8 +125,10 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
     recycleAdapter = new InvoicesAdapter(invoiceCards);
     recyclerView.setLayoutManager(recycleManager);
     recyclerView.setAdapter(recycleAdapter);
+    swipeRefreshLayout.setRefreshing(false);
 
-    recycleAdapter.setOnItemClickListener(
+
+      recycleAdapter.setOnItemClickListener(
         new InvoicesAdapter.onItemClickListener() {
           @Override
           public void onItemClick(int position) {
