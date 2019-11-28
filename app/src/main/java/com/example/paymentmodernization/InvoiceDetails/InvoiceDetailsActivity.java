@@ -9,7 +9,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.paymentmodernization.HomePage.Invoice;
+import com.example.paymentmodernization.HomePage.InvoiceItem;
 import com.example.paymentmodernization.R;
+
+import java.util.ArrayList;
 
 public class InvoiceDetailsActivity extends AppCompatActivity implements InvoiceDetailsView {
 
@@ -17,8 +20,20 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
   private Invoice invoice;
   private String userType;
   private String authToken;
-  private TextView tmpText;
+
   private Button button;
+  private TextView business;
+  private TextView supplier;
+  private TextView dueDate;
+  private TextView invoiceId;
+  private TextView invoiceDate;
+  private TextView deliveryDate;
+  private TextView paymentDate;
+  private TextView itemDescription;
+  private TextView itemQuantity;
+  private TextView itemUnitPrice;
+  private TextView status;
+
 
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,8 +44,32 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
     this.userType = getIntent().getStringExtra("userType");
     this.authToken = getIntent().getStringExtra("authToken");
 
-    this.tmpText = findViewById(R.id.tmp);
+    this.business = findViewById(R.id.business);
+    business.setText(invoice.getBusiness());
+    this.supplier = findViewById(R.id.supplier);
+    supplier.setText(invoice.getInvoiceId());
+    this.dueDate = findViewById(R.id.dueDate);
+    dueDate.setText(invoice.getDueDate());
+    this.invoiceId = findViewById(R.id.invoiceId);
+    invoiceId.setText(invoice.getInvoiceId());
+    this.invoiceDate = findViewById(R.id.invoiceDate);
+    invoiceDate.setText(invoice.getInvoiceDate());
+    this.deliveryDate = findViewById(R.id.delivery);
+    deliveryDate.setText(invoice.getDeliveryDate());
+    this.paymentDate = findViewById(R.id.paymentDate);
+    paymentDate.setText(invoice.getPaymentDate());
+    this.itemDescription = findViewById(R.id.itemDescription);
+    itemDescription.setText(invoice.getItems().get(0).getDescription());
+    this.itemQuantity = findViewById(R.id.itemQuantity);
+    itemQuantity.setText(invoice.getItems().get(0).getQuantity());
+    this.itemUnitPrice = findViewById(R.id.itemUnitPrice);
+    itemUnitPrice.setText(invoice.getItems().get(0).getPrice());
+    this.status = findViewById(R.id.status);
+    status.setText(invoice.getStatus());
+
     this.button = findViewById(R.id.statusButton);
+    button.setText(invoice.getStatus());
+
     presenter = new InvoiceDetailsPresenter(this, new InvoiceDetailsInteractor());
 
     // checking user type and displaying correct button

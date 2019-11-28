@@ -43,5 +43,16 @@
     <string name="menu_send">Send</string>
     <string name="menu_legal">Privacy and Legal</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="business">Business</string>
+    <string name="supplier">Supplier</string>
+    <string name="dueDate">Due date</string>
+    <string name="invoiceId">Invoice ID</string>
+    <string name="invoiceDate">Invoice date</string>
+    <string name="deliveryDate">Delivery date</string>
+    <string name="paymentDate">Payment date</string>
+    <string name="item1">Item #1 description</string>
+    <string name="itemDescription">Item description</string>
+    <string name="itemQuantity">Item quantity</string>
+    <string name="itemUnitPrice">Item unit price</string>
 
 </resources>
