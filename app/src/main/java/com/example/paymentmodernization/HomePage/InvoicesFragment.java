@@ -143,6 +143,9 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
         });
   }
 
-
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        displayInvoices(authToken);
+    }
 }
