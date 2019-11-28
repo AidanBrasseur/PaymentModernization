@@ -20,7 +20,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -39,145 +41,152 @@
 
     <EditText
         android:id="@+id/fullName"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
-        android:ems="10"
-        android:inputType="textPersonName"
         android:autofillHints="Full Name"
+        android:ems="10"
         android:hint="Full Name"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/username"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:autofillHints="Username"
-        android:hint="Username"
-        app:layout_constraintBottom_toTopOf="@+id/password"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintVertical_bias="0.767" />
 
     <EditText
         android:id="@+id/password"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/accountNum"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="56dp"
         android:autofillHints="Password"
-        android:hint="@string/prompt_password"/>
-
-    <EditText
-        android:id="@+id/accountNum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
         android:ems="10"
-        android:autofillHints="Bank Account Number"
-        android:inputType="number"
-        android:hint="Bank Account Number"
-        app:layout_constraintBottom_toTopOf="@+id/cardNum"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/cardNum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:ems="10"
-        android:inputType="number"
-        android:autofillHints="Card Number"
+        android:hint="@string/prompt_password"
+        android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/bankChoice"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent"
-        android:hint="Card Number"/>
-
-    <EditText
-        android:id="@+id/streetAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:ems="10"
-        android:autofillHints="Street Address"
-        android:hint="Street Address"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/region"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/progressBar"
+        app:layout_constraintVertical_bias="0.258" />
 
     <EditText
         android:id="@+id/city"
-        android:layout_width="123dp"
+        android:layout_width="175dp"
         android:layout_height="44dp"
-        android:layout_marginBottom="20dp"
-        android:ems="10"
-        android:inputType="textPersonName"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="432dp"
+        android:layout_marginEnd="16dp"
         android:autofillHints="City"
+        android:ems="10"
         android:hint="City"
-        app:layout_constraintBottom_toTopOf="@+id/country"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toStartOf="@+id/region"
-        app:layout_constraintHorizontal_bias="0.396"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/streetAddress"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:autofillHints="Street Address"
+        android:ems="10"
+        android:hint="Street Address"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/city"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/accountNum"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:autofillHints="Bank Account Number"
+        android:ems="10"
+        android:hint="Bank Account Number"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/streetAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/bankChoice"
+        android:layout_width="250dp"
+        android:layout_height="38dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/accountNum"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:autofillHints="Username"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/country"
-        android:layout_width="123dp"
+        android:layout_width="175dp"
         android:layout_height="44dp"
-        android:layout_marginBottom="24dp"
-        android:ems="10"
-        android:inputType="textPersonName"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:autofillHints="Country"
+        android:ems="10"
         android:hint="Country"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/createAccount"
         app:layout_constraintEnd_toStartOf="@+id/postalCode"
-        app:layout_constraintHorizontal_bias="0.475"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/city"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/postalCode"
-        android:layout_width="123dp"
+        android:layout_width="175dp"
         android:layout_height="44dp"
-        android:layout_marginEnd="68dp"
-        android:layout_marginBottom="16dp"
-        android:ems="10"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
         android:autofillHints="Postal Code"
+        android:ems="10"
         android:hint="Postal Code"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/createAccount"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/country"
+        app:layout_constraintTop_toBottomOf="@+id/region"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/region"
-        android:layout_width="123dp"
+        android:layout_width="175dp"
         android:layout_height="44dp"
-        android:layout_marginEnd="68dp"
-        android:layout_marginBottom="20dp"
-        android:ems="10"
-        android:inputType="textPersonName"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
         android:autofillHints="Region"
+        android:ems="10"
         android:hint="Region"
-        app:layout_constraintBottom_toTopOf="@+id/postalCode"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Spinner
-        android:id="@+id/bankChoice"
-        android:layout_width="212dp"
-        android:layout_height="38dp"
-        android:layout_marginBottom="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/streetAddress"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.644"
+        app:layout_constraintStart_toEndOf="@+id/city"
+        app:layout_constraintTop_toBottomOf="@+id/streetAddress" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

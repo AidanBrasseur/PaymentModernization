@@ -22,7 +22,6 @@ public class CompanySignUp extends AppCompatActivity implements SignUpView {
   private EditText usernameText;
   private EditText passwordText;
   private EditText accountNum;
-  private EditText cardNum;
   private Spinner bankChoice;
   private EditText streetAddress;
   private EditText city;
@@ -43,7 +42,6 @@ public class CompanySignUp extends AppCompatActivity implements SignUpView {
     usernameText = findViewById(R.id.username);
     passwordText = findViewById(R.id.password);
     accountNum = findViewById(R.id.accountNum);
-    cardNum = findViewById(R.id.cardNum);
     bankChoice = findViewById(R.id.bankChoice);
     ArrayAdapter<CharSequence> adapter =
         ArrayAdapter.createFromResource(
@@ -82,7 +80,6 @@ public class CompanySignUp extends AppCompatActivity implements SignUpView {
         fullNameText.getText().toString(),
         companyType,
         accountNum.getText().toString(),
-        cardNum.getText().toString(),
         bankChoice.getSelectedItem().toString(),
         streetAddress.getText().toString(),
         city.getText().toString(),

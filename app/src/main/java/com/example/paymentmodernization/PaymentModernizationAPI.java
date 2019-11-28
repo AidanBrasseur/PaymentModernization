@@ -59,7 +59,6 @@ public interface PaymentModernizationAPI {
    * @param name the name of the user
    * @param type the user type
    * @param accountNum the company bank account number
-   * @param cardNum the company card number
    * @param bank the bank associated with the company
    * @param streetAddress the street address of the company
    * @param city the city the company is located
@@ -75,7 +74,6 @@ public interface PaymentModernizationAPI {
       @Field("name") String name,
       @Field("type") String type,
       @Field("accountNum") String accountNum,
-      @Field("cardNum") String cardNum,
       @Field("bank") String bank,
       @Field("streetAddress") String streetAddress,
       @Field("city") String city,
