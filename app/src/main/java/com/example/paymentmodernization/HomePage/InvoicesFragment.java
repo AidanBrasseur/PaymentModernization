@@ -3,7 +3,6 @@ package com.example.paymentmodernization.HomePage;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +41,9 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
 
   @Override
   public View onCreateView(
-          @NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+      @NonNull final LayoutInflater inflater,
+      final ViewGroup container,
+      final Bundle savedInstanceState) {
 
     View root = inflater.inflate(R.layout.fragment_invoices, container, false);
     /*SectionsPagerAdapter sectionsPagerAdapter =
@@ -75,12 +76,13 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
     recyclerView = root.findViewById(R.id.recyclerView);
     recycleManager = new LinearLayoutManager(context);
     swipeRefreshLayout = root.findViewById(R.id.swipeRefresh);
-    swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-        @Override
-        public void onRefresh() {
+    swipeRefreshLayout.setOnRefreshListener(
+        new SwipeRefreshLayout.OnRefreshListener() {
+          @Override
+          public void onRefresh() {
             displayInvoices(authToken);
-        }
-    });
+          }
+        });
 
     //    LinearLayoutManager manager = new LinearLayoutManager(this);
     //    manager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -127,8 +129,7 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
     recyclerView.setAdapter(recycleAdapter);
     swipeRefreshLayout.setRefreshing(false);
 
-
-      recycleAdapter.setOnItemClickListener(
+    recycleAdapter.setOnItemClickListener(
         new InvoicesAdapter.onItemClickListener() {
           @Override
           public void onItemClick(int position) {
@@ -143,9 +144,9 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
         });
   }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        displayInvoices(authToken);
-    }
+  @Override
+  public void onResume() {
+    super.onResume();
+    displayInvoices(authToken);
+  }
 }

@@ -75,4 +75,23 @@ public interface PaymentModernizationAPI {
       @Field("region") String region,
       @Field("country") String country,
       @Field("postalCode") String postalCode);
+  /**
+   * Creates a new invoice
+   *
+   * @param authToken the authorization token of the user
+   * @param business the recipient of the invoice
+   * @param deliveryPerson the delivery person for the invoice
+   * @param invoiceDate the creation date of the invoice
+   * @param dueDate the estimated delivery date of the invoice
+   * @param items the order items associated with invoice
+   */
+  @FormUrlEncoded
+  @POST("invoices/new-invoice")
+  Call<String> createInvoice(
+      @Header("Authorization") String authToken,
+      @Field("business") String business,
+      @Field("deliveryPerson") String deliveryPerson,
+      @Field("invoiceDate") String invoiceDate,
+      @Field("dueDate") String dueDate,
+      @Field("items") String items);
 }

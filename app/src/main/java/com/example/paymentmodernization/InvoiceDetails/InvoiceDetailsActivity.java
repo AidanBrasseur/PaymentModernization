@@ -130,8 +130,7 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
   }
 
   @Override
-  public void onBackPressed()
-  {
+  public void onBackPressed() {
     finish();
   }
 }

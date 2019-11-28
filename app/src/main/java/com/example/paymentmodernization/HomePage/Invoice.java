@@ -103,7 +103,7 @@ public class Invoice implements Parcelable {
   }
 
   public String getStatus() {
-    if (status == null){
+    if (status == null) {
       return "";
     }
     return status;
