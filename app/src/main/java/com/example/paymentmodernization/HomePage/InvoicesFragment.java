@@ -104,7 +104,7 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
   @Override
   public void addInvoiceCards(final ArrayList<Invoice> invoices) {
     ArrayList<InvoiceCard> invoiceCards = new ArrayList<>();
-    final ArrayList<Invoice> keptinvoice = new ArrayList<>();
+    final ArrayList<Invoice> keptInvoice = new ArrayList<>();
     for (Invoice invoice : invoices) {
       String heading = invoice.getSupplier() + " to " + invoice.getBusiness();
       String status = invoice.getStatus();
@@ -116,11 +116,11 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
       }
       if (this.completedStatus.equals("COMPLETE") && invoice.getStatus().equals("COMPLETE")) {
         invoiceCards.add(new InvoiceCard(heading, delivery, status));
-        keptinvoice.add(invoice);
+        keptInvoice.add(invoice);
       } else if (!this.completedStatus.equals("COMPLETE")) {
         if (!(invoice.getStatus().equals("COMPLETE"))) {
           invoiceCards.add(new InvoiceCard(heading, delivery, status));
-          keptinvoice.add(invoice);
+          keptInvoice.add(invoice);
         }
       }
     }
@@ -134,8 +134,7 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
         new InvoicesAdapter.onItemClickListener() {
           @Override
           public void onItemClick(int position) {
-            Invoice clickedInvoice = keptinvoice.get(position);
-            System.out.println(getActivity());
+            Invoice clickedInvoice = keptInvoice.get(position);
             Intent intent = new Intent(getActivity(), InvoiceDetailsActivity.class);
             intent.putExtra("invoice", clickedInvoice);
             intent.putExtra("authToken", authToken);

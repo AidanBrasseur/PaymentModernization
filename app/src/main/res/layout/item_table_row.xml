@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <EditText
+        android:id="@+id/orderDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="1"
+        android:layout_weight="1"
+        android:autofillHints="Description"
+        android:ems="10"
+        android:hint="Item Description"
+        android:inputType="textMultiLine"
+        android:paddingTop="15dp"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/orderQt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="2"
+        android:layout_gravity="end"
+        android:layout_weight="1"
+        android:autofillHints="Item Quantity"
+        android:ems="10"
+        android:hint="Qty"
+        android:inputType="textPersonName"
+        android:paddingTop="15dp"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/orderPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="3"
+        android:layout_gravity="end"
+        android:layout_weight="1"
+        android:autofillHints="Item Price"
+        android:ems="10"
+        android:hint="Price"
+        android:inputType="textPersonName"
+        android:paddingTop="15dp"
+        android:textSize="14sp" />
+
+</TableRow>

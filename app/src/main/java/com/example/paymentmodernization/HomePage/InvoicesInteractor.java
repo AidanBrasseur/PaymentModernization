@@ -35,6 +35,9 @@ public class InvoicesInteractor {
                 System.out.println("not succesfful *************");
               } else {
                 Invoices invoices = response.body();
+                if (invoices == null) {
+                  System.out.println("**********NULL Response body");
+                }
                 listener.onSuccess(invoices.getInvoices());
                 // System.out.println("*********************interactotr********");
                 // System.out.println(invoices.getInvoices().get(0).get("business"));

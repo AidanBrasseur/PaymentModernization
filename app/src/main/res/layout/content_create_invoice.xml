@@ -23,69 +23,105 @@
             android:ems="10"
             android:hint="Business"
             android:inputType="textPersonName"
-            android:paddingTop="15dp"/>
+            android:paddingTop="15dp" />
 
         <EditText
             android:id="@+id/estimatedDate"
-            android:focusable="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints="Estimated Delivery Date"
             android:ems="10"
             android:hint="Estimated Delivery Date"
             android:inputType="none"
-            android:paddingTop="15dp"/>
+            android:longClickable="false"
+            android:paddingTop="15dp" />
 
         <EditText
             android:id="@+id/deliveryPerson"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
             android:autofillHints="Delivery Person"
             android:ems="10"
             android:hint="Delivery Person"
             android:inputType="textPersonName"
-            android:paddingTop="15dp"/>
-
+            android:paddingTop="15dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:paddingTop="15dp">
+            android:orientation="vertical"
+            android:showDividers="end">
 
-            <EditText
-                android:id="@+id/orderDesc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:autofillHints="Item Description"
-                android:ems="10"
-                android:hint="Item Description"
-                android:inputType="textPersonName"
-                android:paddingTop="15dp"/>
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="35dp"
+                android:shrinkColumns="2,3"
+                android:stretchColumns="1"
+                android:id="@+id/items_table">
 
-            <EditText
-                android:id="@+id/orderQt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:autofillHints="Item Quantity"
-                android:ems="10"
-                android:hint="Item Quantity"
-                android:inputType="textPersonName"
-                android:paddingTop="15dp"/>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/orderPrice"
-                android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="Item Description" />
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:layout_column="2"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="Item Quantity" />
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_column="3"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="Item Price" />
+
+                </TableRow>
+
+                <include layout="@layout/item_table_row" />
+
+
+            </TableLayout>
+
+            <TextView
+                android:id="@+id/totalPrice"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:autofillHints="Item Price"
-                android:ems="10"
-                android:hint="Item Price"
-                android:inputType="textPersonName"
-                android:paddingTop="15dp"/>
+                android:layout_gravity="end"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:text="Total Price: 0.00"
+                android:textAlignment="viewEnd" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/ic_add_circle_outline_black_24dp"
+                android:tint="@color/design_default_color_primary_dark"
+                app:backgroundTint="@color/colorPrimaryDark"
+                app:fabCustomSize="20dp"
+                app:fabSize="mini"
+                app:layout_anchorGravity="bottom|right|end" />
         </LinearLayout>
-
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
