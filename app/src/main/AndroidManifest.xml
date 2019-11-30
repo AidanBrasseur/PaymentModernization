@@ -19,12 +19,9 @@
             android:name=".MainActivity.NavDrawer"
             android:label="@string/title_activity_nav_drawer"
             android:theme="@style/AppTheme.NoActionAndStatusBar" />
-        <activity android:name=".SignUp.DriverSignUp"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".SignUp.SignUpChoiceActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".SignUp.CompanySignUp"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".SignUp.DriverSignUp" />
+        <activity android:name=".SignUp.SignUpChoiceActivity" />
+        <activity android:name=".SignUp.CompanySignUp" />
         <activity android:name=".InvoiceDetails.InvoiceDetailsActivity" />
         <activity
             android:name=".HomePage.InvoicesFragment"
