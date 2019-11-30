@@ -28,8 +28,8 @@ public class CreateInvoiceInteractor {
       listener.onBusinessError("Cannot have empty estimated delivery date");
       return;
     }
-    if (TextUtils.isEmpty(items)) {
-      listener.onBusinessError("Cannot have empty items");
+    if (items.length() <= 12) {
+      listener.onItemsError();
       return;
     }
     try {
@@ -77,7 +77,7 @@ public class CreateInvoiceInteractor {
 
     void onDueDateError(String message);
 
-    void onItemsError(String message);
+    void onItemsError();
 
     void onSuccess();
 

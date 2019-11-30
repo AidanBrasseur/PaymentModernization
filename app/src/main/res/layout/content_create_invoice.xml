@@ -19,7 +19,10 @@
             android:id="@+id/businessRecipient"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
             android:autofillHints="Business"
+            android:drawableStart="@drawable/ic_business_black_24dp"
+            android:drawablePadding="5dp"
             android:ems="10"
             android:hint="Business"
             android:inputType="textPersonName"
@@ -29,7 +32,10 @@
             android:id="@+id/estimatedDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
             android:autofillHints="Estimated Delivery Date"
+            android:drawableStart="@drawable/ic_date_range_black_24dp"
+            android:drawablePadding="5dp"
             android:ems="10"
             android:hint="Estimated Delivery Date"
             android:inputType="none"
@@ -40,8 +46,11 @@
             android:id="@+id/deliveryPerson"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
             android:layout_marginBottom="25dp"
             android:autofillHints="Delivery Person"
+            android:drawableStart="@drawable/ic_person_black_24dp"
+            android:drawablePadding="5dp"
             android:ems="10"
             android:hint="Delivery Person"
             android:inputType="textPersonName"
@@ -95,9 +104,6 @@
 
                 </TableRow>
 
-                <include layout="@layout/item_table_row" />
-
-
             </TableLayout>
 
             <TextView
@@ -123,5 +129,18 @@
                 app:fabSize="mini"
                 app:layout_anchorGravity="bottom|right|end" />
         </LinearLayout>
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="@dimen/fab_margin"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/rounded_button"
+            android:text="Submit"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold"
+            app:layout_anchorGravity="bottom|end" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

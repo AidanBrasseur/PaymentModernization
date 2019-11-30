@@ -61,9 +61,9 @@ public class CreateInvoicePresenter implements CreateInvoiceInteractor.OnCreateF
   }
 
   @Override
-  public void onItemsError(String message) {
+  public void onItemsError() {
     if (createInvoiceView != null) {
-      createInvoiceView.setItemsError(message);
+      createInvoiceView.sendInvalidItemsMessage();
       createInvoiceView.hideProgress();
     }
   }

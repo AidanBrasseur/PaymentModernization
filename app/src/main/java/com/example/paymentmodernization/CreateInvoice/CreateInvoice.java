@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -133,18 +134,21 @@ public class CreateInvoice extends AppCompatActivity implements CreateInvoiceVie
                 if (tableView instanceof TableRow) {
                   JSONObject tempItem = new JSONObject();
                   TableRow row = (TableRow) tableView;
-                  EditText desc = (EditText) row.getChildAt(0);
-                  EditText quantity = (EditText) row.getChildAt(1);
-                  EditText price = (EditText) row.getChildAt(2);
-                  tempItem.put("description", desc.getText().toString());
-                  tempItem.put("quantity", quantity.getText().toString());
-                  tempItem.put("price", price.getText().toString());
-                  items.put(tempItem);
+                  String desc = ((EditText) row.getChildAt(0)).getText().toString();
+                  String quantity = ((EditText) row.getChildAt(1)).getText().toString();
+                  String price = ((EditText) row.getChildAt(2)).getText().toString();
+                  if (!TextUtils.isEmpty(desc)
+                      && !TextUtils.isEmpty(quantity)
+                      && !TextUtils.isEmpty(price)) {
+                    tempItem.put("description", desc);
+                    tempItem.put("quantity", quantity);
+                    tempItem.put("price", price);
+                    items.put(tempItem);
+                  }
                 }
               }
               JSONObject itemsJson = new JSONObject();
               itemsJson.put("items", items);
-
               createInvoice(
                   userInformation.getAuthToken(),
                   businessText.getText().toString(),
@@ -198,8 +202,9 @@ public class CreateInvoice extends AppCompatActivity implements CreateInvoiceVie
   }
 
   @Override
-  public void setItemsError(String message) {
-    // TODO: implement proper items stuff
+  public void sendInvalidItemsMessage() {
+    progressBar.setVisibility(View.GONE);
+    Toast.makeText(getApplicationContext(), "Invoice must contain at least one item", Toast.LENGTH_LONG).show();
   }
 
   void createInvoice(
@@ -219,7 +224,17 @@ public class CreateInvoice extends AppCompatActivity implements CreateInvoiceVie
 
           @Override
           public void onFocusChange(View v, boolean hasFocus) {
+            if(hasFocus){
+              try{
+                double price = Double.parseDouble(orderPrice.getText().toString());
+                currPrice -= price;
+                DecimalFormat df = new DecimalFormat("#.##");
+                totalPrice.setText(String.format("Total Price: %s", df.format(currPrice)));
+              }
+              catch (Exception e){
 
+              }
+            }
             if (!hasFocus) {
               try {
                 double price = Double.parseDouble(orderPrice.getText().toString());
