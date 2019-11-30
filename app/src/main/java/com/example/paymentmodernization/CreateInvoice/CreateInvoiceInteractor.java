@@ -25,7 +25,7 @@ public class CreateInvoiceInteractor {
       return;
     }
     if (TextUtils.isEmpty(dueDate)) {
-      listener.onBusinessError("Cannot have empty estimated delivery date");
+      listener.onDueDateError("Cannot have empty estimated delivery date");
       return;
     }
     if (items.length() <= 12) {
