@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
@@ -16,6 +17,7 @@ import com.example.paymentmodernization.HomePage.InvoicesFragment;
 import com.example.paymentmodernization.Login.UserInformation;
 import com.example.paymentmodernization.R;
 import com.example.paymentmodernization.ui.SectionsPagerAdapter;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
@@ -34,6 +36,7 @@ public class HomeFragment extends Fragment {
     Intent intent = getActivity().getIntent();
     userInformation = intent.getParcelableExtra("userInformation");
     String userType = userInformation.getUserType();
+
     //    final TextView textView = root.findViewById(R.id.text_home);
     //    homeViewModel
     //        .getText()
@@ -68,4 +71,6 @@ public class HomeFragment extends Fragment {
         });
     return root;
   }
+
+
 }

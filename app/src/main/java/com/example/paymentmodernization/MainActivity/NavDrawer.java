@@ -1,13 +1,16 @@
 package com.example.paymentmodernization.MainActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -16,6 +19,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.paymentmodernization.Login.UserInformation;
 import com.example.paymentmodernization.R;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.navigation.NavigationView;
 
 public class NavDrawer extends AppCompatActivity {
@@ -38,7 +42,6 @@ public class NavDrawer extends AppCompatActivity {
     View header = navigationView.getHeaderView(0);
     fullName = header.findViewById(R.id.fullNameText);
     fullName.setText(userInformation.getFullName());
-
     username = header.findViewById(R.id.usernameText);
     username.setText(userInformation.getUsername());
 
@@ -49,10 +52,7 @@ public class NavDrawer extends AppCompatActivity {
                 R.id.nav_home,
                 R.id.nav_profile,
                 R.id.nav_settings,
-                R.id.nav_security,
-                R.id.nav_share,
-                R.id.nav_send,
-                R.id.nav_legal)
+                R.id.nav_security)
             .setDrawerLayout(drawer)
             .build();
     NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -73,4 +73,5 @@ public class NavDrawer extends AppCompatActivity {
     return NavigationUI.navigateUp(navController, mAppBarConfiguration)
         || super.onSupportNavigateUp();
   }
+
 }
