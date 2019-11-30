@@ -38,7 +38,8 @@ public class InvoicesInteractor {
                 if (invoices == null) {
                   System.out.println("**********NULL Response body");
                 }
-                listener.onSuccess(invoices.getInvoices());
+               if(invoices.getInvoices() != null)
+                    listener.onSuccess(invoices.getInvoices());
                 // System.out.println("*********************interactotr********");
                 // System.out.println(invoices.getInvoices().get(0).get("business"));
               }
