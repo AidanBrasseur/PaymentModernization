@@ -14,11 +14,11 @@
         <activity
             android:name=".CreateInvoice.CreateInvoice"
             android:label="@string/title_activity_create_invoice"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionAndStatusBar"></activity>
         <activity
             android:name=".MainActivity.NavDrawer"
             android:label="@string/title_activity_nav_drawer"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionAndStatusBar" />
         <activity android:name=".SignUp.DriverSignUp" />
         <activity android:name=".SignUp.SignUpChoiceActivity" />
         <activity android:name=".SignUp.CompanySignUp" />
@@ -26,7 +26,7 @@
         <activity
             android:name=".HomePage.InvoicesFragment"
             android:label="@string/title_activity_home_page"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionAndStatusBar" />
         <activity
             android:name=".Login.LoginActivity"
             android:label="@string/title_activity_login"

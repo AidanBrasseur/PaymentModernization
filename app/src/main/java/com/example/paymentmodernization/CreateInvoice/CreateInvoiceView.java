@@ -22,5 +22,5 @@ public interface CreateInvoiceView {
   /** sends message to user indicating that their sign-up attempt was invalid */
   void sendInvalidInvoiceMessage();
 
-  void setItemsError(String message);
+  void sendInvalidItemsMessage();
 }

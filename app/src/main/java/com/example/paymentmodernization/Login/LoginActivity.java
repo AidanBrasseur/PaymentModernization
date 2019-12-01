@@ -117,4 +117,10 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     presenter.loginAuthorization(
         usernameField.getText().toString(), passwordField.getText().toString());
   }
+
+  @Override
+  protected void onResume() {
+    super.onResume();
+    hideProgress();
+  }
 }
