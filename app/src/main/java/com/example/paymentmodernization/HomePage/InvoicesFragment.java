@@ -3,6 +3,7 @@ package com.example.paymentmodernization.HomePage;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,22 +19,23 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.paymentmodernization.InvoiceDetails.InvoiceDetailsActivity;
 import com.example.paymentmodernization.Login.UserInformation;
 import com.example.paymentmodernization.R;
+import com.example.paymentmodernization.ui.home.Invoice;
+import com.example.paymentmodernization.ui.home.InvoicesInteractor;
+import com.example.paymentmodernization.ui.home.InvoicesPresenter;
 
 import java.util.ArrayList;
 
 public class InvoicesFragment extends Fragment implements InvoicesView {
 
   private String authToken;
-  private InvoicesPresenter invoicesPresenter;
-  private TableLayout invoicesTable;
-  private ConstraintLayout layout;
   private Context context;
   private RecyclerView recyclerView;
   private InvoicesAdapter recycleAdapter;
   private RecyclerView.LayoutManager recycleManager;
   private String completedStatus;
   private UserInformation userInformation;
-  private SwipeRefreshLayout swipeRefreshLayout;
+  private View layout;
+
 
   public InvoicesFragment(String completedStatus) {
     this.completedStatus = completedStatus;
@@ -63,8 +65,7 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
                 .show();
           }
         });*/
-    /** getting invoices */
-    invoicesPresenter = new InvoicesPresenter(this, new InvoicesInteractor());
+
     Intent intent = getActivity().getIntent();
     this.userInformation = intent.getParcelableExtra("userInformation");
     this.authToken = userInformation.getAuthToken();
@@ -75,15 +76,7 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
     // displayInvoices(this.authToken);
     recyclerView = root.findViewById(R.id.recyclerView);
     recycleManager = new LinearLayoutManager(context);
-    swipeRefreshLayout = root.findViewById(R.id.swipeRefresh);
-    swipeRefreshLayout.setRefreshing(false);
-    swipeRefreshLayout.setOnRefreshListener(
-        new SwipeRefreshLayout.OnRefreshListener() {
-          @Override
-          public void onRefresh() {
-            displayInvoices(authToken);
-          }
-        });
+
 
     //    LinearLayoutManager manager = new LinearLayoutManager(this);
     //    manager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -91,15 +84,7 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
     return root;
   }
 
-  /**
-   * tell presenter to get invoices
-   *
-   * @param authToken
-   */
-  public void displayInvoices(String authToken) {
 
-    invoicesPresenter.invoices(authToken);
-  }
 
   @Override
   public void addInvoiceCards(final ArrayList<Invoice> invoices) {
@@ -128,7 +113,6 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
     recycleAdapter = new InvoicesAdapter(invoiceCards);
     recyclerView.setLayoutManager(recycleManager);
     recyclerView.setAdapter(recycleAdapter);
-    swipeRefreshLayout.setRefreshing(false);
 
     recycleAdapter.setOnItemClickListener(
         new InvoicesAdapter.onItemClickListener() {
@@ -144,9 +128,5 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
         });
   }
 
-  @Override
-  public void onResume() {
-    super.onResume();
-    displayInvoices(authToken);
-  }
+
 }

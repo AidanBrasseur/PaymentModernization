@@ -1,16 +1,18 @@
-package com.example.paymentmodernization.HomePage;
+package com.example.paymentmodernization.ui.home;
+
+import com.example.paymentmodernization.HomePage.InvoicesView;
 
 import java.util.ArrayList;
 
 public class InvoicesPresenter implements InvoicesInteractor.OnInvoicesFinishedListener {
 
   /** The LoginView that this LoginPresenter formats information for */
-  private InvoicesView invoicesView;
+  private HomeFragment homeFragment;
   /** The LoginInteractor that this LoginPresenter retrieves data from */
   private InvoicesInteractor invoicesInteractor;
 
-  public InvoicesPresenter(InvoicesView invoicesView, InvoicesInteractor invoicesInteractor) {
-    this.invoicesView = invoicesView;
+  public InvoicesPresenter(HomeFragment homeFragment, InvoicesInteractor invoicesInteractor) {
+    this.homeFragment = homeFragment;
     this.invoicesInteractor = invoicesInteractor;
   }
 
@@ -22,7 +24,7 @@ public class InvoicesPresenter implements InvoicesInteractor.OnInvoicesFinishedL
   @Override
   public void onSuccess(ArrayList<Invoice> invoices) {
     // TODO impliment this method call some method on homepageview
-    invoicesView.addInvoiceCards(invoices);
+    homeFragment.updateInvoices(invoices);
     System.out.println(invoices.toString());
   }
 }

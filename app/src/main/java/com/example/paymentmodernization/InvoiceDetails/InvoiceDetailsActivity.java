@@ -8,11 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.paymentmodernization.HomePage.Invoice;
-import com.example.paymentmodernization.HomePage.InvoiceItem;
+import com.example.paymentmodernization.ui.home.Invoice;
 import com.example.paymentmodernization.R;
-
-import java.util.ArrayList;
 
 public class InvoiceDetailsActivity extends AppCompatActivity implements InvoiceDetailsView {
 

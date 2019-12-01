@@ -19,6 +19,8 @@ import com.example.paymentmodernization.ui.SectionsPagerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.ArrayList;
+
 // import com.example.paymentmodernization.ui.slideshow.SlideshowFragment;
 
 public class HomeFragment extends Fragment {
@@ -26,6 +28,9 @@ public class HomeFragment extends Fragment {
   private HomeViewModel homeViewModel;
   private FloatingActionButton fab;
   private UserInformation userInformation;
+  private InvoicesPresenter invoicesPresenter;
+  private InvoicesFragment completeInvoiceFragment;
+  private InvoicesFragment incompleteInvoiceFragment;
 
   public View onCreateView(
       @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,8 +52,15 @@ public class HomeFragment extends Fragment {
     //            });
     SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
     // Temporary until invoice tabs go in
-    sectionsPagerAdapter.addFragment(new InvoicesFragment("NOT_COMPLETE"), "Invoices");
-    sectionsPagerAdapter.addFragment(new InvoicesFragment("COMPLETE"), "Completed Invoices");
+    System.out.println("new invoices fragment created *******************************");
+
+    invoicesPresenter = new InvoicesPresenter(this, new InvoicesInteractor());
+    completeInvoiceFragment = new InvoicesFragment("COMPLETE");
+    incompleteInvoiceFragment = new InvoicesFragment("NOT_COMPLETE");
+
+
+    sectionsPagerAdapter.addFragment(incompleteInvoiceFragment, "Invoices");
+    sectionsPagerAdapter.addFragment(completeInvoiceFragment, "Completed Invoices");
     ViewPager viewPager = root.findViewById(R.id.view_pager);
     viewPager.setAdapter(sectionsPagerAdapter);
     TabLayout tabs = root.findViewById(R.id.tabs);
@@ -66,6 +78,22 @@ public class HomeFragment extends Fragment {
             getActivity().startActivity(intent);
           }
         });
+    getInvoices();
     return root;
   }
+
+
+  public void getInvoices(){
+    invoicesPresenter.invoices(userInformation.getAuthToken());
+
+  }
+
+  public void updateInvoices(ArrayList<Invoice> invoices){
+
+    incompleteInvoiceFragment.addInvoiceCards(invoices);
+    completeInvoiceFragment.addInvoiceCards(invoices);
+
+  }
+
+
 }

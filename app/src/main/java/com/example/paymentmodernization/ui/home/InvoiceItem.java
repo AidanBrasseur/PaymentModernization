@@ -1,4 +1,4 @@
-package com.example.paymentmodernization.HomePage;
+package com.example.paymentmodernization.ui.home;
 
 import android.os.Parcel;
 import android.os.Parcelable;
