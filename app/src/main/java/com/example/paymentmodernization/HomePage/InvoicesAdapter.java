@@ -54,7 +54,19 @@ public class InvoicesAdapter extends RecyclerView.Adapter<InvoicesAdapter.Invoic
     }
     else if (holder.status.getText().toString().equals("NEW")){
       holder.status.setTextColor(Color.parseColor("#EE3124"));
+      holder.status.setTypeface(null, Typeface.BOLD);
     }
+
+    else if (holder.status.getText().toString().equals("DELIVERED")){
+      holder.status.setTextColor(Color.parseColor("#3B5998"));
+
+    }
+
+    else{
+
+      holder.status.setTextColor(Color.parseColor("#C750C5"));
+    }
+
   }
 
   @Override
