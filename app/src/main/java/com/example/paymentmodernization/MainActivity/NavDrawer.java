@@ -38,6 +38,7 @@ public class NavDrawer extends AppCompatActivity {
     setContentView(R.layout.activity_nav_drawer);
     Toolbar toolbar = findViewById(R.id.toolbar);
     signOut = findViewById(R.id.signOut);
+    signOut.setTextColor(Color.WHITE);
     signOut.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
