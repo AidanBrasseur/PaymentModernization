@@ -5,11 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Layout;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.TableLayout;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +24,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.paymentmodernization.InvoiceDetails.InvoiceDetailsActivity;
 import com.example.paymentmodernization.Login.UserInformation;
 import com.example.paymentmodernization.R;
+import com.example.paymentmodernization.ui.home.HomeFragment;
 import com.example.paymentmodernization.ui.home.Invoice;
 import com.example.paymentmodernization.ui.home.InvoicesInteractor;
 import com.example.paymentmodernization.ui.home.InvoicesPresenter;
@@ -35,10 +41,14 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
   private String completedStatus;
   private UserInformation userInformation;
   private View layout;
+  private SwipeRefreshLayout swipeRefreshLayout;
+  private HomeFragment homeFragment;
+  private SearchView searchView;
 
 
-  public InvoicesFragment(String completedStatus) {
+  public InvoicesFragment(String completedStatus, HomeFragment homeFragment) {
     this.completedStatus = completedStatus;
+    this.homeFragment = homeFragment;
   }
 
   @Override
@@ -65,6 +75,7 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
                 .show();
           }
         });*/
+    setHasOptionsMenu(true);
 
     Intent intent = getActivity().getIntent();
     this.userInformation = intent.getParcelableExtra("userInformation");
@@ -76,6 +87,14 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
     // displayInvoices(this.authToken);
     recyclerView = root.findViewById(R.id.recyclerView);
     recycleManager = new LinearLayoutManager(context);
+      this.swipeRefreshLayout = root.findViewById(R.id.swipe);
+      swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+          @Override
+          public void onRefresh() {
+              homeFragment.getInvoices();
+              swipeRefreshLayout.setRefreshing(false);
+          }
+      });
 
 
     //    LinearLayoutManager manager = new LinearLayoutManager(this);
@@ -97,14 +116,14 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
       if (invoice.getDueDate() == null) {
         delivery = "Delivery Date TBD";
       } else {
-        delivery = "Delivery Date: " + invoice.getDueDate();
+        delivery = "Due Date: " + invoice.getDueDate();
       }
       if (this.completedStatus.equals("COMPLETE") && invoice.getStatus().equals("COMPLETE")) {
-        invoiceCards.add(new InvoiceCard(heading, delivery, status));
+        invoiceCards.add(new InvoiceCard(invoice, heading, delivery, status, invoice.getItems(), invoice.getInvoiceId()));
         keptInvoice.add(invoice);
       } else if (!this.completedStatus.equals("COMPLETE")) {
         if (!(invoice.getStatus().equals("COMPLETE"))) {
-          invoiceCards.add(new InvoiceCard(heading, delivery, status));
+          invoiceCards.add(new InvoiceCard(invoice, heading, delivery, status, invoice.getItems(), invoice.getInvoiceId()));
           keptInvoice.add(invoice);
         }
       }
@@ -118,14 +137,43 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
         new InvoicesAdapter.onItemClickListener() {
           @Override
           public void onItemClick(int position) {
-            Invoice clickedInvoice = keptInvoice.get(position);
+            InvoiceCard clickedcard = recycleAdapter.getInvoiceCards().get(position);
+            Invoice clickedInvoice = clickedcard.getInvoice();
             Intent intent = new Intent(getActivity(), InvoiceDetailsActivity.class);
-            intent.putExtra("invoice", clickedInvoice);
+             intent.putExtra("invoice", clickedInvoice);
             intent.putExtra("authToken", authToken);
             intent.putExtra("userType", userInformation.getUserType());
             getActivity().startActivity(intent);
           }
         });
+  }
+
+  @Override
+  public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+    //setHasOptionsMenu(true);
+
+    MenuInflater inflater2 = inflater;
+    inflater2.inflate(R.menu.nav_drawer, menu);
+
+    MenuItem searchItem = menu.findItem(R.id.action_search);
+    searchView = (SearchView) searchItem.getActionView();
+    searchView.setIconifiedByDefault(false);
+
+
+    searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+      @Override
+      public boolean onQueryTextSubmit(String s) {
+        return false;
+      }
+
+      @Override
+      public boolean onQueryTextChange(String s) {
+        recycleAdapter.getFilter().filter(s);
+        return false;
+      }
+    });
+
+    super.onCreateOptionsMenu(menu, inflater);
   }
 
 

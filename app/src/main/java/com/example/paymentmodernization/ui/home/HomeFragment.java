@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.paymentmodernization.CreateInvoice.CreateInvoice;
@@ -39,6 +40,9 @@ public class HomeFragment extends Fragment {
     Intent intent = getActivity().getIntent();
     userInformation = intent.getParcelableExtra("userInformation");
     String userType = userInformation.getUserType();
+
+
+
     //    final TextView textView = root.findViewById(R.id.text_home);
     //    homeViewModel
     //        .getText()
@@ -55,8 +59,8 @@ public class HomeFragment extends Fragment {
     System.out.println("new invoices fragment created *******************************");
 
     invoicesPresenter = new InvoicesPresenter(this, new InvoicesInteractor());
-    completeInvoiceFragment = new InvoicesFragment("COMPLETE");
-    incompleteInvoiceFragment = new InvoicesFragment("NOT_COMPLETE");
+    completeInvoiceFragment = new InvoicesFragment("COMPLETE", this);
+    incompleteInvoiceFragment = new InvoicesFragment("NOT_COMPLETE", this);
 
 
     sectionsPagerAdapter.addFragment(incompleteInvoiceFragment, "Invoices");
@@ -84,7 +88,9 @@ public class HomeFragment extends Fragment {
 
 
   public void getInvoices(){
+    System.out.println("getting ----------------------------------");
     invoicesPresenter.invoices(userInformation.getAuthToken());
+
 
   }
 

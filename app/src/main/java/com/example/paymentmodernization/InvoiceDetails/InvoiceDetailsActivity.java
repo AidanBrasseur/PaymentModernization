@@ -56,6 +56,7 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
     this.paymentDate = findViewById(R.id.paymentDate);
     paymentDate.setText(invoice.getPaymentDate());
     this.itemDescription = findViewById(R.id.itemDescription);
+    //System.out.println(invoice.getItems().get(1).getDescription());
     itemDescription.setText(invoice.getItems().get(0).getDescription());
     this.itemQuantity = findViewById(R.id.itemQuantity);
     itemQuantity.setText(invoice.getItems().get(0).getQuantity());
