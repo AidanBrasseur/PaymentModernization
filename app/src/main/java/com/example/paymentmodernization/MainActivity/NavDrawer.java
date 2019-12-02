@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.paymentmodernization.Login.LoginActivity;
 import com.example.paymentmodernization.Login.UserInformation;
 import com.example.paymentmodernization.R;
 import com.google.android.material.appbar.AppBarLayout;
@@ -28,12 +30,21 @@ public class NavDrawer extends AppCompatActivity {
 
   private TextView username;
   private TextView fullName;
+  private Button signOut;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_nav_drawer);
     Toolbar toolbar = findViewById(R.id.toolbar);
+    signOut = findViewById(R.id.signOut);
+    signOut.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Intent intent = new Intent(NavDrawer.this, LoginActivity.class);
+        startActivity(intent);
+      }
+    });
     setSupportActionBar(toolbar);
     Intent intent = getIntent();
     UserInformation userInformation = intent.getParcelableExtra("userInformation");
@@ -44,6 +55,7 @@ public class NavDrawer extends AppCompatActivity {
     fullName.setText(userInformation.getFullName());
     username = header.findViewById(R.id.usernameText);
     username.setText(userInformation.getUsername());
+
 
     // Passing each menu ID as a set of Ids because each
     // menu should be considered as top level destinations.
