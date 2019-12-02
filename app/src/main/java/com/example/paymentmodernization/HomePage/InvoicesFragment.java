@@ -100,10 +100,16 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
     //    LinearLayoutManager manager = new LinearLayoutManager(this);
     //    manager.setOrientation(LinearLayoutManager.VERTICAL);
     //    recyclerView.setLayoutManager(manager);
+
+   // homeFragment.getInvoices();
     return root;
   }
 
-
+  @Override
+  public void onResume() {
+    super.onResume();
+    homeFragment.getInvoices();
+  }
 
   @Override
   public void addInvoiceCards(final ArrayList<Invoice> invoices) {

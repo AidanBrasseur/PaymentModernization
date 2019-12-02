@@ -32,6 +32,7 @@ public class HomeFragment extends Fragment {
   private InvoicesPresenter invoicesPresenter;
   private InvoicesFragment completeInvoiceFragment;
   private InvoicesFragment incompleteInvoiceFragment;
+  private ArrayList<Invoice> invoices;
 
   public View onCreateView(
       @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,6 +41,7 @@ public class HomeFragment extends Fragment {
     Intent intent = getActivity().getIntent();
     userInformation = intent.getParcelableExtra("userInformation");
     String userType = userInformation.getUserType();
+    this.invoices = new ArrayList<>();
 
 
 
@@ -94,10 +96,12 @@ public class HomeFragment extends Fragment {
 
   }
 
-  public void updateInvoices(ArrayList<Invoice> invoices){
+  public void updateInvoices(ArrayList<Invoice> newInvoices){
 
-    incompleteInvoiceFragment.addInvoiceCards(invoices);
-    completeInvoiceFragment.addInvoiceCards(invoices);
+
+    incompleteInvoiceFragment.addInvoiceCards(newInvoices);
+    completeInvoiceFragment.addInvoiceCards(newInvoices);
+    this.invoices = newInvoices;
 
   }
 

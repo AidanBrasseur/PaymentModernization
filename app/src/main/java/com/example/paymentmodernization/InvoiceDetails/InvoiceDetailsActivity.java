@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.paymentmodernization.ui.home.Invoice;
 import com.example.paymentmodernization.R;
@@ -30,6 +31,8 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
   private TextView itemQuantity;
   private TextView itemUnitPrice;
   private TextView status;
+  private SwipeRefreshLayout refresh;
+
 
 
   @Override
@@ -40,36 +43,73 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
     this.invoice = getIntent().getParcelableExtra("invoice");
     this.userType = getIntent().getStringExtra("userType");
     this.authToken = getIntent().getStringExtra("authToken");
+    this.refresh = findViewById(R.id.swipe_details);
+
+    refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+      @Override
+      public void onRefresh() {
+        getInvoiceDetails();
+        refresh.setRefreshing(false);
+      }
+    });
+
+
 
     this.business = findViewById(R.id.business);
-    business.setText(invoice.getBusiness());
+
     this.supplier = findViewById(R.id.supplier);
-    supplier.setText(invoice.getInvoiceId());
+
     this.dueDate = findViewById(R.id.dueDate);
-    dueDate.setText(invoice.getDueDate());
+
     this.invoiceId = findViewById(R.id.invoiceId);
-    invoiceId.setText(invoice.getInvoiceId());
+
     this.invoiceDate = findViewById(R.id.invoiceDate);
-    invoiceDate.setText(invoice.getInvoiceDate());
+
     this.deliveryDate = findViewById(R.id.deliveryDate);
-    deliveryDate.setText(invoice.getDeliveryDate());
+
     this.paymentDate = findViewById(R.id.paymentDate);
-    paymentDate.setText(invoice.getPaymentDate());
+
     this.itemDescription = findViewById(R.id.itemDescription);
     //System.out.println(invoice.getItems().get(1).getDescription());
-    itemDescription.setText(invoice.getItems().get(0).getDescription());
+
     this.itemQuantity = findViewById(R.id.itemQuantity);
-    itemQuantity.setText(invoice.getItems().get(0).getQuantity());
+
     this.itemUnitPrice = findViewById(R.id.itemUnitPrice);
-    itemUnitPrice.setText(invoice.getItems().get(0).getPrice());
+
     this.status = findViewById(R.id.status);
-    status.setText(invoice.getStatus());
+
 
     this.button = findViewById(R.id.statusButton);
+
+
+    this.presenter = new InvoiceDetailsPresenter(this, new InvoiceDetailsInteractor());
+
+    setTextFields(invoice);
+
+
+  }
+
+  public void getInvoiceDetails(){
+   presenter.getInvoiceDetails(invoice.getInvoiceId(), authToken);
+
+  }
+
+
+
+  public void setTextFields(Invoice invoice){
+    business.setText(invoice.getBusiness());
+    supplier.setText(invoice.getSupplier());
+    dueDate.setText(invoice.getDueDate());
+    invoiceId.setText(invoice.getInvoiceId());
+    invoiceDate.setText(invoice.getInvoiceDate());
+    deliveryDate.setText(invoice.getDeliveryDate());
+    paymentDate.setText(invoice.getPaymentDate());
+    paymentDate.setText(invoice.getPaymentDate());
+    itemDescription.setText(invoice.getItems().get(0).getDescription());
+    itemQuantity.setText(invoice.getItems().get(0).getQuantity());
+    itemUnitPrice.setText(invoice.getItems().get(0).getPrice());
+    status.setText(invoice.getStatus());
     button.setText(invoice.getStatus());
-
-    presenter = new InvoiceDetailsPresenter(this, new InvoiceDetailsInteractor());
-
     // checking user type and displaying correct button
     if (invoice.getStatus().equals("COMPLETE")) {
       button.setText(("Completed"));
@@ -94,12 +134,12 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
         }
       }
       button.setOnClickListener(
-          new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-              handleStatusButtonClick();
-            }
-          });
+              new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                  handleStatusButtonClick();
+                }
+              });
     }
   }
 

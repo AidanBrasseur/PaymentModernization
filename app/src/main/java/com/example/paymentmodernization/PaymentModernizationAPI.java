@@ -1,5 +1,6 @@
 package com.example.paymentmodernization;
 
+import com.example.paymentmodernization.ui.home.Invoice;
 import com.example.paymentmodernization.ui.home.Invoices;
 import com.example.paymentmodernization.Login.UserInformation;
 
@@ -21,6 +22,19 @@ public interface PaymentModernizationAPI {
   /** Gets invoices of the user */
   @GET("invoices")
   Call<Invoices> getInvoices(@Header("Authorization") String authorizationString);
+
+
+  /**
+   *
+   * @param invoiceId
+   * @param authToken
+   * @return Invoice object with details of specific invoice
+   */
+  @GET("invoices/{invoiceId}")
+  Call<Invoice> getInvoice(
+      @Path("invoiceId") String invoiceId,
+      @Header("Authorization") String authToken
+  );
 
   /**
    * Signs up a new user with given username, password, name and type

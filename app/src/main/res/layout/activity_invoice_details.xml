@@ -11,6 +11,14 @@
         android:layout_height="match_parent"
         android:fillViewport="true"/>
 
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_details"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -308,5 +316,7 @@
         </TableRow>
 
     </TableLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

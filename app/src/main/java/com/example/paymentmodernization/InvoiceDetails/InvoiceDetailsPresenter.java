@@ -1,5 +1,7 @@
 package com.example.paymentmodernization.InvoiceDetails;
 
+import com.example.paymentmodernization.ui.home.Invoice;
+
 public class InvoiceDetailsPresenter implements InvoiceDetailsInteractor.OnStatusUpdatedListener {
   private InvoiceDetailsView invoiceDetailsView;
   private InvoiceDetailsInteractor invoiceDetailsInteractor;
@@ -19,8 +21,19 @@ public class InvoiceDetailsPresenter implements InvoiceDetailsInteractor.OnStatu
     invoiceDetailsView.statusUpdatedSuccess(newStatus);
   }
 
+  public void getInvoiceDetails(String invoiceId, String authToken){
+    invoiceDetailsInteractor.getInvoiceDetails(invoiceId, authToken, this);
+  }
+
+
+
   @Override
   public void onFailure(String newStatus) {
     // TODO handleFailure
+  }
+
+  @Override
+  public void onSuccessDetails(Invoice invoice) {
+    invoiceDetailsView.setTextFields(invoice);
   }
 }
