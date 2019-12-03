@@ -2,6 +2,7 @@ package com.example.paymentmodernization.ui.home;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.provider.Telephony;
 
 import java.util.ArrayList;
 
@@ -16,6 +17,7 @@ public class Invoice implements Parcelable {
           return new Invoice[size];
         }
       };
+  private Address supplierAddress;
   private String business;
   private String supplier;
   private String dueDate;
@@ -23,10 +25,36 @@ public class Invoice implements Parcelable {
   private String invoiceDate;
   private String deliveryDate;
   private String paymentDate;
+  private Address businessAddress;
+
+  public static Creator<Invoice> getCREATOR() {
+    return CREATOR;
+  }
+
+  public Address getSupplierAddress() {
+    return supplierAddress;
+  }
+
+  public void setSupplierAddress(Address supplierAddress) {
+    this.supplierAddress = supplierAddress;
+  }
+
+  public Address getBusinessAddress() {
+    return businessAddress;
+  }
+
+  public void setBusinessAddress(Address businessAddress) {
+    this.businessAddress = businessAddress;
+  }
+
   private ArrayList<InvoiceItem> items;
   private String status;
 
+
+
+
   private Invoice(Parcel parcel) {
+    supplierAddress = parcel.readParcelable(Address.class.getClassLoader());
     business = parcel.readString();
     supplier = parcel.readString();
     dueDate = parcel.readString();
@@ -34,8 +62,10 @@ public class Invoice implements Parcelable {
     invoiceDate = parcel.readString();
     deliveryDate = parcel.readString();
     paymentDate = parcel.readString();
+    businessAddress = parcel.readParcelable(Address.class.getClassLoader());
     items = parcel.readArrayList(InvoiceItem.class.getClassLoader());
     status = parcel.readString();
+
   }
 
   public String getBusiness() {
@@ -120,6 +150,7 @@ public class Invoice implements Parcelable {
 
   @Override
   public void writeToParcel(Parcel parcel, int i) {
+    parcel.writeParcelable(supplierAddress, i);
     parcel.writeString(business);
     parcel.writeString(supplier);
     parcel.writeString(dueDate);
@@ -127,7 +158,9 @@ public class Invoice implements Parcelable {
     parcel.writeString(invoiceDate);
     parcel.writeString(deliveryDate);
     parcel.writeString(paymentDate);
+    parcel.writeParcelable(businessAddress, i);
     parcel.writeList(items);
     parcel.writeString(status);
+
   }
 }
