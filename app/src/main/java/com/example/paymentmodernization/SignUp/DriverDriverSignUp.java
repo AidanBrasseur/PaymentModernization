@@ -13,14 +13,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.paymentmodernization.Login.LoginActivity;
 import com.example.paymentmodernization.R;
 
-/** Activity to display driver sign-up page. Implements SignUpView. */
-public class DriverSignUp extends AppCompatActivity implements SignUpView {
+/** Activity to display driver sign-up page. Implements DriverSignUpView. */
+public class DriverDriverSignUp extends AppCompatActivity implements DriverSignUpView {
 
   private EditText fullNameText;
   private EditText usernameText;
   private EditText passwordText;
   private Button createAccountButton;
-  private SignUpPresenter presenter;
+  private DriverSignUpPresenter presenter;
   private ProgressBar progressBar;
 
   @Override
@@ -32,7 +32,7 @@ public class DriverSignUp extends AppCompatActivity implements SignUpView {
     passwordText = findViewById(R.id.password);
     createAccountButton = findViewById(R.id.createAccount);
     progressBar = findViewById(R.id.progressBar);
-    presenter = new SignUpPresenter(this, new SignUpInteractor());
+    presenter = new DriverSignUpPresenter(this, new DriverSignUpInteractor());
     createAccountButton.setOnClickListener(
         new View.OnClickListener() {
           @Override
@@ -86,7 +86,7 @@ public class DriverSignUp extends AppCompatActivity implements SignUpView {
   /** switches current screen to the login screen */
   @Override
   public void switchToLogin() {
-    Intent intent = new Intent(DriverSignUp.this, LoginActivity.class);
+    Intent intent = new Intent(DriverDriverSignUp.this, LoginActivity.class);
     startActivity(intent);
   }
   /** sends message to user indicating that their sign-up attempt was invalid */

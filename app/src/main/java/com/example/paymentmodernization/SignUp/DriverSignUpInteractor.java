@@ -10,8 +10,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-/** SignUpInteractor communicates with server to perform sign-up functionalities. */
-public class SignUpInteractor {
+/** DriverSignUpInteractor communicates with server to perform sign-up functionalities. */
+public class DriverSignUpInteractor {
 
   /**
    * Signs up a new user with given username, password, and fullName, calling the corresponding

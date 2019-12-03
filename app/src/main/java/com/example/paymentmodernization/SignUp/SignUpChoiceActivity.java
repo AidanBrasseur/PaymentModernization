@@ -26,7 +26,7 @@ public class SignUpChoiceActivity extends AppCompatActivity {
         new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-            Intent intent = new Intent(SignUpChoiceActivity.this, DriverSignUp.class);
+            Intent intent = new Intent(SignUpChoiceActivity.this, DriverDriverSignUp.class);
             startActivity(intent);
           }
         });

@@ -1,25 +1,25 @@
 package com.example.paymentmodernization.SignUp;
 
 /**
- * SignUpPresenter retrieves data from the SignUpInteractor and formats it for the SignUpView.
+ * DriverSignUpPresenter retrieves data from the DriverSignUpInteractor and formats it for the DriverSignUpView.
  * Implements OnSignUpFinishedListener to handle sign-up events *
  */
-public class SignUpPresenter implements SignUpInteractor.OnSignUpFinishedListener {
+public class DriverSignUpPresenter implements DriverSignUpInteractor.OnSignUpFinishedListener {
 
-  /** The SignUpView that this SignUpPresenter formats information for */
-  private SignUpView signUpView;
-  /** The SignUpInteractor that this SignUpPresenter retrieves data from */
-  private SignUpInteractor signUpInteractor;
+  /** The DriverSignUpView that this DriverSignUpPresenter formats information for */
+  private DriverSignUpView driverSignUpView;
+  /** The DriverSignUpInteractor that this DriverSignUpPresenter retrieves data from */
+  private DriverSignUpInteractor driverSignUpInteractor;
 
   /**
-   * Constructs a new SignUpPresenter with given signUpView and signUpInteractor
+   * Constructs a new DriverSignUpPresenter with given driverSignUpView and driverSignUpInteractor
    *
-   * @param signUpView the SignUpView corresponding to this SignUpPresenter
-   * @param signUpInteractor the SignUpInteractor corresponding to this SignUpPresenter
+   * @param driverSignUpView the DriverSignUpView corresponding to this DriverSignUpPresenter
+   * @param driverSignUpInteractor the DriverSignUpInteractor corresponding to this DriverSignUpPresenter
    */
-  SignUpPresenter(SignUpView signUpView, SignUpInteractor signUpInteractor) {
-    this.signUpView = signUpView;
-    this.signUpInteractor = signUpInteractor;
+  DriverSignUpPresenter(DriverSignUpView driverSignUpView, DriverSignUpInteractor driverSignUpInteractor) {
+    this.driverSignUpView = driverSignUpView;
+    this.driverSignUpInteractor = driverSignUpInteractor;
   }
   // TODO: Documentation. Probably going to move all this to new classes honestly
   /**
@@ -41,10 +41,10 @@ public class SignUpPresenter implements SignUpInteractor.OnSignUpFinishedListene
       String region,
       String country,
       String postalCode) {
-    if (signUpView != null) {
-      signUpView.showProgress();
+    if (driverSignUpView != null) {
+      driverSignUpView.showProgress();
     }
-    signUpInteractor.signUpUser(
+    driverSignUpInteractor.signUpUser(
         username,
         password,
         fullName,
@@ -67,14 +67,14 @@ public class SignUpPresenter implements SignUpInteractor.OnSignUpFinishedListene
    * @param fullName the full name of the new user
    */
   public void signUpUser(String username, String password, String fullName) {
-    if (signUpView != null) {
-      signUpView.showProgress();
+    if (driverSignUpView != null) {
+      driverSignUpView.showProgress();
     }
-    signUpInteractor.signUpUser(username, password, fullName, this);
+    driverSignUpInteractor.signUpUser(username, password, fullName, this);
   }
 
   public void onDestroy() {
-    signUpView = null;
+    driverSignUpView = null;
   }
 
   /**
@@ -84,9 +84,9 @@ public class SignUpPresenter implements SignUpInteractor.OnSignUpFinishedListene
    */
   @Override
   public void onUsernameError(String message) {
-    if (signUpView != null) {
-      signUpView.setUsernameError(message);
-      signUpView.hideProgress();
+    if (driverSignUpView != null) {
+      driverSignUpView.setUsernameError(message);
+      driverSignUpView.hideProgress();
     }
   }
 
@@ -97,23 +97,23 @@ public class SignUpPresenter implements SignUpInteractor.OnSignUpFinishedListene
    */
   @Override
   public void onPasswordError(String message) {
-    if (signUpView != null) {
-      signUpView.setPasswordError(message);
-      signUpView.hideProgress();
+    if (driverSignUpView != null) {
+      driverSignUpView.setPasswordError(message);
+      driverSignUpView.hideProgress();
     }
   }
   /** Handles the successful sign-up new user */
   @Override
   public void onSuccess() {
-    if (signUpView != null) {
-      signUpView.switchToLogin();
+    if (driverSignUpView != null) {
+      driverSignUpView.switchToLogin();
     }
   }
   /** Handles failure during sign-up of new user */
   @Override
   public void onFail() {
-    if (signUpView != null) {
-      signUpView.sendInvalidSignUpMessage();
+    if (driverSignUpView != null) {
+      driverSignUpView.sendInvalidSignUpMessage();
     }
   }
 }

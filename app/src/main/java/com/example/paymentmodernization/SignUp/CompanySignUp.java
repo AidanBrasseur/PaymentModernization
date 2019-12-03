@@ -15,8 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.paymentmodernization.Login.LoginActivity;
 import com.example.paymentmodernization.R;
 
-/** Activity to display driver sign-up page. Implements SignUpView. */
-public class CompanySignUp extends AppCompatActivity implements SignUpView {
+/** Activity to display company sign-up page. Implements CompanySignUpView. */
+public class CompanySignUp extends AppCompatActivity implements CompanySignUpView {
 
   private EditText fullNameText;
   private EditText usernameText;
@@ -29,7 +29,7 @@ public class CompanySignUp extends AppCompatActivity implements SignUpView {
   private EditText country;
   private EditText postalCode;
   private Button createAccountButton;
-  private SignUpPresenter presenter;
+  private CompanySignUpPresenter presenter;
   private ProgressBar progressBar;
   private String companyType = "";
 
@@ -57,7 +57,7 @@ public class CompanySignUp extends AppCompatActivity implements SignUpView {
     postalCode = findViewById(R.id.postalCode);
     createAccountButton = findViewById(R.id.createAccount);
     progressBar = findViewById(R.id.progressBar);
-    presenter = new SignUpPresenter(this, new SignUpInteractor());
+    presenter = new CompanySignUpPresenter(this, new CompanySignUpInteractor());
     createAccountButton.setOnClickListener(
         new View.OnClickListener() {
           @Override
@@ -128,5 +128,40 @@ public class CompanySignUp extends AppCompatActivity implements SignUpView {
     usernameText.setText("");
     progressBar.setVisibility(View.GONE);
     Toast.makeText(getApplicationContext(), "Username already taken", Toast.LENGTH_LONG).show();
+  }
+
+  @Override
+  public void setFullNameError(String message) {
+    fullNameText.setError(message);
+  }
+
+  @Override
+  public void setBankNumError(String message) {
+    accountNum.setError(message);
+  }
+
+  @Override
+  public void setStreetAddressError(String message) {
+    streetAddress.setError(message);
+  }
+
+  @Override
+  public void setCityError(String message) {
+    city.setError(message);
+  }
+
+  @Override
+  public void setCountryError(String message) {
+    country.setError(message);
+  }
+
+  @Override
+  public void setRegionError(String message) {
+    region.setError(message);
+  }
+
+  @Override
+  public void setPostalCodeError(String message) {
+    postalCode.setError(message);
   }
 }
