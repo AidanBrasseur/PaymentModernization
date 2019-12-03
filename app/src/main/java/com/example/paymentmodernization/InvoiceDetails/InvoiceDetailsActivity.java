@@ -53,7 +53,7 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
       }
     });
 
-
+    System.out.println(invoice.getBusinessAddress().getCity());
 
     this.business = findViewById(R.id.business);
 
