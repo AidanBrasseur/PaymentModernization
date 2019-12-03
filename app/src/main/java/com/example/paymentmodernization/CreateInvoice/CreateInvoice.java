@@ -4,8 +4,10 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -47,7 +49,6 @@ public class CreateInvoice extends AppCompatActivity implements CreateInvoiceVie
   private TableLayout tableLayout;
   private FloatingActionButton addItemFab;
   private TextView totalPrice;
-  private double currPrice = 0.0;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -204,7 +205,9 @@ public class CreateInvoice extends AppCompatActivity implements CreateInvoiceVie
   @Override
   public void sendInvalidItemsMessage() {
     progressBar.setVisibility(View.GONE);
-    Toast.makeText(getApplicationContext(), "Invoice must contain at least one item", Toast.LENGTH_LONG).show();
+    Toast.makeText(
+            getApplicationContext(), "Invoice must contain at least one item", Toast.LENGTH_LONG)
+        .show();
   }
 
   void createInvoice(
@@ -219,34 +222,55 @@ public class CreateInvoice extends AppCompatActivity implements CreateInvoiceVie
     TableRow row =
         (TableRow) LayoutInflater.from(CreateInvoice.this).inflate(R.layout.item_table_row, null);
     final EditText orderPrice = row.findViewById(R.id.orderPrice);
-    orderPrice.setOnFocusChangeListener(
-        new View.OnFocusChangeListener() {
+    final EditText orderQuantity = row.findViewById(R.id.orderQt);
+    orderQuantity.addTextChangedListener(new TextWatcher() {
+      @Override
+      public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+      }
+
+      @Override
+      public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+      updateTotalPrice();
+      }
+
+      @Override
+      public void afterTextChanged(Editable editable) {
+
+      }
+    });
+    orderPrice.addTextChangedListener(
+        new TextWatcher() {
+          @Override
+          public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
           @Override
-          public void onFocusChange(View v, boolean hasFocus) {
-            if(hasFocus){
-              try{
-                double price = Double.parseDouble(orderPrice.getText().toString());
-                currPrice -= price;
-                DecimalFormat df = new DecimalFormat("#.##");
-                totalPrice.setText(String.format("Total Price: %s", df.format(currPrice)));
-              }
-              catch (Exception e){
-
-              }
-            }
-            if (!hasFocus) {
-              try {
-                double price = Double.parseDouble(orderPrice.getText().toString());
-
-                DecimalFormat df = new DecimalFormat("#.##");
-                currPrice += price;
-                totalPrice.setText(String.format("Total Price: %s", df.format(currPrice)));
-              } catch (Exception e) {
-              }
-            }
+          public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            updateTotalPrice();
           }
+
+          @Override
+          public void afterTextChanged(Editable editable) {}
         });
     tableLayout.addView(row);
+  }
+
+  void updateTotalPrice() {
+    double totalPrice = 0;
+    for (int i = 1; i < tableLayout.getChildCount(); i++) {
+      View tableView = tableLayout.getChildAt(i);
+      if (tableView instanceof TableRow) {
+        TableRow row = (TableRow) tableView;
+        try{
+        String quantity = ((EditText) row.getChildAt(1)).getText().toString();
+        String price = ((EditText) row.getChildAt(2)).getText().toString();
+        totalPrice += Double.parseDouble(quantity) * Double.parseDouble(price);
+        }
+        catch (Exception e){
+        }
+      }
+    }
+    DecimalFormat df = new DecimalFormat("#.##");
+    this.totalPrice.setText(String.format("Total Price: $%s", df.format(totalPrice)));
   }
 }

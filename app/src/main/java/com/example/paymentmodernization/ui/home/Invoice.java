@@ -2,7 +2,6 @@ package com.example.paymentmodernization.ui.home;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.provider.Telephony;
 
 import java.util.ArrayList;
 
@@ -19,6 +18,7 @@ public class Invoice implements Parcelable {
       };
   private Address supplierAddress;
   private String business;
+  private String driver;
   private String supplier;
   private String dueDate;
   private String invoiceId;
@@ -26,9 +26,33 @@ public class Invoice implements Parcelable {
   private String deliveryDate;
   private String paymentDate;
   private Address businessAddress;
+  private ArrayList<InvoiceItem> items;
+  private String status;
+  private Invoice(Parcel parcel) {
+    supplierAddress = parcel.readParcelable(Address.class.getClassLoader());
+    business = parcel.readString();
+    driver = parcel.readString();
+    supplier = parcel.readString();
+    dueDate = parcel.readString();
+    invoiceId = parcel.readString();
+    invoiceDate = parcel.readString();
+    deliveryDate = parcel.readString();
+    paymentDate = parcel.readString();
+    businessAddress = parcel.readParcelable(Address.class.getClassLoader());
+    items = parcel.readArrayList(InvoiceItem.class.getClassLoader());
+    status = parcel.readString();
+  }
 
   public static Creator<Invoice> getCREATOR() {
     return CREATOR;
+  }
+
+  public String getDriver() {
+    return driver;
+  }
+
+  public void setDriver(String driver) {
+    this.driver = driver;
   }
 
   public Address getSupplierAddress() {
@@ -45,27 +69,6 @@ public class Invoice implements Parcelable {
 
   public void setBusinessAddress(Address businessAddress) {
     this.businessAddress = businessAddress;
-  }
-
-  private ArrayList<InvoiceItem> items;
-  private String status;
-
-
-
-
-  private Invoice(Parcel parcel) {
-    supplierAddress = parcel.readParcelable(Address.class.getClassLoader());
-    business = parcel.readString();
-    supplier = parcel.readString();
-    dueDate = parcel.readString();
-    invoiceId = parcel.readString();
-    invoiceDate = parcel.readString();
-    deliveryDate = parcel.readString();
-    paymentDate = parcel.readString();
-    businessAddress = parcel.readParcelable(Address.class.getClassLoader());
-    items = parcel.readArrayList(InvoiceItem.class.getClassLoader());
-    status = parcel.readString();
-
   }
 
   public String getBusiness() {
@@ -152,6 +155,7 @@ public class Invoice implements Parcelable {
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeParcelable(supplierAddress, i);
     parcel.writeString(business);
+    parcel.writeString(driver);
     parcel.writeString(supplier);
     parcel.writeString(dueDate);
     parcel.writeString(invoiceId);
@@ -161,6 +165,5 @@ public class Invoice implements Parcelable {
     parcel.writeParcelable(businessAddress, i);
     parcel.writeList(items);
     parcel.writeString(status);
-
   }
 }

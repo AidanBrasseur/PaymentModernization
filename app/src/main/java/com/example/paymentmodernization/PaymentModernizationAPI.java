@@ -60,6 +60,13 @@ public interface PaymentModernizationAPI {
       @Header("Authorization") String authToken,
       @Field("newStatus") String newStatus);
 
+  /** updates driver for particular invoice */
+  @FormUrlEncoded
+  @POST("invoices/update-driver/{invoiceId}")
+  Call<String> updateDriver(
+          @Path("invoiceId") String invoiceId,
+          @Header("Authorization") String authToken,
+          @Field("newDriver") String newDriver);
   /**
    * Signs up a new company with given username, password, name, type, bank information, and address
    *

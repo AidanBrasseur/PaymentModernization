@@ -14,6 +14,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.paymentmodernization.R;
+import com.example.paymentmodernization.ui.home.Address;
 import com.example.paymentmodernization.ui.home.Invoice;
 import com.example.paymentmodernization.ui.home.InvoiceItem;
 
@@ -33,9 +34,6 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
   private TextView invoiceDate;
   private TextView deliveryDate;
   private TextView paymentDate;
-  private TextView itemDescription;
-  private TextView itemQuantity;
-  private TextView itemUnitPrice;
   private TextView status;
   private SwipeRefreshLayout refresh;
   private TableLayout itemTable;
@@ -44,6 +42,9 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
   private TextView deliveryDriver;
   private TextView supplierStreet;
   private TextView supplierRegionAndPostalCode;
+  private TextView businessStreet;
+  private TextView businessRegionAndPostalCode;
+
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -55,10 +56,11 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
     this.authToken = getIntent().getStringExtra("authToken");
     this.refresh = findViewById(R.id.swipe_details);
     this.itemTable = findViewById(R.id.items_table);
-    this.totalPrice = findViewById(R.id.totalPrice);
     this.totalPriceLarge = findViewById(R.id.total_price_large);
-    this.deliveryDriver = findViewById(R.id.deliveryPerson);
-    toolbar.setTitle("Id: " + invoice.getInvoiceId());
+    this.deliveryDriver = findViewById(R.id.delivery_driver_name);
+    this.businessStreet = findViewById(R.id.recipient_street_address);
+    this.businessRegionAndPostalCode = findViewById(R.id.recipient_region_postal);
+    toolbar.setTitle("Invoice #" + invoice.getInvoiceId());
     setSupportActionBar(toolbar);
     refresh.setOnRefreshListener(
         new SwipeRefreshLayout.OnRefreshListener() {
@@ -69,23 +71,24 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
           }
         });
 
-    this.business = findViewById(R.id.bill_to);
+    this.business = findViewById(R.id.recipient_name);
 
     this.supplier = findViewById(R.id.supplier);
+    this.totalPrice = findViewById(R.id.totalPrice);
 
-    this.dueDate = findViewById(R.id.due_date_data);
+    this.dueDate = findViewById(R.id.due_date);
 
-    this.invoiceId = findViewById(R.id.invoice_id_num);
+    this.invoiceId = findViewById(R.id.invoice_id);
 
-    this.invoiceDate = findViewById(R.id.invoice_date_data);
+    this.invoiceDate = findViewById(R.id.invoice_date);
     this.supplierStreet = findViewById(R.id.supplier_streetaddress);
     this.supplierRegionAndPostalCode = findViewById(R.id.supplier_region_postal);
 
-    // this.deliveryDate = findViewById(R.id.deliveryDate);
+    this.deliveryDate = findViewById(R.id.delivery_date);
 
-    // this.paymentDate = findViewById(R.id.paymentDate);
+    this.paymentDate = findViewById(R.id.payment_date);
 
-    // this.status = findViewById(R.id.status);
+    this.status = findViewById(R.id.status);
 
     this.button = findViewById(R.id.statusButton);
 
@@ -119,20 +122,37 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
       itemTable.addView(row);
     }
     DecimalFormat df = new DecimalFormat("#.##");
-    this.totalPrice.setText(String.format("Total Price: %s", df.format(totalPrice)));
-    this.totalPriceLarge.setText("$" + df.format(totalPrice));
+    this.totalPriceLarge.setText(String.format("$%s", df.format(totalPrice)));
+    this.totalPrice.setText(String.format("Total Price: $%s", df.format(totalPrice)));
     business.setText(invoice.getBusiness());
-    deliveryDriver.setText("");
-
+    deliveryDriver.setText(invoice.getDriver());
+    Address supplierAddress = invoice.getSupplierAddress();
+    supplierStreet.setText(supplierAddress.getStreetAddress());
+    supplierRegionAndPostalCode.setText(
+        String.format(
+            "%s, %s, %s, %s",
+            supplierAddress.getCity(),
+            supplierAddress.getRegion(),
+            supplierAddress.getCountry(),
+            supplierAddress.getPostalCode()));
+    Address businessAddress = invoice.getBusinessAddress();
+    businessStreet.setText(businessAddress.getStreetAddress());
+    businessRegionAndPostalCode.setText(
+        String.format(
+            "%s, %s, %s, %s",
+            businessAddress.getCity(),
+            businessAddress.getRegion(),
+            businessAddress.getCountry(),
+            businessAddress.getPostalCode()));
     supplier.setText(invoice.getSupplier());
-    //supplierStreet.setText(invoice);
+
     dueDate.setText(invoice.getDueDate());
     invoiceId.setText(invoice.getInvoiceId());
     invoiceDate.setText(invoice.getInvoiceDate());
-    // deliveryDate.setText(invoice.getDeliveryDate());
-    // paymentDate.setText(invoice.getPaymentDate());
-    // paymentDate.setText(invoice.getPaymentDate());
-    // status.setText(invoice.getStatus());
+    if (invoice.getDeliveryDate() != null) deliveryDate.setText(invoice.getDeliveryDate());
+    if (invoice.getPaymentDate() != null) paymentDate.setText(invoice.getPaymentDate());
+
+    status.setText(invoice.getStatus());
     button.setText(invoice.getStatus());
     // checking user type and displaying correct button
     if (invoice.getStatus().equals("COMPLETE")) {
