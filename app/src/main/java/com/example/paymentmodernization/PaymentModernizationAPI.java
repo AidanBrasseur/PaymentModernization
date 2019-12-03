@@ -67,6 +67,23 @@ public interface PaymentModernizationAPI {
           @Path("invoiceId") String invoiceId,
           @Header("Authorization") String authToken,
           @Field("newDriver") String newDriver);
+
+  /** updates delivery date for particular invoice */
+  @FormUrlEncoded
+  @POST("invoices/update-delivery-date/{invoiceId}")
+  Call<String> updateDeliveryDate(
+          @Path("invoiceId") String invoiceId,
+          @Header("Authorization") String authToken,
+          @Field("newDeliveryDate") String newDeliveryDate);
+
+  /** updates payment date for particular invoice */
+  @FormUrlEncoded
+  @POST("invoices/update-payment-date/{invoiceId}")
+  Call<String> updatePaymentDate(
+          @Path("invoiceId") String invoiceId,
+          @Header("Authorization") String authToken,
+          @Field("newPaymentDate") String newPaymentDate);
+
   /**
    * Signs up a new company with given username, password, name, type, bank information, and address
    *
