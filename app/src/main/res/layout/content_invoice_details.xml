@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/scroll_invoice_details"
     tools:context=".InvoiceDetails.InvoiceDetailsActivity"
     tools:showIn="@layout/activity_invoice_details">
 
@@ -205,7 +206,7 @@
                     android:layout_column="2"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:text="John Doe" />
+                    android:text="TBD" />
             </TableRow>
 
             <TableRow
@@ -265,7 +266,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-                android:paddingTop="35dp"
+                android:layout_marginVertical="@dimen/activity_vertical_margin"
+                android:background="@drawable/item_table_border"
+                android:paddingVertical="35dp"
                 android:shrinkColumns="2,3"
                 android:stretchColumns="1">
 
@@ -306,16 +309,6 @@
                 </TableRow>
 
             </TableLayout>
-
-            <TextView
-                android:id="@+id/totalPrice"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:paddingVertical="15dp"
-                android:text="Total Price: $0.00"
-                android:textAlignment="viewEnd" />
 
         </LinearLayout>
     </LinearLayout>

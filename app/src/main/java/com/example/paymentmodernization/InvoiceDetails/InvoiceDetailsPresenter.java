@@ -16,21 +16,41 @@ public class InvoiceDetailsPresenter implements InvoiceDetailsInteractor.OnStatu
     invoiceDetailsInteractor.updateStatus(invoiceId, authToken, newStatus, this);
   }
 
-  @Override
-  public void onSuccess(String newStatus) {
-    invoiceDetailsView.statusUpdatedSuccess(newStatus);
+  public void updateDate(String invoiceId, String authToken, String newDate, String userType) {
+    invoiceDetailsInteractor.updateDate(invoiceId, authToken, newDate, userType, this);
   }
 
-  public void getInvoiceDetails(String invoiceId, String authToken){
+  public void updateDriver(String invoiceId, String authToken, String newDriver) {
+    invoiceDetailsInteractor.updateDriver(invoiceId, authToken, newDriver, this);
+  }
+
+  public void getInvoiceDetails(String invoiceId, String authToken) {
     invoiceDetailsInteractor.getInvoiceDetails(invoiceId, authToken, this);
   }
 
-
+  @Override
+  public void onStatusUpdateSuccess(String newStatus) {
+    invoiceDetailsView.statusUpdatedSuccess(newStatus);
+  }
 
   @Override
-  public void onFailure(String newStatus) {
-    // TODO handleFailure
+  public void onStatusUpdateFailure(String newStatus) {}
+
+  @Override
+  public void onDriverUpdateSuccess(String newDriver) {
+    invoiceDetailsView.driverUpdatedSuccess(newDriver);
   }
+
+  @Override
+  public void onDriverUpdateFailure(String newDriver) {}
+
+  @Override
+  public void onDateUpdateSuccess(String newDate) {
+    invoiceDetailsView.dateUpdatedSuccess(newDate);
+  }
+
+  @Override
+  public void onDateUpdateFailure(String newDate) {}
 
   @Override
   public void onSuccessDetails(Invoice invoice) {

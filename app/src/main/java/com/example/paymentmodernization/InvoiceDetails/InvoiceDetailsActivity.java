@@ -1,14 +1,17 @@
 package com.example.paymentmodernization.InvoiceDetails;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -19,6 +22,9 @@ import com.example.paymentmodernization.ui.home.Invoice;
 import com.example.paymentmodernization.ui.home.InvoiceItem;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class InvoiceDetailsActivity extends AppCompatActivity implements InvoiceDetailsView {
 
@@ -37,7 +43,6 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
   private TextView status;
   private SwipeRefreshLayout refresh;
   private TableLayout itemTable;
-  private TextView totalPrice;
   private TextView totalPriceLarge;
   private TextView deliveryDriver;
   private TextView supplierStreet;
@@ -50,7 +55,6 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_invoice_details);
     Toolbar toolbar = findViewById(R.id.toolbar);
-
     this.invoice = getIntent().getParcelableExtra("invoice");
     this.userType = getIntent().getStringExtra("userType");
     this.authToken = getIntent().getStringExtra("authToken");
@@ -74,7 +78,6 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
     this.business = findViewById(R.id.recipient_name);
 
     this.supplier = findViewById(R.id.supplier);
-    this.totalPrice = findViewById(R.id.totalPrice);
 
     this.dueDate = findViewById(R.id.due_date);
 
@@ -121,11 +124,18 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
               * Double.parseDouble(invoiceItem.getQuantity());
       itemTable.addView(row);
     }
+    TableRow row =
+        (TableRow)
+            LayoutInflater.from(InvoiceDetailsActivity.this)
+                .inflate(R.layout.total_price_row, null);
     DecimalFormat df = new DecimalFormat("#.##");
+    TextView totalPriceText = row.findViewById(R.id.totalPrice);
+    totalPriceText.setText(String.format("Total Price: $%s", df.format(totalPrice)));
+    itemTable.addView(row);
     this.totalPriceLarge.setText(String.format("$%s", df.format(totalPrice)));
-    this.totalPrice.setText(String.format("Total Price: $%s", df.format(totalPrice)));
+
     business.setText(invoice.getBusiness());
-    deliveryDriver.setText(invoice.getDriver());
+    if (invoice.getDriver() != null) deliveryDriver.setText(invoice.getDriver());
     Address supplierAddress = invoice.getSupplierAddress();
     supplierStreet.setText(supplierAddress.getStreetAddress());
     supplierRegionAndPostalCode.setText(
@@ -167,8 +177,7 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
           button.setText(("Deliver"));
         }
       } else if (userType.equals("SUPPLIER")) {
-        button.setEnabled(false);
-        button.setVisibility(View.INVISIBLE);
+        button.setText("Update Driver");
       } else if (userType.equals("SMALL_BUSINESS")) {
         if (invoice.getStatus().equals("PAID")) {
           button.setText(("Paid"));
@@ -181,21 +190,40 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
           new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              handleStatusButtonClick();
+              if (userType.equals("SUPPLIER")) {
+                handleDriverUpdateButton();
+              } else {
+                handleStatusButtonClick();
+              }
             }
           });
     }
   }
 
+  @Override
+  public void dateUpdatedSuccess(String newDate) {
+    getInvoiceDetails();
+  }
+
+  @Override
+  public void driverUpdatedSuccess(String newDriver) {
+    getInvoiceDetails();
+  }
+
   public void handleStatusButtonClick() {
     System.out.println("button clicked******************************");
+    String myFormat = "yyyy-MM-dd HH:mm:ss";
+    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.CANADA);
+    String date = sdf.format(new Date());
     if (userType.equals("DELIVERY_PERSON")) {
+      presenter.updateDate(invoice.getInvoiceId(), authToken, date, userType);
       if (invoice.getStatus().equals("PAID")) {
         presenter.updateStatus(invoice.getInvoiceId(), authToken, "COMPLETE");
       } else {
         presenter.updateStatus(invoice.getInvoiceId(), authToken, "DELIVERED");
       }
     } else if (userType.equals("SMALL_BUSINESS")) {
+      presenter.updateDate(invoice.getInvoiceId(), authToken, date, userType);
       if (invoice.getStatus().equals("DELIVERED")) {
         presenter.updateStatus(invoice.getInvoiceId(), authToken, "COMPLETE");
       } else {
@@ -209,10 +237,34 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
     if (newStatus.equals("DELIVERED") || newStatus.equals("PAID") || newStatus.equals("COMPLETE")) {
       button.setEnabled(false);
     }
+    getInvoiceDetails();
   }
 
   @Override
   public void onBackPressed() {
     finish();
+  }
+
+  void handleDriverUpdateButton() {
+    final EditText driverEditText = new EditText(this);
+    driverEditText.setHint("Driver");
+    AlertDialog dialog =
+        new AlertDialog.Builder(this)
+            .setTitle("Update Driver")
+            .setView(driverEditText)
+            .setPositiveButton(
+                "Update",
+                new DialogInterface.OnClickListener() {
+                  @Override
+                  public void onClick(DialogInterface dialog, int which) {
+                    presenter.updateDriver(
+                        invoice.getInvoiceId(),
+                        authToken,
+                        String.valueOf(driverEditText.getText()));
+                  }
+                })
+            .setNegativeButton("Cancel", null)
+            .create();
+    dialog.show();
   }
 }

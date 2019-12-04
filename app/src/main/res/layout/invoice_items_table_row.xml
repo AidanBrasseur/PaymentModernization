@@ -14,7 +14,8 @@
         android:layout_gravity="center_horizontal"
         android:textAlignment="center"
         android:paddingTop="15dp"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        />
 
     <TextView
         android:id="@+id/orderQt"
@@ -26,7 +27,9 @@
         android:ems="10"
         android:paddingTop="15dp"
         android:textAlignment="center"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:background="#ffff"
+        android:layout_margin="2dp"/>
 
     <TextView
         android:id="@+id/orderPrice"

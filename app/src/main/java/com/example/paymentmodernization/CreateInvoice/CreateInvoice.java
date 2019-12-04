@@ -94,7 +94,6 @@ public class CreateInvoice extends AppCompatActivity implements CreateInvoiceVie
 
           @Override
           public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-            // TODO Auto-generated method stub
             myCalendar.set(Calendar.YEAR, year);
             myCalendar.set(Calendar.MONTH, monthOfYear);
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -223,22 +222,19 @@ public class CreateInvoice extends AppCompatActivity implements CreateInvoiceVie
         (TableRow) LayoutInflater.from(CreateInvoice.this).inflate(R.layout.item_table_row, null);
     final EditText orderPrice = row.findViewById(R.id.orderPrice);
     final EditText orderQuantity = row.findViewById(R.id.orderQt);
-    orderQuantity.addTextChangedListener(new TextWatcher() {
-      @Override
-      public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+    orderQuantity.addTextChangedListener(
+        new TextWatcher() {
+          @Override
+          public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
-      }
+          @Override
+          public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            updateTotalPrice();
+          }
 
-      @Override
-      public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-      updateTotalPrice();
-      }
-
-      @Override
-      public void afterTextChanged(Editable editable) {
-
-      }
-    });
+          @Override
+          public void afterTextChanged(Editable editable) {}
+        });
     orderPrice.addTextChangedListener(
         new TextWatcher() {
           @Override
@@ -261,12 +257,11 @@ public class CreateInvoice extends AppCompatActivity implements CreateInvoiceVie
       View tableView = tableLayout.getChildAt(i);
       if (tableView instanceof TableRow) {
         TableRow row = (TableRow) tableView;
-        try{
-        String quantity = ((EditText) row.getChildAt(1)).getText().toString();
-        String price = ((EditText) row.getChildAt(2)).getText().toString();
-        totalPrice += Double.parseDouble(quantity) * Double.parseDouble(price);
-        }
-        catch (Exception e){
+        try {
+          String quantity = ((EditText) row.getChildAt(1)).getText().toString();
+          String price = ((EditText) row.getChildAt(2)).getText().toString();
+          totalPrice += Double.parseDouble(quantity) * Double.parseDouble(price);
+        } catch (Exception e) {
         }
       }
     }
