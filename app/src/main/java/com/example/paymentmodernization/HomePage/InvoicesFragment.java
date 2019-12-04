@@ -14,6 +14,7 @@ import android.widget.SearchView;
 import android.widget.TableLayout;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
@@ -44,6 +45,7 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
   private SwipeRefreshLayout swipeRefreshLayout;
   private HomeFragment homeFragment;
   private SearchView searchView;
+  private View root;
 
 
   public InvoicesFragment(String completedStatus, HomeFragment homeFragment) {
@@ -57,24 +59,30 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
       final ViewGroup container,
       final Bundle savedInstanceState) {
 
-    View root = inflater.inflate(R.layout.fragment_invoices, container, false);
-    /*SectionsPagerAdapter sectionsPagerAdapter =
-        new SectionsPagerAdapter(this, getSupportFragmentManager());
-    ViewPager viewPager = findViewById(R.id.view_pager);
-    viewPager.setAdapter(sectionsPagerAdapter);
-    TabLayout tabs = findViewById(R.id.tabs);
-    tabs.setupWithViewPager(viewPager);
-    FloatingActionButton fab = findViewById(R.id.fab);
+    root = inflater.inflate(R.layout.fragment_invoices, container, false);
 
-    fab.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null)
-                .show();
-          }
-        });*/
+
+
+    //    LinearLayoutManager manager = new LinearLayoutManager(this);
+    //    manager.setOrientation(LinearLayoutManager.VERTICAL);
+    //    recyclerView.setLayoutManager(manager);
+
+   // homeFragment.getInvoices();
+    return root;
+  }
+
+//  @Override
+//  public void onResume() {
+//    System.out.println("CALLED ON RESUMEEEE ____________________________-_");
+//    super.onResume();
+//    homeFragment.getInvoices();
+//  }
+
+
+  @Override
+  public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+
     setHasOptionsMenu(true);
 
     Intent intent = getActivity().getIntent();
@@ -86,29 +94,19 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
     layout = root.findViewById(R.id.coordinatorLayout);
     // displayInvoices(this.authToken);
     recyclerView = root.findViewById(R.id.recyclerView);
+    System.out.println("ONCREATE AND view made =-----------------------");
     recycleManager = new LinearLayoutManager(context);
-      this.swipeRefreshLayout = root.findViewById(R.id.swipe);
-      swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-          @Override
-          public void onRefresh() {
-              homeFragment.getInvoices();
-              swipeRefreshLayout.setRefreshing(false);
-          }
-      });
+    this.swipeRefreshLayout = root.findViewById(R.id.swipe);
+    swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+      @Override
+      public void onRefresh() {
+        homeFragment.getInvoices();
+        swipeRefreshLayout.setRefreshing(false);
+      }
+    });
+    super.onViewCreated(view, savedInstanceState);
 
 
-    //    LinearLayoutManager manager = new LinearLayoutManager(this);
-    //    manager.setOrientation(LinearLayoutManager.VERTICAL);
-    //    recyclerView.setLayoutManager(manager);
-
-   // homeFragment.getInvoices();
-    return root;
-  }
-
-  @Override
-  public void onResume() {
-    super.onResume();
-    homeFragment.getInvoices();
   }
 
   @Override

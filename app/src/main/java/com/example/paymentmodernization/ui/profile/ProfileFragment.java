@@ -41,4 +41,6 @@ public class ProfileFragment extends Fragment {
     fullName.setText(userInformation.getFullName());
     return root;
   }
+
+
 }

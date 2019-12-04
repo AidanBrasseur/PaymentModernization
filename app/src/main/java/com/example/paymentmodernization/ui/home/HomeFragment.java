@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -33,11 +34,22 @@ public class HomeFragment extends Fragment {
   private InvoicesFragment completeInvoiceFragment;
   private InvoicesFragment incompleteInvoiceFragment;
   private ArrayList<Invoice> invoices;
+  private SectionsPagerAdapter sectionsPagerAdapter;
+  private ViewPager viewPager;
+  TabLayout tabs;
+  View root;
 
   public View onCreateView(
       @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
-    View root = inflater.inflate(R.layout.fragment_home, container, false);
+    root = inflater.inflate(R.layout.fragment_home, container, false);
+
+    return root;
+  }
+
+  @Override
+  public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
     Intent intent = getActivity().getIntent();
     userInformation = intent.getParcelableExtra("userInformation");
     String userType = userInformation.getUserType();
@@ -56,7 +68,7 @@ public class HomeFragment extends Fragment {
     //                textView.setText(s);
     //              }
     //            });
-    SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
+    sectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
     // Temporary until invoice tabs go in
     System.out.println("new invoices fragment created *******************************");
 
@@ -67,30 +79,34 @@ public class HomeFragment extends Fragment {
 
     sectionsPagerAdapter.addFragment(incompleteInvoiceFragment, "Invoices");
     sectionsPagerAdapter.addFragment(completeInvoiceFragment, "Completed Invoices");
-    ViewPager viewPager = root.findViewById(R.id.view_pager);
+    viewPager = root.findViewById(R.id.view_pager);
     viewPager.setAdapter(sectionsPagerAdapter);
-    TabLayout tabs = root.findViewById(R.id.tabs);
+    tabs = root.findViewById(R.id.tabs);
     tabs.setupWithViewPager(viewPager);
-    FloatingActionButton fab = root.findViewById(R.id.fab);
+    fab = root.findViewById(R.id.fab);
     if (!userType.equals("SUPPLIER")) {
       fab.hide();
     }
     fab.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-            Intent intent = new Intent(getActivity(), CreateInvoice.class);
-            intent.putExtra("userInformation", userInformation);
-            getActivity().startActivity(intent);
-          }
-        });
-    getInvoices();
-    return root;
+            new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CreateInvoice.class);
+                intent.putExtra("userInformation", userInformation);
+                getActivity().startActivity(intent);
+              }
+            });
   }
 
+  @Override
+  public void onResume() {
+    System.out.println("CALLED ON RESUMEEEE ____________________________-_");
+    getInvoices();
+    super.onResume();
+  }
 
   public void getInvoices(){
-    System.out.println("getting ----------------------------------");
+    System.out.println(" geting ----------------------------------");
     invoicesPresenter.invoices(userInformation.getAuthToken());
 
 
@@ -105,5 +121,8 @@ public class HomeFragment extends Fragment {
 
   }
 
-
+  @Override
+  public void onPause() {
+    super.onPause();
+  }
 }
