@@ -248,13 +248,6 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
       button.setEnabled(false);
     }
     getInvoiceDetails();
-    new Handler().postDelayed(new Runnable() {
-      @Override
-      public void run() {
-        progressBar.setVisibility(View.INVISIBLE);
-      }
-    }, 500);
-    // Thread.sleep(500);
 
   }
 
