@@ -19,6 +19,13 @@ public class ProfileFragment extends Fragment {
   private ProfileViewModel profileViewModel;
   private UserInformation userInformation;
   private TextView fullName;
+  private TextView username;
+  private TextView bankNum;
+  private TextView street;
+  private TextView city;
+  private TextView region;
+  private TextView country;
+  private TextView postcode;
 
   public View onCreateView(
       @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,6 +46,22 @@ public class ProfileFragment extends Fragment {
     //            });
     fullName = root.findViewById(R.id.fullName);
     fullName.setText(userInformation.getFullName());
+    username = root.findViewById(R.id.username);
+    username.setText(userInformation.getUsername());
+    bankNum = root.findViewById(R.id.bankNum);
+    bankNum.setText(userInformation.getBankNum());
+    street = root.findViewById(R.id.street);
+    street.setText(userInformation.getStreetAddress());
+    city = root.findViewById(R.id.city);
+    city.setText(userInformation.getCity());
+    region = root.findViewById(R.id.region);
+    region.setText(userInformation.getRegion());
+    country = root.findViewById(R.id.country);
+    country.setText(userInformation.getCountry());
+    postcode = root.findViewById(R.id.postcode);
+    postcode.setText(userInformation.getPostalCode());
+
+
     return root;
   }
 
