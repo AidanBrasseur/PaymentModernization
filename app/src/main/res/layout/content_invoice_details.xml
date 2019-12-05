@@ -270,7 +270,9 @@
                 android:background="@drawable/item_table_border"
                 android:paddingVertical="35dp"
                 android:shrinkColumns="2,3"
-                android:stretchColumns="1">
+                android:stretchColumns="1"
+                android:divider="@color/colorPrimary"
+                android:showDividers="middle">
 
                 <TableRow
                     android:layout_width="match_parent"
@@ -282,6 +284,7 @@
                         android:layout_column="1"
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
+                        android:divider="@color/colorPrimary"
                         android:text="Description"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -292,6 +295,7 @@
                         android:layout_column="2"
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
+                        android:divider="@color/colorPrimary"
                         android:text="Quantity"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -302,6 +306,7 @@
                         android:layout_column="3"
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
+                        android:divider="@color/colorPrimary"
                         android:text="Price"
                         android:textSize="18sp"
                         android:textStyle="bold" />
