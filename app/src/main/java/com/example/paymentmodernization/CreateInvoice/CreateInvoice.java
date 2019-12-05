@@ -37,6 +37,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+/** Activity to display create invoice page. Implements CreateInvoiceView */
 public class CreateInvoice extends AppCompatActivity implements CreateInvoiceView {
   private EditText businessText;
   private EditText deliveryPersonText;
@@ -111,7 +112,6 @@ public class CreateInvoice extends AppCompatActivity implements CreateInvoiceVie
         new View.OnFocusChangeListener() {
           @Override
           public void onFocusChange(View v, boolean hasFocus) {
-            // TODO Auto-generated method stub
             if (hasFocus) {
               new DatePickerDialog(
                       CreateInvoice.this,
@@ -161,46 +161,55 @@ public class CreateInvoice extends AppCompatActivity implements CreateInvoiceVie
           }
         });
   }
-
+  /** updates due date text with date selected by the user */
   private void updateLabel() {
     String myFormat = "yyyy-MM-dd HH:mm:ss";
     SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.CANADA);
     dueDateText.setText(sdf.format(myCalendar.getTime()));
   }
 
+  /** Shows current loading progress */
   @Override
   public void showProgress() {
     progressBar.setVisibility(View.VISIBLE);
   }
-
+  /** Hides current loading progress */
   @Override
   public void hideProgress() {
     progressBar.setVisibility(View.GONE);
   }
-
+  /**
+   * Sets error message given an error with the business
+   *
+   * @param message the message for the error
+   */
   @Override
   public void setBusinessError(String message) {
     businessText.setError(message);
   }
-
+  /**
+   * Sets error message given an error with the due date
+   *
+   * @param message the message for the error
+   */
   @Override
   public void setDueDateError(String message) {
     dueDateText.setError(message);
   }
-
+  /** switches current screen to the homescreen */
   @Override
   public void switchToHome() {
     Intent intent = new Intent(CreateInvoice.this, NavDrawer.class);
     intent.putExtra("userInformation", userInformation);
     startActivity(intent);
   }
-
+  /** sends message to user indicating that their invoice was invalid */
   @Override
   public void sendInvalidInvoiceMessage() {
     progressBar.setVisibility(View.GONE);
     Toast.makeText(getApplicationContext(), "Invalid Invoice", Toast.LENGTH_LONG).show();
   }
-
+  /** sends message to user indicating that there is an invalid item in the invoice */
   @Override
   public void sendInvalidItemsMessage() {
     progressBar.setVisibility(View.GONE);
@@ -209,6 +218,15 @@ public class CreateInvoice extends AppCompatActivity implements CreateInvoiceVie
         .show();
   }
 
+  /**
+   * Attempts to create an invoice with the provided information
+   *
+   * @param authToken the authorization token of the user
+   * @param business the business the invoice is being sent to
+   * @param deliveryPerson the delivery person that the invoice is assigned to
+   * @param dueDate the due date of the invoice
+   * @param items the items associated with the invoice
+   */
   void createInvoice(
       String authToken, String business, String deliveryPerson, String dueDate, String items) {
     String myFormat = "yyyy-MM-dd HH:mm:ss";
@@ -217,6 +235,7 @@ public class CreateInvoice extends AppCompatActivity implements CreateInvoiceVie
     createInvoicePresenter.createInvoice(authToken, business, deliveryPerson, date, dueDate, items);
   }
 
+  /** Adds a row to the table for a new item */
   void addItemRow() {
     TableRow row =
         (TableRow) LayoutInflater.from(CreateInvoice.this).inflate(R.layout.item_table_row, null);
@@ -251,6 +270,7 @@ public class CreateInvoice extends AppCompatActivity implements CreateInvoiceVie
     tableLayout.addView(row);
   }
 
+  /** Updates the total price text field with the current total from the items table */
   void updateTotalPrice() {
     double totalPrice = 0;
     for (int i = 1; i < tableLayout.getChildCount(); i++) {
@@ -267,5 +287,10 @@ public class CreateInvoice extends AppCompatActivity implements CreateInvoiceVie
     }
     DecimalFormat df = new DecimalFormat("#.##");
     this.totalPrice.setText(String.format("Total Price: $%s", df.format(totalPrice)));
+  }
+
+  public void onResume() {
+    super.onResume();
+    hideProgress();
   }
 }

@@ -3,9 +3,10 @@ package com.example.paymentmodernization.Login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,8 +20,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
   private EditText usernameField;
   private EditText passwordField;
-  private Button signInButton;
-  private Button signUpButton;
+  private ImageView signInButton;
+  private TextView signUpButton;
   private LoginPresenter presenter;
   private ProgressBar progressBar;
 
@@ -32,7 +33,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     passwordField = findViewById(R.id.password);
     signInButton = findViewById(R.id.login);
     signUpButton = findViewById(R.id.signUp);
-    progressBar = findViewById(R.id.loading);
+    progressBar = findViewById(R.id.progress);
 
     presenter = new LoginPresenter(this, new LoginInteractor());
     signUpButton.setOnClickListener(
