@@ -100,9 +100,11 @@ public class HomeFragment extends Fragment {
 
   @Override
   public void onResume() {
+    super.onResume();
+
     System.out.println("CALLED ON RESUMEEEE ____________________________-_");
     getInvoices();
-    super.onResume();
+
   }
 
   public void getInvoices(){
@@ -113,6 +115,7 @@ public class HomeFragment extends Fragment {
   }
 
   public void updateInvoices(ArrayList<Invoice> newInvoices){
+
 
 
     incompleteInvoiceFragment.addInvoiceCards(newInvoices);

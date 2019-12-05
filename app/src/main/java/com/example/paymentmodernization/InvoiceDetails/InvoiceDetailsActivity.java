@@ -2,10 +2,12 @@ package com.example.paymentmodernization.InvoiceDetails;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -49,6 +51,8 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
   private TextView supplierRegionAndPostalCode;
   private TextView businessStreet;
   private TextView businessRegionAndPostalCode;
+  private ProgressBar progressBar;
+
 
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,6 +78,8 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
             refresh.setRefreshing(false);
           }
         });
+
+    this.progressBar = findViewById(R.id.progress);
 
     this.business = findViewById(R.id.recipient_name);
 
@@ -198,11 +204,19 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
             }
           });
     }
+    new Handler().postDelayed(new Runnable() {
+      @Override
+      public void run() {
+        progressBar.setVisibility(View.INVISIBLE);
+      }
+    }, 2000);
+   // Thread.sleep(500);
+
   }
 
   @Override
   public void dateUpdatedSuccess(String newDate) {
-    getInvoiceDetails();
+
   }
 
   @Override
@@ -223,6 +237,8 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
         presenter.updateStatus(invoice.getInvoiceId(), authToken, "DELIVERED");
       }
     } else if (userType.equals("SMALL_BUSINESS")) {
+      progressBar.setVisibility(View.VISIBLE);
+
       presenter.updateDate(invoice.getInvoiceId(), authToken, date, userType);
       if (invoice.getStatus().equals("DELIVERED")) {
         presenter.updateStatus(invoice.getInvoiceId(), authToken, "COMPLETE");
@@ -238,6 +254,7 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
       button.setEnabled(false);
     }
     getInvoiceDetails();
+
   }
 
   @Override

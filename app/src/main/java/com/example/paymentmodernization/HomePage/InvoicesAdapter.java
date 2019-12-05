@@ -48,6 +48,8 @@ public class InvoicesAdapter extends RecyclerView.Adapter<InvoicesAdapter.Invoic
     holder.supplierToCompany.setText(currentCard.getSupplierToCompany());
     holder.delivery.setText(currentCard.getDelivery());
     holder.status.setText(currentCard.getStatus());
+    String idText = "Id: " + currentCard.getInvoiceId();
+    holder.id.setText(idText);
     if(holder.status.getText().toString().equals("COMPLETE")){
       holder.status.setTextColor(Color.parseColor("#3fa657"));
       holder.status.setTypeface(null, Typeface.BOLD);
@@ -82,12 +84,15 @@ public class InvoicesAdapter extends RecyclerView.Adapter<InvoicesAdapter.Invoic
     public TextView supplierToCompany;
     public TextView delivery;
     public TextView status;
+    public TextView id;
 
     public InvoicesViewHolder(View itemView, final onItemClickListener listener) {
       super(itemView);
       supplierToCompany = itemView.findViewById(R.id.supplierToCompany);
       delivery = itemView.findViewById(R.id.delivery);
       status = itemView.findViewById(R.id.status);
+      id = itemView.findViewById(R.id.id);
+
       itemView.setOnClickListener(
           new View.OnClickListener() {
             @Override
