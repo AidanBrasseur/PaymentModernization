@@ -23,8 +23,7 @@ public class InvoicesPresenter implements InvoicesInteractor.OnInvoicesFinishedL
   /** Handles the successful retreival of invoice information */
   @Override
   public void onSuccess(ArrayList<Invoice> invoices) {
-    // TODO impliment this method call some method on homepageview
+    // TODO implement this method call some method on homepageview
     homeFragment.updateInvoices(invoices);
-    System.out.println(invoices.toString());
   }
 }
