@@ -111,6 +111,7 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
   }
 
   public void setTextFields(Invoice invoice) {
+    this.invoice = invoice;
     double totalPrice = 0;
     while (itemTable.getChildCount() > 1)
       itemTable.removeView(itemTable.getChildAt(itemTable.getChildCount() - 1));
@@ -231,15 +232,15 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
         presenter.updateStatus(invoice.getInvoiceId(), authToken, "DELIVERED");
       }
     } else if (userType.equals("SMALL_BUSINESS")) {
-      progressBar.setVisibility(View.VISIBLE);
-
       presenter.updateDate(invoice.getInvoiceId(), authToken, date, userType);
       if (invoice.getStatus().equals("DELIVERED")) {
+        System.out.println("WEN GOT TO COMPLETEEEEEEEEEEEE8888888888888888888888888888");
         presenter.updateStatus(invoice.getInvoiceId(), authToken, "COMPLETE");
       } else {
         presenter.updateStatus(invoice.getInvoiceId(), authToken, "PAID");
       }
     }
+
   }
 
   public void statusUpdatedSuccess(String newStatus) {
