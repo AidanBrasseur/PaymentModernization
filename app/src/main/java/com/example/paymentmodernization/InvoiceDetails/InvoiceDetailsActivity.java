@@ -209,7 +209,7 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
       public void run() {
         progressBar.setVisibility(View.INVISIBLE);
       }
-    }, 2000);
+    }, 500);
    // Thread.sleep(500);
 
   }
