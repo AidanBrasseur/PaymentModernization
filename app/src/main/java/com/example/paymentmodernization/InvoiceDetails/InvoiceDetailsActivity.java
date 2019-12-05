@@ -134,9 +134,9 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
         (TableRow)
             LayoutInflater.from(InvoiceDetailsActivity.this)
                 .inflate(R.layout.total_price_row, null);
-    DecimalFormat df = new DecimalFormat("#.##");
+    DecimalFormat df = new DecimalFormat("#.00");
     TextView totalPriceText = row.findViewById(R.id.totalPrice);
-    totalPriceText.setText(String.format("Total Price: $%s", df.format(totalPrice)));
+    totalPriceText.setText(String.format("Total Price:     $%s", df.format(totalPrice)));
     itemTable.addView(row);
     this.totalPriceLarge.setText(String.format("$%s", df.format(totalPrice)));
 
@@ -209,7 +209,7 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
       public void run() {
         progressBar.setVisibility(View.INVISIBLE);
       }
-    }, 2000);
+    }, 500);
    // Thread.sleep(500);
 
   }

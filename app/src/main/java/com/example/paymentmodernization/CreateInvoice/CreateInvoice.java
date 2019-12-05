@@ -285,7 +285,7 @@ public class CreateInvoice extends AppCompatActivity implements CreateInvoiceVie
         }
       }
     }
-    DecimalFormat df = new DecimalFormat("#.##");
+    DecimalFormat df = new DecimalFormat("#.00");
     this.totalPrice.setText(String.format("Total Price: $%s", df.format(totalPrice)));
   }
 
