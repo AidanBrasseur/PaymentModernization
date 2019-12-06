@@ -2,7 +2,6 @@ package com.example.paymentmodernization.InvoiceDetails;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -18,16 +17,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.paymentmodernization.InvoicesHomePage.Address;
+import com.example.paymentmodernization.InvoicesHomePage.Invoice;
+import com.example.paymentmodernization.InvoicesHomePage.InvoiceItem;
 import com.example.paymentmodernization.R;
-import com.example.paymentmodernization.ui.home.Address;
-import com.example.paymentmodernization.ui.home.Invoice;
-import com.example.paymentmodernization.ui.home.InvoiceItem;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+/** Activity to display invoice details page. Implements InvoiceDetailsView. */
 public class InvoiceDetailsActivity extends AppCompatActivity implements InvoiceDetailsView {
 
   private InvoiceDetailsPresenter presenter;
@@ -52,7 +52,6 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
   private TextView businessStreet;
   private TextView businessRegionAndPostalCode;
   private ProgressBar progressBar;
-
 
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -106,10 +105,16 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
     setTextFields(invoice);
   }
 
+  /** Retrieves most updated information about the invoice */
   public void getInvoiceDetails() {
     presenter.getInvoiceDetails(invoice.getInvoiceId(), authToken);
   }
 
+  /**
+   * Sets text on page to display the information provided in invoice
+   *
+   * @param invoice the invoice to be displayed
+   */
   public void setTextFields(Invoice invoice) {
     this.invoice = invoice;
     double totalPrice = 0;
@@ -142,7 +147,7 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
     this.totalPriceLarge.setText(String.format("$%s", df.format(totalPrice)));
 
     business.setText(invoice.getBusiness());
-    if (invoice.getDriver() != null) deliveryDriver.setText(invoice.getDriver());
+    if (invoice.getDeliveryPerson() != null) deliveryDriver.setText(invoice.getDeliveryPerson());
     Address supplierAddress = invoice.getSupplierAddress();
     supplierStreet.setText(supplierAddress.getStreetAddress());
     supplierRegionAndPostalCode.setText(
@@ -205,22 +210,17 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
             }
           });
     }
-
-
   }
-
+  /** Handles successful update of date */
   @Override
-  public void dateUpdatedSuccess(String newDate) {
-
-  }
-
+  public void dateUpdatedSuccess() {}
+  /** Handles successful update of driver */
   @Override
-  public void driverUpdatedSuccess(String newDriver) {
+  public void driverUpdatedSuccess() {
     getInvoiceDetails();
   }
-
+  /** Handles the choice of status to be updated on the invoice */
   public void handleStatusButtonClick() {
-    System.out.println("button clicked******************************");
     String myFormat = "yyyy-MM-dd HH:mm:ss";
     SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.CANADA);
     String date = sdf.format(new Date());
@@ -234,29 +234,26 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
     } else if (userType.equals("SMALL_BUSINESS")) {
       presenter.updateDate(invoice.getInvoiceId(), authToken, date, userType);
       if (invoice.getStatus().equals("DELIVERED")) {
-        System.out.println("WEN GOT TO COMPLETEEEEEEEEEEEE8888888888888888888888888888");
         presenter.updateStatus(invoice.getInvoiceId(), authToken, "COMPLETE");
       } else {
         presenter.updateStatus(invoice.getInvoiceId(), authToken, "PAID");
       }
     }
-
   }
-
+  /** Handles successful update of status */
   public void statusUpdatedSuccess(String newStatus) {
     button.setText(newStatus);
     if (newStatus.equals("DELIVERED") || newStatus.equals("PAID") || newStatus.equals("COMPLETE")) {
       button.setEnabled(false);
     }
     getInvoiceDetails();
-
   }
 
   @Override
   public void onBackPressed() {
     finish();
   }
-
+  /** Handles dialog to prompt update of driver */
   void handleDriverUpdateButton() {
     final EditText driverEditText = new EditText(this);
     driverEditText.setHint("Driver");

@@ -1,7 +1,4 @@
-package com.example.paymentmodernization.HomePage;
-
-import com.example.paymentmodernization.ui.home.Invoice;
-import com.example.paymentmodernization.ui.home.InvoiceItem;
+package com.example.paymentmodernization.InvoicesHomePage;
 
 import java.util.ArrayList;
 
@@ -13,7 +10,13 @@ public class InvoiceCard {
   private ArrayList<InvoiceItem> items;
   private Invoice invoice;
 
-  public InvoiceCard(Invoice invoice, String supplierToCompany, String delivery, String status, ArrayList<InvoiceItem> items, String invoiceId) {
+  public InvoiceCard(
+      Invoice invoice,
+      String supplierToCompany,
+      String delivery,
+      String status,
+      ArrayList<InvoiceItem> items,
+      String invoiceId) {
     this.supplierToCompany = supplierToCompany;
     this.delivery = delivery;
     this.status = status;
@@ -38,7 +41,7 @@ public class InvoiceCard {
     return invoiceId;
   }
 
-  public ArrayList<InvoiceItem> getItems(){
+  public ArrayList<InvoiceItem> getItems() {
     return items;
   }
 

@@ -1,4 +1,4 @@
-package com.example.paymentmodernization.ui.home;
+package com.example.paymentmodernization.InvoicesHomePage;
 
 import com.example.paymentmodernization.PaymentModernizationAPI;
 
@@ -15,7 +15,6 @@ public class InvoicesInteractor {
   public void invoiceDisplay(
       String authorizationString, final OnInvoicesFinishedListener listener) {
     try {
-      System.out.println(authorizationString + "***************************");
       Retrofit retrofit =
           new Retrofit.Builder()
               .baseUrl("https://payment-modernization.herokuapp.com/")
@@ -32,23 +31,17 @@ public class InvoicesInteractor {
             @Override
             public void onResponse(Call<Invoices> call, Response<Invoices> response) {
               if (!response.isSuccessful()) {
-                System.out.println("not succesfful *************");
               } else {
                 Invoices invoices = response.body();
                 if (invoices == null) {
-                  System.out.println("**********NULL Response body");
                 }
-               if(invoices.getInvoices() != null)
-                    listener.onSuccess(invoices.getInvoices());
-                // System.out.println("*********************interactotr********");
-                // System.out.println(invoices.getInvoices().get(0).get("business"));
+                if (invoices.getInvoices() != null) listener.onSuccess(invoices.getInvoices());
               }
             }
 
             @Override
             public void onFailure(Call<Invoices> call, Throwable t) {
               // TODO: Handle failure of http get.
-              System.out.println(t.toString() + "**FAILURE FUNCTION*******");
             }
           });
     } catch (Exception e) {

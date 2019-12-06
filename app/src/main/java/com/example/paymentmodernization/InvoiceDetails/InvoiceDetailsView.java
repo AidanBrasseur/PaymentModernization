@@ -1,16 +1,17 @@
 package com.example.paymentmodernization.InvoiceDetails;
 
-import com.example.paymentmodernization.ui.home.Invoice;
-
+import com.example.paymentmodernization.InvoicesHomePage.Invoice;
+/** An interface for the methods necessary for displaying and updating specific invoices */
 public interface InvoiceDetailsView {
-
+  /** Handles the successful update of status to newStatus */
   void statusUpdatedSuccess(String newStatus);
 
+  /** Fills the text fields on the page with the invoice data */
   void setTextFields(Invoice invoice);
 
-  void dateUpdatedSuccess(String newDate);
+  /** Handles successful update of date */
+  void dateUpdatedSuccess();
 
-  void driverUpdatedSuccess(String newDriver);
-
-  // void getInvoiceDetails(Invoice invoice, String authToken);
+  /** Handles successful update of driver */
+  void driverUpdatedSuccess();
 }

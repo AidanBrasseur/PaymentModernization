@@ -10,19 +10,26 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-/** DriverSignUpInteractor communicates with server to perform sign-up functionalities. */
+/** CompanySignUpInteractor communicates with server to perform company sign-up functionality. */
 public class CompanySignUpInteractor {
 
-  // TODO: Fix documentation. Possibly move this out of this class and make two separate signup MVP
-  // setups
   /**
-   * Signs up a new user with given username, password, and fullName, calling the corresponding
-   * method in listener.
+   * Attempts to sign up company with provided information, calling the corresponding method in
+   * listener.
    *
-   * @param username the username input
-   * @param password the password input
-   * @param fullName the full name of the new user
-   * @param listener an OnSignUpFinishedListener to signal sucess or failure during sign-up
+   * @param username the user name of the new company
+   * @param password the password of the new company
+   * @param fullName the full name of the new company
+   * @param userType the user type of the company
+   * @param accountNum the bank account number of the new company
+   * @param bank the financial institution of the new company
+   * @param streetAddress the street address of the new company
+   * @param city the city of the new company
+   * @param region the region of the new company
+   * @param country the country of the new company
+   * @param postalCode the postal code of the new company
+   * @param listener an OnCompanySignUpFinishedListener to signal success or failure during company
+   *     sign-up
    */
   public void signUpUser(
       String username,
@@ -122,7 +129,10 @@ public class CompanySignUpInteractor {
       e.printStackTrace();
     }
   }
-  /** OnSignUpFinishedListener is an interface outlines methods for use during sign-up. */
+  /**
+   * OnCompanySignUpFinishedListener is an interface outlines methods for use during company
+   * sign-up.
+   */
   interface OnCompanySignUpFinishedListener {
     void onUsernameError(String message);
 

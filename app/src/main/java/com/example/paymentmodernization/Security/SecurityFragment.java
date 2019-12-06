@@ -1,4 +1,4 @@
-package com.example.paymentmodernization.ui.settings;
+package com.example.paymentmodernization.Security;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,16 +14,16 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.paymentmodernization.R;
 
-public class SettingsFragment extends Fragment {
+public class SecurityFragment extends Fragment {
 
-  private SettingsViewModel settingsViewModel;
+  private SecurityViewModel securityViewModel;
 
   public View onCreateView(
       @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    settingsViewModel = ViewModelProviders.of(this).get(SettingsViewModel.class);
-    View root = inflater.inflate(R.layout.fragment_settings, container, false);
-    final TextView textView = root.findViewById(R.id.text_settings);
-    settingsViewModel
+    securityViewModel = ViewModelProviders.of(this).get(SecurityViewModel.class);
+    View root = inflater.inflate(R.layout.fragment_security, container, false);
+    final TextView textView = root.findViewById(R.id.text_security);
+    securityViewModel
         .getText()
         .observe(
             this,

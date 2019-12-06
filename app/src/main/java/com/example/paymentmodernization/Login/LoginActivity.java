@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.paymentmodernization.MainActivity.NavDrawer;
+import com.example.paymentmodernization.MainNavigation.NavDrawer;
 import com.example.paymentmodernization.R;
 import com.example.paymentmodernization.SignUp.SignUpChoiceActivity;
 

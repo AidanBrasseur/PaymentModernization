@@ -10,17 +10,17 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-/** DriverSignUpInteractor communicates with server to perform sign-up functionalities. */
+/** DriverSignUpInteractor communicates with server to perform sign-up functionality. */
 public class DriverSignUpInteractor {
 
   /**
-   * Signs up a new user with given username, password, and fullName, calling the corresponding
+   * Signs up a new driver with given username, password, and fullName, calling the corresponding
    * method in listener.
    *
    * @param username the username input
    * @param password the password input
    * @param fullName the full name of the new user
-   * @param listener an OnSignUpFinishedListener to signal sucess or failure during sign-up
+   * @param listener an OnSignUpFinishedListener to signal success or failure during sign-up
    */
   public void signUpUser(
       String username, String password, String fullName, final OnSignUpFinishedListener listener) {
@@ -70,10 +70,8 @@ public class DriverSignUpInteractor {
       e.printStackTrace();
     }
   }
-  // TODO: Fix documentation. Possibly move this out of this class and make two separate signup MVP
-  // setups
   /**
-   * Signs up a new user with given username, password, and fullName, calling the corresponding
+   * Signs up a new driver with given username, password, and fullName, calling the corresponding
    * method in listener.
    *
    * @param username the username input

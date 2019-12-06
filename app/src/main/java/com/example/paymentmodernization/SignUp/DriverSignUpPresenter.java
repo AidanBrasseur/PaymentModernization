@@ -1,8 +1,8 @@
 package com.example.paymentmodernization.SignUp;
 
 /**
- * DriverSignUpPresenter retrieves data from the DriverSignUpInteractor and formats it for the DriverSignUpView.
- * Implements OnSignUpFinishedListener to handle sign-up events *
+ * DriverSignUpPresenter retrieves data from the DriverSignUpInteractor and formats it for the
+ * DriverSignUpView. Implements OnSignUpFinishedListener to handle sign-up events *
  */
 public class DriverSignUpPresenter implements DriverSignUpInteractor.OnSignUpFinishedListener {
 
@@ -15,15 +15,16 @@ public class DriverSignUpPresenter implements DriverSignUpInteractor.OnSignUpFin
    * Constructs a new DriverSignUpPresenter with given driverSignUpView and driverSignUpInteractor
    *
    * @param driverSignUpView the DriverSignUpView corresponding to this DriverSignUpPresenter
-   * @param driverSignUpInteractor the DriverSignUpInteractor corresponding to this DriverSignUpPresenter
+   * @param driverSignUpInteractor the DriverSignUpInteractor corresponding to this
+   *     DriverSignUpPresenter
    */
-  DriverSignUpPresenter(DriverSignUpView driverSignUpView, DriverSignUpInteractor driverSignUpInteractor) {
+  DriverSignUpPresenter(
+      DriverSignUpView driverSignUpView, DriverSignUpInteractor driverSignUpInteractor) {
     this.driverSignUpView = driverSignUpView;
     this.driverSignUpInteractor = driverSignUpInteractor;
   }
-  // TODO: Documentation. Probably going to move all this to new classes honestly
   /**
-   * Signs up new user with given username, password and fullName
+   * Signs up new driver with given username, password and fullName
    *
    * @param username the username input
    * @param password the password input
@@ -60,7 +61,7 @@ public class DriverSignUpPresenter implements DriverSignUpInteractor.OnSignUpFin
   }
 
   /**
-   * Signs up new user with given username, password and fullName
+   * Signs up new driver with given username, password and fullName
    *
    * @param username the username input
    * @param password the password input
@@ -102,14 +103,14 @@ public class DriverSignUpPresenter implements DriverSignUpInteractor.OnSignUpFin
       driverSignUpView.hideProgress();
     }
   }
-  /** Handles the successful sign-up new user */
+  /** Handles the successful sign-up new driver */
   @Override
   public void onSuccess() {
     if (driverSignUpView != null) {
       driverSignUpView.switchToLogin();
     }
   }
-  /** Handles failure during sign-up of new user */
+  /** Handles failure during sign-up of new driver */
   @Override
   public void onFail() {
     if (driverSignUpView != null) {

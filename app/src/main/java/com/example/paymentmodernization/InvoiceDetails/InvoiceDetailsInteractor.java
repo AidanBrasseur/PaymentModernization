@@ -1,7 +1,7 @@
 package com.example.paymentmodernization.InvoiceDetails;
 
+import com.example.paymentmodernization.InvoicesHomePage.Invoice;
 import com.example.paymentmodernization.PaymentModernizationAPI;
-import com.example.paymentmodernization.ui.home.Invoice;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -9,9 +9,21 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
-
+/**
+ * InvoiceDetailsInteractor communicates with server to perform updates and retrieval of data for
+ * invoices.
+ */
 public class InvoiceDetailsInteractor {
 
+  /**
+   * Attempts to update the status of the invoice to newStatus, calling the corresponding method in
+   * listener.
+   *
+   * @param invoiceId the id of the invoice to be updated
+   * @param authToken the authorization token of the user
+   * @param newStatus the new status
+   * @param listener an OnStatusUpdatedListener to signal success or failure of status updates.
+   */
   public void updateStatus(
       String invoiceId,
       String authToken,
@@ -51,7 +63,13 @@ public class InvoiceDetailsInteractor {
           }
         });
   }
-
+  /**
+   * Attempts to retrieve details about the status of the invoice
+   *
+   * @param invoiceId the id of the invoice to be updated
+   * @param authToken the authorization token of the user
+   * @param listener an OnStatusUpdatedListener to signal success or failure of invoice retrieval.
+   */
   public void getInvoiceDetails(
       String invoiceId, String authToken, final OnStatusUpdatedListener listener) {
     Retrofit retrofit =
@@ -76,7 +94,16 @@ public class InvoiceDetailsInteractor {
           }
         });
   }
-
+  /**
+   * Attempts to update the payment or delivery date of the invoice to newDate, corresponding to
+   * userType. Calls the corresponding method in listener.
+   *
+   * @param invoiceId the id of the invoice to be updated
+   * @param authToken the authorization token of the user
+   * @param newDate the new date
+   * @param userType the type of the user
+   * @param listener an OnStatusUpdatedListener to signal success or failure of date updates.
+   */
   public void updateDate(
       String invoiceId,
       String authToken,
@@ -104,10 +131,10 @@ public class InvoiceDetailsInteractor {
             System.out.println(response.code());
             String valid = response.body();
             if (valid.contains("true")) {
-              listener.onDateUpdateSuccess(newDate);
+              listener.onDateUpdateSuccess();
             } else {
 
-              listener.onDateUpdateFailure(newDate);
+              listener.onDateUpdateFailure();
             }
           }
 
@@ -118,7 +145,15 @@ public class InvoiceDetailsInteractor {
           }
         });
   }
-
+  /**
+   * Attempts to update the driver of the invoice to newDriver, calling the corresponding method in
+   * listener.
+   *
+   * @param invoiceId the id of the invoice to be updated
+   * @param authToken the authorization token of the user
+   * @param newDriver the new driver
+   * @param listener an OnStatusUpdatedListener to signal success or failure of driver updates.
+   */
   public void updateDriver(
       String invoiceId,
       String authToken,
@@ -144,10 +179,10 @@ public class InvoiceDetailsInteractor {
             System.out.println(response.code());
             String valid = response.body();
             if (valid.contains("true")) {
-              listener.onDriverUpdateSuccess(newDriver);
+              listener.onDriverUpdateSuccess();
             } else {
 
-              listener.onDriverUpdateFailure(newDriver);
+              listener.onDriverUpdateFailure();
             }
           }
 
@@ -158,19 +193,22 @@ public class InvoiceDetailsInteractor {
           }
         });
   }
-
+  /**
+   * OnStatusUpdatedListener is an interface outlines methods for use during the displaying and
+   * update of invoices.
+   */
   public interface OnStatusUpdatedListener {
     void onStatusUpdateSuccess(String newStatus);
 
     void onStatusUpdateFailure(String newStatus);
 
-    void onDriverUpdateSuccess(String newDriver);
+    void onDriverUpdateSuccess();
 
-    void onDriverUpdateFailure(String newDriver);
+    void onDriverUpdateFailure();
 
-    void onDateUpdateSuccess(String newDate);
+    void onDateUpdateSuccess();
 
-    void onDateUpdateFailure(String newDate);
+    void onDateUpdateFailure();
 
     void onSuccessDetails(Invoice invoice);
   }

@@ -72,7 +72,7 @@ public class CompanySignUp extends AppCompatActivity implements CompanySignUpVie
     presenter.onDestroy();
     super.onDestroy();
   }
-  /** Signs up new user with username, password, and fullName fields text */
+  /** Signs up new company using the input from the displayed text fields */
   void signUpUser() {
     presenter.signUpUser(
         usernameText.getText().toString(),
@@ -129,37 +129,65 @@ public class CompanySignUp extends AppCompatActivity implements CompanySignUpVie
     progressBar.setVisibility(View.GONE);
     Toast.makeText(getApplicationContext(), "Username already taken", Toast.LENGTH_LONG).show();
   }
-
+  /**
+   * Sets error message given an error with the full name
+   *
+   * @param message the message for the error
+   */
   @Override
   public void setFullNameError(String message) {
     fullNameText.setError(message);
   }
-
+  /**
+   * Sets error message given an error with the bank account number
+   *
+   * @param message the message for the error
+   */
   @Override
   public void setBankNumError(String message) {
     accountNum.setError(message);
   }
-
+  /**
+   * Sets error message given an error with the street adresss
+   *
+   * @param message the message for the error
+   */
   @Override
   public void setStreetAddressError(String message) {
     streetAddress.setError(message);
   }
-
+  /**
+   * Sets error message given an error with the city
+   *
+   * @param message the message for the error
+   */
   @Override
   public void setCityError(String message) {
     city.setError(message);
   }
-
+  /**
+   * Sets error message given an error with the country
+   *
+   * @param message the message for the error
+   */
   @Override
   public void setCountryError(String message) {
     country.setError(message);
   }
-
+  /**
+   * Sets error message given an error with the region
+   *
+   * @param message the message for the error
+   */
   @Override
   public void setRegionError(String message) {
     region.setError(message);
   }
-
+  /**
+   * Sets error message given an error with the postal code
+   *
+   * @param message the message for the error
+   */
   @Override
   public void setPostalCodeError(String message) {
     postalCode.setError(message);

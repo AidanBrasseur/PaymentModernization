@@ -1,9 +1,8 @@
-package com.example.paymentmodernization.HomePage;
+package com.example.paymentmodernization.InvoicesHomePage;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,12 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
-import android.widget.TableLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,10 +21,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.paymentmodernization.InvoiceDetails.InvoiceDetailsActivity;
 import com.example.paymentmodernization.Login.UserInformation;
 import com.example.paymentmodernization.R;
-import com.example.paymentmodernization.ui.home.HomeFragment;
-import com.example.paymentmodernization.ui.home.Invoice;
-import com.example.paymentmodernization.ui.home.InvoicesInteractor;
-import com.example.paymentmodernization.ui.home.InvoicesPresenter;
 
 import java.util.ArrayList;
 
@@ -47,7 +39,6 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
   private SearchView searchView;
   private View root;
 
-
   public InvoicesFragment(String completedStatus, HomeFragment homeFragment) {
     this.completedStatus = completedStatus;
     this.homeFragment = homeFragment;
@@ -61,27 +52,13 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
 
     root = inflater.inflate(R.layout.fragment_invoices, container, false);
 
-
-
-    //    LinearLayoutManager manager = new LinearLayoutManager(this);
-    //    manager.setOrientation(LinearLayoutManager.VERTICAL);
-    //    recyclerView.setLayoutManager(manager);
-
-   // homeFragment.getInvoices();
     return root;
   }
 
-//  @Override
-//  public void onResume() {
-//    System.out.println("CALLED ON RESUMEEEE ____________________________-_");
-//    super.onResume();
-//    homeFragment.getInvoices();
-//  }
 
 
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
 
     setHasOptionsMenu(true);
 
@@ -94,19 +71,17 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
     layout = root.findViewById(R.id.coordinatorLayout);
     // displayInvoices(this.authToken);
     recyclerView = root.findViewById(R.id.recyclerView);
-    System.out.println("ONCREATE AND view made =-----------------------");
     recycleManager = new LinearLayoutManager(context);
     this.swipeRefreshLayout = root.findViewById(R.id.swipe);
-    swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-      @Override
-      public void onRefresh() {
-        homeFragment.getInvoices();
-        swipeRefreshLayout.setRefreshing(false);
-      }
-    });
+    swipeRefreshLayout.setOnRefreshListener(
+        new SwipeRefreshLayout.OnRefreshListener() {
+          @Override
+          public void onRefresh() {
+            homeFragment.getInvoices();
+            swipeRefreshLayout.setRefreshing(false);
+          }
+        });
     super.onViewCreated(view, savedInstanceState);
-
-
   }
 
   @Override
@@ -123,11 +98,15 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
         delivery = "Due Date: " + invoice.getDueDate();
       }
       if (this.completedStatus.equals("COMPLETE") && invoice.getStatus().equals("COMPLETE")) {
-        invoiceCards.add(new InvoiceCard(invoice, heading, delivery, status, invoice.getItems(), invoice.getInvoiceId()));
+        invoiceCards.add(
+            new InvoiceCard(
+                invoice, heading, delivery, status, invoice.getItems(), invoice.getInvoiceId()));
         keptInvoice.add(invoice);
       } else if (!this.completedStatus.equals("COMPLETE")) {
         if (!(invoice.getStatus().equals("COMPLETE"))) {
-          invoiceCards.add(new InvoiceCard(invoice, heading, delivery, status, invoice.getItems(), invoice.getInvoiceId()));
+          invoiceCards.add(
+              new InvoiceCard(
+                  invoice, heading, delivery, status, invoice.getItems(), invoice.getInvoiceId()));
           keptInvoice.add(invoice);
         }
       }
@@ -144,7 +123,7 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
             InvoiceCard clickedcard = recycleAdapter.getInvoiceCards().get(position);
             Invoice clickedInvoice = clickedcard.getInvoice();
             Intent intent = new Intent(getActivity(), InvoiceDetailsActivity.class);
-             intent.putExtra("invoice", clickedInvoice);
+            intent.putExtra("invoice", clickedInvoice);
             intent.putExtra("authToken", authToken);
             intent.putExtra("userType", userInformation.getUserType());
             getActivity().startActivity(intent);
@@ -154,7 +133,7 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
 
   @Override
   public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-    //setHasOptionsMenu(true);
+    // setHasOptionsMenu(true);
 
     MenuInflater inflater2 = inflater;
     inflater2.inflate(R.menu.nav_drawer, menu);
@@ -163,22 +142,20 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
     searchView = (SearchView) searchItem.getActionView();
     searchView.setIconifiedByDefault(false);
 
+    searchView.setOnQueryTextListener(
+        new SearchView.OnQueryTextListener() {
+          @Override
+          public boolean onQueryTextSubmit(String s) {
+            return false;
+          }
 
-    searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-      @Override
-      public boolean onQueryTextSubmit(String s) {
-        return false;
-      }
-
-      @Override
-      public boolean onQueryTextChange(String s) {
-        recycleAdapter.getFilter().filter(s);
-        return false;
-      }
-    });
+          @Override
+          public boolean onQueryTextChange(String s) {
+            recycleAdapter.getFilter().filter(s);
+            return false;
+          }
+        });
 
     super.onCreateOptionsMenu(menu, inflater);
   }
-
-
 }

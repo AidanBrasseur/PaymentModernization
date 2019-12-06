@@ -24,7 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.paymentmodernization.Login.UserInformation;
-import com.example.paymentmodernization.MainActivity.NavDrawer;
+import com.example.paymentmodernization.MainNavigation.NavDrawer;
 import com.example.paymentmodernization.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -161,7 +161,7 @@ public class CreateInvoice extends AppCompatActivity implements CreateInvoiceVie
           }
         });
   }
-  /** updates due date text with date selected by the user */
+  /** Updates due date text with date selected by the user */
   private void updateLabel() {
     String myFormat = "yyyy-MM-dd HH:mm:ss";
     SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.CANADA);

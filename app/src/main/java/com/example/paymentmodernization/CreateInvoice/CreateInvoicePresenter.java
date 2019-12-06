@@ -1,5 +1,9 @@
 package com.example.paymentmodernization.CreateInvoice;
 
+/**
+ * CreateInvoicePresenter retrieves data from the CreateInvoiceInteractor and formats it for the
+ * CreateInvoiceView. Implements OnCreateFinishedListener to handle invoice creation events *
+ */
 public class CreateInvoicePresenter implements CreateInvoiceInteractor.OnCreateFinishedListener {
   /** The CreateInvoiceView that this CreateInformationPresenter formats information for */
   private CreateInvoiceView createInvoiceView;
@@ -19,8 +23,17 @@ public class CreateInvoicePresenter implements CreateInvoiceInteractor.OnCreateF
     this.createInvoiceView = createInvoiceView;
     this.createInvoiceInteractor = createInvoiceInteractor;
   }
-  // TODO: Documentation. Probably going to move all this to new classes honestly
 
+  /**
+   * Attempts to create an invoice with the given information
+   *
+   * @param authToken the authorization token of the user
+   * @param business the business receiving the invoice
+   * @param deliveryPerson the delivery person associated with the invoice
+   * @param invoiceDate the date that the invoice was created
+   * @param dueDate the due date of te invoice
+   * @param items the items associated with the invoice
+   */
   public void createInvoice(
       String authToken,
       String business,
@@ -40,7 +53,7 @@ public class CreateInvoicePresenter implements CreateInvoiceInteractor.OnCreateF
   }
 
   /**
-   * Sets error message given an error with the username
+   * Sets error message given an error with the business
    *
    * @param message the message for the error
    */
@@ -52,6 +65,11 @@ public class CreateInvoicePresenter implements CreateInvoiceInteractor.OnCreateF
     }
   }
 
+  /**
+   * Sets error message given an error with the due date
+   *
+   * @param message the message for the error
+   */
   @Override
   public void onDueDateError(String message) {
     if (createInvoiceView != null) {
@@ -60,6 +78,7 @@ public class CreateInvoicePresenter implements CreateInvoiceInteractor.OnCreateF
     }
   }
 
+  /** Handles errors within creation of invoice items */
   @Override
   public void onItemsError() {
     if (createInvoiceView != null) {
@@ -68,14 +87,14 @@ public class CreateInvoicePresenter implements CreateInvoiceInteractor.OnCreateF
     }
   }
 
-  /** Handles the successful sign-up new user */
+  /** Handles the successful creation of new invoice */
   @Override
   public void onSuccess() {
     if (createInvoiceView != null) {
       createInvoiceView.switchToHome();
     }
   }
-  /** Handles failure during sign-up of new user */
+  /** Handles failure of invoice creation */
   @Override
   public void onFail() {
     if (createInvoiceView != null) {

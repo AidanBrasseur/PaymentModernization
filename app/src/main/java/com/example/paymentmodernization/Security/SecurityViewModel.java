@@ -1,4 +1,4 @@
-package com.example.paymentmodernization.ui.security;
+package com.example.paymentmodernization.Security;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

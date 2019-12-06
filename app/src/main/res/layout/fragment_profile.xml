@@ -71,6 +71,8 @@
             android:paddingTop="15dp">
 
             <TextView
+                android:id="@+id/bankNumText"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
@@ -94,11 +96,13 @@
             android:paddingTop="15dp">
 
             <TextView
+                android:id="@+id/streetText"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:padding="5dp"
-                android:text="Address"
+                android:text="Street Address"
                 android:textSize="20sp" />
 
             <TextView
@@ -117,10 +121,13 @@
             android:paddingTop="15dp">
 
             <TextView
+                android:id="@+id/cityText"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:padding="5dp"
+                android:text="City"
                 android:textSize="20sp" />
 
             <TextView
@@ -139,10 +146,13 @@
             android:paddingTop="15dp">
 
             <TextView
+                android:id="@+id/regionText"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:padding="5dp"
+                android:text="Region"
                 android:textSize="20sp" />
 
             <TextView
@@ -161,10 +171,13 @@
             android:paddingTop="15dp">
 
             <TextView
+                android:id="@+id/countryText"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:padding="5dp"
+                android:text="Country"
                 android:textSize="20sp" />
 
             <TextView
@@ -183,14 +196,17 @@
             android:paddingTop="15dp">
 
             <TextView
+                android:id="@+id/postalCodeText"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
+                android:text="Postal Code"
                 android:padding="5dp"
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/postcode"
+                android:id="@+id/postalCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="2"
@@ -198,7 +214,6 @@
                 android:padding="5dp"
                 android:textSize="20sp" />
         </TableRow>
-
 
     </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

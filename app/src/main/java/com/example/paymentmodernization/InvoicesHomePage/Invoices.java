@@ -1,6 +1,4 @@
-package com.example.paymentmodernization.ui.home;
-
-import com.example.paymentmodernization.ui.home.Invoice;
+package com.example.paymentmodernization.InvoicesHomePage;
 
 import java.util.ArrayList;
 

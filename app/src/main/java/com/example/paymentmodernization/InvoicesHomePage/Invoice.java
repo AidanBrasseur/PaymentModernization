@@ -1,10 +1,10 @@
-package com.example.paymentmodernization.ui.home;
+package com.example.paymentmodernization.InvoicesHomePage;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
-
+/** An invoice placed by a business. Implements Parcelable */
 public class Invoice implements Parcelable {
   public static final Parcelable.Creator<Invoice> CREATOR =
       new Parcelable.Creator<Invoice>() {
@@ -28,6 +28,12 @@ public class Invoice implements Parcelable {
   private Address businessAddress;
   private ArrayList<InvoiceItem> items;
   private String status;
+
+  /**
+   * Constructor for invoice from given parcel
+   *
+   * @param parcel the parcel that the invoice object is being created from
+   */
   private Invoice(Parcel parcel) {
     supplierAddress = parcel.readParcelable(Address.class.getClassLoader());
     business = parcel.readString();
@@ -46,19 +52,35 @@ public class Invoice implements Parcelable {
   public static Creator<Invoice> getCREATOR() {
     return CREATOR;
   }
-
-  public String getDriver() {
+  /**
+   * Get delivery person
+   *
+   * @return Delivery person
+   */
+  public String getDeliveryPerson() {
     return driver;
   }
-
-  public void setDriver(String driver) {
+  /**
+   * Set delivery person
+   *
+   * @param deliveryPerson New delivery person
+   */
+  public void setDeliveryPerson(String deliveryPerson) {
     this.driver = driver;
   }
-
+  /**
+   * Get supplier address
+   *
+   * @return supplier address
+   */
   public Address getSupplierAddress() {
     return supplierAddress;
   }
-
+  /**
+   * Set supplier address
+   *
+   * @param supplierAddress New supplier address
+   */
   public void setSupplierAddress(Address supplierAddress) {
     this.supplierAddress = supplierAddress;
   }
@@ -71,77 +93,150 @@ public class Invoice implements Parcelable {
     this.businessAddress = businessAddress;
   }
 
+  /**
+   * Get business
+   *
+   * @return Business
+   */
   public String getBusiness() {
     return business;
   }
-
+  /**
+   * Set business
+   *
+   * @param business New business
+   */
   public void setBusiness(String business) {
     this.business = business;
   }
-
+  /**
+   * Get supplier
+   *
+   * @return Supplier
+   */
   public String getSupplier() {
     return supplier;
   }
-
+  /**
+   * Set supplier
+   *
+   * @param supplier New supplier
+   */
   public void setSupplier(String supplier) {
     this.supplier = supplier;
   }
-
+  /**
+   * Get due date
+   *
+   * @return Due date
+   */
   public String getDueDate() {
     return dueDate;
   }
-
+  /**
+   * Set due date
+   *
+   * @param dueDate New due date
+   */
   public void setDueDate(String dueDate) {
     this.dueDate = dueDate;
   }
-
+  /**
+   * Get invoice id
+   *
+   * @return invoice id
+   */
   public String getInvoiceId() {
     return invoiceId;
   }
-
+  /**
+   * Set invoice id
+   *
+   * @param invoiceId New invoiceId
+   */
   public void setInvoiceId(String invoiceId) {
     this.invoiceId = invoiceId;
   }
-
+  /**
+   * Get invoice date
+   *
+   * @return Invoice date
+   */
   public String getInvoiceDate() {
     return invoiceDate;
   }
-
+  /**
+   * Set invoice date
+   *
+   * @param invoiceDate New invoice date
+   */
   public void setInvoiceDate(String invoiceDate) {
     this.invoiceDate = invoiceDate;
   }
-
+  /**
+   * Get delivered date
+   *
+   * @return Delivered date
+   */
   public String getDeliveryDate() {
     return deliveryDate;
   }
-
+  /**
+   * Set delivered date
+   *
+   * @param deliveryDate New delivered date
+   */
   public void setDeliveryDate(String deliveryDate) {
     this.deliveryDate = deliveryDate;
   }
-
+  /**
+   * Get payment date
+   *
+   * @return Payment date
+   */
   public String getPaymentDate() {
     return paymentDate;
   }
-
+  /**
+   * Set payment date
+   *
+   * @param paymentDate New payment date
+   */
   public void setPaymentDate(String paymentDate) {
     this.paymentDate = paymentDate;
   }
-
+  /**
+   * Get invoice items
+   *
+   * @return Invoice items
+   */
   public ArrayList<InvoiceItem> getItems() {
     return items;
   }
-
+  /**
+   * Set invoice items
+   *
+   * @param items New invoice items
+   */
   public void setItems(ArrayList<InvoiceItem> items) {
     this.items = items;
   }
-
+  /**
+   * Get status
+   *
+   * @return Status
+   */
   public String getStatus() {
     if (status == null) {
       return "";
     }
     return status;
   }
-
+  /**
+   * Set status
+   *
+   * @param status New status
+   */
   public void setStatus(String status) {
     this.status = status;
   }

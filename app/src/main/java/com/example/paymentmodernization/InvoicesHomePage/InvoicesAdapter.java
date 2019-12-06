@@ -1,6 +1,5 @@
-package com.example.paymentmodernization.HomePage;
+package com.example.paymentmodernization.InvoicesHomePage;
 
-import android.content.ClipData;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -14,15 +13,64 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.paymentmodernization.R;
-import com.example.paymentmodernization.ui.home.InvoiceItem;
 
 import java.util.ArrayList;
 
-public class InvoicesAdapter extends RecyclerView.Adapter<InvoicesAdapter.InvoicesViewHolder> implements Filterable {
+public class InvoicesAdapter extends RecyclerView.Adapter<InvoicesAdapter.InvoicesViewHolder>
+    implements Filterable {
 
   private ArrayList<InvoiceCard> invoiceCards;
   private ArrayList<InvoiceCard> invoiceCardsFull;
   private onItemClickListener mListener;
+  private Filter invoiceFilter =
+      new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+          ArrayList<InvoiceCard> filteredList = new ArrayList<>();
+          if (charSequence == null || charSequence.length() == 0) {
+            filteredList.addAll(invoiceCardsFull);
+          } else {
+            String filterPattern = charSequence.toString().toLowerCase().trim();
+            for (InvoiceCard invoiceCard : invoiceCardsFull) {
+              ArrayList<InvoiceItem> items = invoiceCard.getItems();
+
+              if (!filteredList.contains(invoiceCard)) {
+                if (invoiceCard.getStatus().toLowerCase().contains(filterPattern)) {
+                  filteredList.add(invoiceCard);
+                }
+                if (invoiceCard.getSupplierToCompany().toLowerCase().contains(filterPattern)) {
+                  filteredList.add(invoiceCard);
+                }
+
+                if (invoiceCard.getInvoiceId().toLowerCase().contains(filterPattern)) {
+                  filteredList.add(invoiceCard);
+                }
+
+                for (InvoiceItem item : items) {
+                  if (item.getDescription().toLowerCase().contains(filterPattern)
+                      && !(filteredList.contains(invoiceCard))) {
+                    filteredList.add(invoiceCard);
+                  }
+                }
+              }
+              // }
+              // }
+
+            }
+          }
+
+          FilterResults results = new FilterResults();
+          results.values = filteredList;
+          return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+          invoiceCards.clear();
+          invoiceCards.addAll((ArrayList) filterResults.values);
+          notifyDataSetChanged();
+        }
+      };
 
   public InvoicesAdapter(ArrayList<InvoiceCard> invoiceCards) {
     this.invoiceCards = invoiceCards;
@@ -50,30 +98,33 @@ public class InvoicesAdapter extends RecyclerView.Adapter<InvoicesAdapter.Invoic
     holder.status.setText(currentCard.getStatus());
     String idText = "Id: " + currentCard.getInvoiceId();
     holder.id.setText(idText);
-    if(holder.status.getText().toString().equals("COMPLETE")){
+    if (holder.status.getText().toString().equals("COMPLETE")) {
       holder.status.setTextColor(Color.parseColor("#3fa657"));
       holder.status.setTypeface(null, Typeface.BOLD);
-    }
-    else if (holder.status.getText().toString().equals("NEW")){
+    } else if (holder.status.getText().toString().equals("NEW")) {
       holder.status.setTextColor(Color.parseColor("#EE3124"));
       holder.status.setTypeface(null, Typeface.BOLD);
-    }
-
-    else if (holder.status.getText().toString().equals("DELIVERED")){
+    } else if (holder.status.getText().toString().equals("DELIVERED")) {
       holder.status.setTextColor(Color.parseColor("#3B5998"));
 
-    }
-
-    else{
+    } else {
 
       holder.status.setTextColor(Color.parseColor("#C750C5"));
     }
-
   }
 
   @Override
   public int getItemCount() {
     return invoiceCards.size();
+  }
+
+  @Override
+  public Filter getFilter() {
+    return invoiceFilter;
+  }
+
+  public ArrayList<InvoiceCard> getInvoiceCards() {
+    return invoiceCards;
   }
 
   public interface onItemClickListener {
@@ -106,64 +157,5 @@ public class InvoicesAdapter extends RecyclerView.Adapter<InvoicesAdapter.Invoic
             }
           });
     }
-  }
-
-  @Override
-  public Filter getFilter() {
-    return invoiceFilter;
-  }
-
-  private Filter invoiceFilter =
-      new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence charSequence) {
-          ArrayList<InvoiceCard> filteredList = new ArrayList<>();
-          if (charSequence == null || charSequence.length() == 0) {
-            filteredList.addAll(invoiceCardsFull);
-          } else {
-            String filterPattern = charSequence.toString().toLowerCase().trim();
-            for (InvoiceCard invoiceCard : invoiceCardsFull) {
-              ArrayList<InvoiceItem> items = invoiceCard.getItems();
-              System.out.println(items.get(0).getDescription());
-
-              if (!filteredList.contains(invoiceCard)) {
-                if (invoiceCard.getStatus().toLowerCase().contains(filterPattern)) {
-                  filteredList.add(invoiceCard);
-                }
-                if (invoiceCard.getSupplierToCompany().toLowerCase().contains(filterPattern)) {
-                  filteredList.add(invoiceCard);
-                }
-
-                if (invoiceCard.getInvoiceId().toLowerCase().contains(filterPattern)) {
-                  filteredList.add(invoiceCard);
-                }
-
-                for (InvoiceItem item : items){
-                  if (item.getDescription().toLowerCase().contains(filterPattern) && !(filteredList.contains(invoiceCard))){
-                    filteredList.add(invoiceCard);
-                  }
-                }
-              }
-              // }
-              // }
-
-            }
-          }
-
-          FilterResults results = new FilterResults();
-          results.values = filteredList;
-          return results;
-        }
-
-        @Override
-        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-          invoiceCards.clear();
-          invoiceCards.addAll((ArrayList) filterResults.values);
-          notifyDataSetChanged();
-        }
-      };
-
-  public ArrayList<InvoiceCard> getInvoiceCards() {
-    return invoiceCards;
   }
 }

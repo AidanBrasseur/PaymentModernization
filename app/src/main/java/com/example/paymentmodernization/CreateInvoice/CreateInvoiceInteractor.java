@@ -9,9 +9,21 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
-
+/** CreateInvoiceInteractor communicates with server to create invoices */
 public class CreateInvoiceInteractor {
 
+  /**
+   * Attempts to create an invoice with provided information, calling the corresponding method in
+   * listener.
+   *
+   * @param authToken the authorization token of the user
+   * @param business the recipient of the invoice
+   * @param deliveryPerson the delivery person associated with the invoice
+   * @param invoiceDate the date of invoice creation
+   * @param dueDate the due date of the invoice
+   * @param items the items associated with the invoice
+   * @param listener an OnCreateInvoiceListener to signal success or failure of invoice creation.
+   */
   public void createInvoice(
       String authToken,
       String business,
@@ -71,7 +83,10 @@ public class CreateInvoiceInteractor {
       e.printStackTrace();
     }
   }
-
+  /**
+   * OnCreateInvoiceFinishedListener is an interface outlines methods for use during invoice
+   * creation.
+   */
   interface OnCreateFinishedListener {
     void onBusinessError(String message);
 

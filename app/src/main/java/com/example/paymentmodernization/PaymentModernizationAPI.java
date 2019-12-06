@@ -1,7 +1,7 @@
 package com.example.paymentmodernization;
 
-import com.example.paymentmodernization.ui.home.Invoice;
-import com.example.paymentmodernization.ui.home.Invoices;
+import com.example.paymentmodernization.InvoicesHomePage.Invoice;
+import com.example.paymentmodernization.InvoicesHomePage.Invoices;
 import com.example.paymentmodernization.Login.UserInformation;
 
 import retrofit2.Call;
@@ -23,18 +23,14 @@ public interface PaymentModernizationAPI {
   @GET("invoices")
   Call<Invoices> getInvoices(@Header("Authorization") String authorizationString);
 
-
   /**
-   *
    * @param invoiceId
    * @param authToken
    * @return Invoice object with details of specific invoice
    */
   @GET("invoices/{invoiceId}")
   Call<Invoice> getInvoice(
-      @Path("invoiceId") String invoiceId,
-      @Header("Authorization") String authToken
-  );
+      @Path("invoiceId") String invoiceId, @Header("Authorization") String authToken);
 
   /**
    * Signs up a new user with given username, password, name and type
@@ -64,25 +60,25 @@ public interface PaymentModernizationAPI {
   @FormUrlEncoded
   @POST("invoices/update-driver/{invoiceId}")
   Call<String> updateDriver(
-          @Path("invoiceId") String invoiceId,
-          @Header("Authorization") String authToken,
-          @Field("newDriver") String newDriver);
+      @Path("invoiceId") String invoiceId,
+      @Header("Authorization") String authToken,
+      @Field("newDriver") String newDriver);
 
   /** updates delivery date for particular invoice */
   @FormUrlEncoded
   @POST("invoices/update-delivery-date/{invoiceId}")
   Call<String> updateDeliveryDate(
-          @Path("invoiceId") String invoiceId,
-          @Header("Authorization") String authToken,
-          @Field("newDeliveryDate") String newDeliveryDate);
+      @Path("invoiceId") String invoiceId,
+      @Header("Authorization") String authToken,
+      @Field("newDeliveryDate") String newDeliveryDate);
 
   /** updates payment date for particular invoice */
   @FormUrlEncoded
   @POST("invoices/update-payment-date/{invoiceId}")
   Call<String> updatePaymentDate(
-          @Path("invoiceId") String invoiceId,
-          @Header("Authorization") String authToken,
-          @Field("newPaymentDate") String newPaymentDate);
+      @Path("invoiceId") String invoiceId,
+      @Header("Authorization") String authToken,
+      @Field("newPaymentDate") String newPaymentDate);
 
   /**
    * Signs up a new company with given username, password, name, type, bank information, and address
