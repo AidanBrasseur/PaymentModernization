@@ -67,14 +67,14 @@ public class DriverSignUpPresenter implements DriverSignUpInteractor.OnSignUpFin
    * @param password the password input
    * @param fullName the full name of the new user
    */
-  public void signUpUser(String username, String password, String fullName) {
+  void signUpUser(String username, String password, String fullName) {
     if (driverSignUpView != null) {
       driverSignUpView.showProgress();
     }
     driverSignUpInteractor.signUpUser(username, password, fullName, this);
   }
 
-  public void onDestroy() {
+  void onDestroy() {
     driverSignUpView = null;
   }
 

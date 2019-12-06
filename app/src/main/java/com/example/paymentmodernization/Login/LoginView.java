@@ -1,7 +1,7 @@
 package com.example.paymentmodernization.Login;
 
 /** An interface for the methods necessary for login functionality */
-public interface LoginView {
+interface LoginView {
 
   /** switches current screen to the homescreen */
   void switchToHomeScreen(UserInformation userInformation);

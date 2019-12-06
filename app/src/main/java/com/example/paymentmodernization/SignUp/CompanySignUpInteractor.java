@@ -11,7 +11,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /** CompanySignUpInteractor communicates with server to perform company sign-up functionality. */
-public class CompanySignUpInteractor {
+class CompanySignUpInteractor {
 
   /**
    * Attempts to sign up company with provided information, calling the corresponding method in
@@ -29,9 +29,8 @@ public class CompanySignUpInteractor {
    * @param country the country of the new company
    * @param postalCode the postal code of the new company
    * @param listener an OnCompanySignUpFinishedListener to signal success or failure during company
-   *     sign-up
    */
-  public void signUpUser(
+  void signUpUser(
       String username,
       String password,
       String fullName,

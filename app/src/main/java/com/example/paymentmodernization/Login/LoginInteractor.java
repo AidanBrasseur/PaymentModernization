@@ -12,7 +12,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /** LoginInteractor communicates with server to perform login functionalities. */
-public class LoginInteractor {
+class LoginInteractor {
 
   /**
    * Determine whether the login credentials username and password are valid, calling the

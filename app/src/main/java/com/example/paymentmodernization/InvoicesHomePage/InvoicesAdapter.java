@@ -72,12 +72,12 @@ public class InvoicesAdapter extends RecyclerView.Adapter<InvoicesAdapter.Invoic
         }
       };
 
-  public InvoicesAdapter(ArrayList<InvoiceCard> invoiceCards) {
+  InvoicesAdapter(ArrayList<InvoiceCard> invoiceCards) {
     this.invoiceCards = invoiceCards;
     this.invoiceCardsFull = new ArrayList<>(invoiceCards);
   }
 
-  public void setOnItemClickListener(onItemClickListener listener) {
+  void setOnItemClickListener(onItemClickListener listener) {
     mListener = listener;
   }
 
@@ -123,7 +123,7 @@ public class InvoicesAdapter extends RecyclerView.Adapter<InvoicesAdapter.Invoic
     return invoiceFilter;
   }
 
-  public ArrayList<InvoiceCard> getInvoiceCards() {
+  ArrayList<InvoiceCard> getInvoiceCards() {
     return invoiceCards;
   }
 
@@ -131,13 +131,13 @@ public class InvoicesAdapter extends RecyclerView.Adapter<InvoicesAdapter.Invoic
     void onItemClick(int position);
   }
 
-  public static class InvoicesViewHolder extends RecyclerView.ViewHolder {
-    public TextView supplierToCompany;
-    public TextView delivery;
-    public TextView status;
-    public TextView id;
+  static class InvoicesViewHolder extends RecyclerView.ViewHolder {
+    private TextView supplierToCompany;
+    private TextView delivery;
+    private TextView status;
+    private TextView id;
 
-    public InvoicesViewHolder(View itemView, final onItemClickListener listener) {
+    InvoicesViewHolder(View itemView, final onItemClickListener listener) {
       super(itemView);
       supplierToCompany = itemView.findViewById(R.id.supplierToCompany);
       delivery = itemView.findViewById(R.id.delivery);

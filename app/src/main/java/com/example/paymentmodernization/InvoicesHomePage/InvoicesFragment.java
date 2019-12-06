@@ -39,7 +39,7 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
   private SearchView searchView;
   private View root;
 
-  public InvoicesFragment(String completedStatus, HomeFragment homeFragment) {
+  InvoicesFragment(String completedStatus, HomeFragment homeFragment) {
     this.completedStatus = completedStatus;
     this.homeFragment = homeFragment;
   }
@@ -54,8 +54,6 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
 
     return root;
   }
-
-
 
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

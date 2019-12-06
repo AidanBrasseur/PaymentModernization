@@ -48,7 +48,7 @@ public class DriverDriverSignUp extends AppCompatActivity implements DriverSignU
     super.onDestroy();
   }
   /** Signs up new driver with username, password, and fullName fields text */
-  void signUpUser() {
+  private void signUpUser() {
     presenter.signUpUser(
         usernameText.getText().toString(),
         passwordText.getText().toString(),

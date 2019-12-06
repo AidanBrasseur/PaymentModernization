@@ -1,7 +1,7 @@
 package com.example.paymentmodernization.SignUp;
 
 /** An interface for the methods necessary for company sign-up functionality */
-public interface CompanySignUpView {
+interface CompanySignUpView {
   /** Shows current loading progress */
   void showProgress();
   /** Hides current loading progress */

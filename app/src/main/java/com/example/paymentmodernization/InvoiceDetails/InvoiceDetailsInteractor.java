@@ -13,7 +13,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
  * InvoiceDetailsInteractor communicates with server to perform updates and retrieval of data for
  * invoices.
  */
-public class InvoiceDetailsInteractor {
+class InvoiceDetailsInteractor {
 
   /**
    * Attempts to update the status of the invoice to newStatus, calling the corresponding method in

@@ -1,7 +1,7 @@
 package com.example.paymentmodernization.CreateInvoice;
 
 /** An interface for the methods necessary for creation of invoices */
-public interface CreateInvoiceView {
+interface CreateInvoiceView {
   /** Shows current loading progress */
   void showProgress();
   /** Hides current loading progress */

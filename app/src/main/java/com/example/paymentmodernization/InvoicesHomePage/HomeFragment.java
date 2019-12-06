@@ -22,8 +22,8 @@ import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
-  TabLayout tabs;
-  View root;
+  private TabLayout tabs;
+  private View root;
   private FloatingActionButton fab;
   private UserInformation userInformation;
   private InvoicesPresenter invoicesPresenter;

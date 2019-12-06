@@ -33,7 +33,7 @@ public class CompanySignUpPresenter
    * @param password the password input
    * @param fullName the full name of the new user
    */
-  public void signUpUser(
+  void signUpUser(
       String username,
       String password,
       String fullName,
@@ -63,7 +63,7 @@ public class CompanySignUpPresenter
         this);
   }
 
-  public void onDestroy() {
+  void onDestroy() {
     companySignUpView = null;
   }
 

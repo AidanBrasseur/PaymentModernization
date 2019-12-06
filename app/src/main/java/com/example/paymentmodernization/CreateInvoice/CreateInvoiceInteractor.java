@@ -10,7 +10,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 /** CreateInvoiceInteractor communicates with server to create invoices */
-public class CreateInvoiceInteractor {
+class CreateInvoiceInteractor {
 
   /**
    * Attempts to create an invoice with provided information, calling the corresponding method in

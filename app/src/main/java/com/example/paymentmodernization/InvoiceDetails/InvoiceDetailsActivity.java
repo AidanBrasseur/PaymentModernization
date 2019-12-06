@@ -106,7 +106,7 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
   }
 
   /** Retrieves most updated information about the invoice */
-  public void getInvoiceDetails() {
+  private void getInvoiceDetails() {
     presenter.getInvoiceDetails(invoice.getInvoiceId(), authToken);
   }
 
@@ -220,7 +220,7 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
     getInvoiceDetails();
   }
   /** Handles the choice of status to be updated on the invoice */
-  public void handleStatusButtonClick() {
+  private void handleStatusButtonClick() {
     String myFormat = "yyyy-MM-dd HH:mm:ss";
     SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.CANADA);
     String date = sdf.format(new Date());
@@ -254,7 +254,7 @@ public class InvoiceDetailsActivity extends AppCompatActivity implements Invoice
     finish();
   }
   /** Handles dialog to prompt update of driver */
-  void handleDriverUpdateButton() {
+  private void handleDriverUpdateButton() {
     final EditText driverEditText = new EditText(this);
     driverEditText.setHint("Driver");
     AlertDialog dialog =

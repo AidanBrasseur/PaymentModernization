@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class SecurityViewModel extends ViewModel {
+class SecurityViewModel extends ViewModel {
 
   private MutableLiveData<String> mText;
 

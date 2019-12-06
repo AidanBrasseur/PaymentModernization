@@ -73,7 +73,7 @@ public class CompanySignUp extends AppCompatActivity implements CompanySignUpVie
     super.onDestroy();
   }
   /** Signs up new company using the input from the displayed text fields */
-  void signUpUser() {
+  private void signUpUser() {
     presenter.signUpUser(
         usernameText.getText().toString(),
         passwordText.getText().toString(),

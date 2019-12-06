@@ -11,7 +11,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /** DriverSignUpInteractor communicates with server to perform sign-up functionality. */
-public class DriverSignUpInteractor {
+class DriverSignUpInteractor {
 
   /**
    * Signs up a new driver with given username, password, and fullName, calling the corresponding
@@ -22,7 +22,7 @@ public class DriverSignUpInteractor {
    * @param fullName the full name of the new user
    * @param listener an OnSignUpFinishedListener to signal success or failure during sign-up
    */
-  public void signUpUser(
+  void signUpUser(
       String username, String password, String fullName, final OnSignUpFinishedListener listener) {
     if (TextUtils.isEmpty(username)) {
       listener.onUsernameError("Cannot have empty username");

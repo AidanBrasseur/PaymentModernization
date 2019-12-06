@@ -7,7 +7,7 @@ public class InvoicesPresenter implements InvoicesInteractor.OnInvoicesFinishedL
   private HomeFragment homeFragment;
   private InvoicesInteractor invoicesInteractor;
 
-  public InvoicesPresenter(HomeFragment homeFragment, InvoicesInteractor invoicesInteractor) {
+  InvoicesPresenter(HomeFragment homeFragment, InvoicesInteractor invoicesInteractor) {
     this.homeFragment = homeFragment;
     this.invoicesInteractor = invoicesInteractor;
   }

@@ -2,7 +2,7 @@ package com.example.paymentmodernization.InvoiceDetails;
 
 import com.example.paymentmodernization.InvoicesHomePage.Invoice;
 /** An interface for the methods necessary for displaying and updating specific invoices */
-public interface InvoiceDetailsView {
+interface InvoiceDetailsView {
   /** Handles the successful update of status to newStatus */
   void statusUpdatedSuccess(String newStatus);
 

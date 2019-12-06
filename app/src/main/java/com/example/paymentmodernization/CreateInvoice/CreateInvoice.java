@@ -227,7 +227,7 @@ public class CreateInvoice extends AppCompatActivity implements CreateInvoiceVie
    * @param dueDate the due date of the invoice
    * @param items the items associated with the invoice
    */
-  void createInvoice(
+  private void createInvoice(
       String authToken, String business, String deliveryPerson, String dueDate, String items) {
     String myFormat = "yyyy-MM-dd HH:mm:ss";
     SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.CANADA);
@@ -236,7 +236,7 @@ public class CreateInvoice extends AppCompatActivity implements CreateInvoiceVie
   }
 
   /** Adds a row to the table for a new item */
-  void addItemRow() {
+  private void addItemRow() {
     TableRow row =
         (TableRow) LayoutInflater.from(CreateInvoice.this).inflate(R.layout.item_table_row, null);
     final EditText orderPrice = row.findViewById(R.id.orderPrice);
@@ -271,7 +271,7 @@ public class CreateInvoice extends AppCompatActivity implements CreateInvoiceVie
   }
 
   /** Updates the total price text field with the current total from the items table */
-  void updateTotalPrice() {
+  private void updateTotalPrice() {
     double totalPrice = 0;
     for (int i = 1; i < tableLayout.getChildCount(); i++) {
       View tableView = tableLayout.getChildAt(i);
@@ -281,7 +281,7 @@ public class CreateInvoice extends AppCompatActivity implements CreateInvoiceVie
           String quantity = ((EditText) row.getChildAt(1)).getText().toString();
           String price = ((EditText) row.getChildAt(2)).getText().toString();
           totalPrice += Double.parseDouble(quantity) * Double.parseDouble(price);
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
       }
     }

@@ -66,7 +66,7 @@ public class Invoice implements Parcelable {
    * @param deliveryPerson New delivery person
    */
   public void setDeliveryPerson(String deliveryPerson) {
-    this.driver = driver;
+    this.driver = deliveryPerson;
   }
   /**
    * Get supplier address

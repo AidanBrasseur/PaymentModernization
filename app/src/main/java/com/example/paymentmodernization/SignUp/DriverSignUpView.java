@@ -1,7 +1,7 @@
 package com.example.paymentmodernization.SignUp;
 
 /** An interface for the methods necessary for sign-up functionality */
-public interface DriverSignUpView {
+interface DriverSignUpView {
   /** Shows current loading progress */
   void showProgress();
   /** Hides current loading progress */

@@ -2,7 +2,7 @@ package com.example.paymentmodernization.InvoicesHomePage;
 
 import java.util.ArrayList;
 
-public class InvoiceCard {
+class InvoiceCard {
   private String supplierToCompany;
   private String delivery;
   private String status;
@@ -10,7 +10,7 @@ public class InvoiceCard {
   private ArrayList<InvoiceItem> items;
   private Invoice invoice;
 
-  public InvoiceCard(
+  InvoiceCard(
       Invoice invoice,
       String supplierToCompany,
       String delivery,
@@ -25,27 +25,27 @@ public class InvoiceCard {
     this.invoice = invoice;
   }
 
-  public String getDelivery() {
+  String getDelivery() {
     return delivery;
   }
 
-  public String getSupplierToCompany() {
+  String getSupplierToCompany() {
     return supplierToCompany;
   }
 
-  public String getStatus() {
+  String getStatus() {
     return status;
   }
 
-  public String getInvoiceId() {
+  String getInvoiceId() {
     return invoiceId;
   }
 
-  public ArrayList<InvoiceItem> getItems() {
+  ArrayList<InvoiceItem> getItems() {
     return items;
   }
 
-  public Invoice getInvoice() {
+  Invoice getInvoice() {
     return invoice;
   }
 }

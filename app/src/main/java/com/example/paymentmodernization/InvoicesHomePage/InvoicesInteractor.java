@@ -10,10 +10,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class InvoicesInteractor {
+class InvoicesInteractor {
 
-  public void invoiceDisplay(
-      String authorizationString, final OnInvoicesFinishedListener listener) {
+  void invoiceDisplay(String authorizationString, final OnInvoicesFinishedListener listener) {
     try {
       Retrofit retrofit =
           new Retrofit.Builder()
@@ -33,8 +32,7 @@ public class InvoicesInteractor {
               if (!response.isSuccessful()) {
               } else {
                 Invoices invoices = response.body();
-                if (invoices == null) {
-                }
+                if (invoices == null) {}
                 if (invoices.getInvoices() != null) listener.onSuccess(invoices.getInvoices());
               }
             }
