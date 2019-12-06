@@ -15,15 +15,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/fullName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:layout_marginVertical="15dp"
-            android:autofillHints="@string/prompt_password"
+            android:autofillHints="@string/full_name_prompt"
             android:ems="10"
-            android:hint="@string/prompt_password"
-            android:inputType="textPassword" />
+            android:hint="@string/full_name_prompt"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/username"
@@ -37,14 +36,15 @@
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/fullName"
+            android:id="@+id/password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:layout_marginVertical="15dp"
-            android:autofillHints="@string/full_name_prompt"
+            android:autofillHints="@string/prompt_password"
             android:ems="10"
-            android:hint="@string/full_name_prompt"
-            android:inputType="textPersonName" />
+            android:hint="@string/prompt_password"
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/createAccount"
