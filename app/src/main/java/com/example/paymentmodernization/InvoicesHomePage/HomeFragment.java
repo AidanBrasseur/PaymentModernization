@@ -74,6 +74,9 @@ public class HomeFragment extends Fragment {
         });
   }
 
+  /**
+   * once we get back to the homepage, we retreive incoices again to refresh.
+   */
   @Override
   public void onResume() {
     super.onResume();
@@ -84,6 +87,11 @@ public class HomeFragment extends Fragment {
     invoicesPresenter.invoices(userInformation.getAuthToken());
   }
 
+
+  /**
+   * add new invoices to current fragments
+   * @param newInvoices
+   */
   public void updateInvoices(ArrayList<Invoice> newInvoices) {
 
     incompleteInvoiceFragment.addInvoiceCards(newInvoices);
@@ -91,8 +99,4 @@ public class HomeFragment extends Fragment {
     this.invoices = newInvoices;
   }
 
-  @Override
-  public void onPause() {
-    super.onPause();
-  }
 }

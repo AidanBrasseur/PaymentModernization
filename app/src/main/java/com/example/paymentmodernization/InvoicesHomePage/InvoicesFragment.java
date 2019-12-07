@@ -55,6 +55,12 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
     return root;
   }
 
+  /**
+   * set necessary text views once fragment is created
+   * @param view
+   * @param savedInstanceState
+   */
+
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
@@ -82,6 +88,10 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
     super.onViewCreated(view, savedInstanceState);
   }
 
+  /**
+   * add invoice cards to existing recycler view
+   * @param invoices
+   */
   @Override
   public void addInvoiceCards(final ArrayList<Invoice> invoices) {
     ArrayList<InvoiceCard> invoiceCards = new ArrayList<>();
@@ -128,6 +138,12 @@ public class InvoicesFragment extends Fragment implements InvoicesView {
           }
         });
   }
+
+  /**
+   * add the seach button onto the options menu
+   * @param menu
+   * @param inflater
+   */
 
   @Override
   public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {

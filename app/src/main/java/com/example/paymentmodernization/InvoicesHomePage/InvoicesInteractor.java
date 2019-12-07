@@ -10,6 +10,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * interactor to retreive dinfo from backend about invoices for specific user
+ */
 class InvoicesInteractor {
 
   void invoiceDisplay(String authorizationString, final OnInvoicesFinishedListener listener) {

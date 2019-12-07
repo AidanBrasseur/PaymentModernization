@@ -2,6 +2,10 @@ package com.example.paymentmodernization.InvoicesHomePage;
 
 import java.util.ArrayList;
 
+/**
+ * a single invoice card to display in recycler view.
+ */
+
 class InvoiceCard {
   private String supplierToCompany;
   private String delivery;

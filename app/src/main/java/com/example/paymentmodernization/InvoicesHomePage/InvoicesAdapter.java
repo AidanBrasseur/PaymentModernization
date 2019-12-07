@@ -16,8 +16,15 @@ import com.example.paymentmodernization.R;
 
 import java.util.ArrayList;
 
+/**
+ * adapter for recycler view on homepage to display invoices
+ */
+
 public class InvoicesAdapter extends RecyclerView.Adapter<InvoicesAdapter.InvoicesViewHolder>
     implements Filterable {
+  /**
+   * filer logic for search functionality
+   */
 
   private ArrayList<InvoiceCard> invoiceCards;
   private ArrayList<InvoiceCard> invoiceCardsFull;
@@ -89,6 +96,12 @@ public class InvoicesAdapter extends RecyclerView.Adapter<InvoicesAdapter.Invoic
     return ivh;
   }
 
+  /**
+   * setting the style of status in invoice cards
+   * @param holder
+   * @param position
+   */
+
   @Override
   public void onBindViewHolder(@NonNull InvoicesViewHolder holder, int position) {
     InvoiceCard currentCard = invoiceCards.get(position);
@@ -130,6 +143,10 @@ public class InvoicesAdapter extends RecyclerView.Adapter<InvoicesAdapter.Invoic
   public interface onItemClickListener {
     void onItemClick(int position);
   }
+
+  /**
+   * retrieve xml views
+   */
 
   static class InvoicesViewHolder extends RecyclerView.ViewHolder {
     private TextView supplierToCompany;
